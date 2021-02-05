@@ -14,4 +14,7 @@ public interface BoardService {
 
     // 게시글 삭제
     Long deleteBoard(Long boardId);
+
+    // 게시글 수정
+    void updateBoard(Long boardId, String Content);
 }

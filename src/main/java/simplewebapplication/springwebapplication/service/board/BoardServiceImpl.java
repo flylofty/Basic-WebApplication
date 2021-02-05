@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.repository.board.BoardRepository;
+import simplewebapplication.springwebapplication.repository.board.H2BoardRepository;
 
 import java.util.List;
 
@@ -36,5 +37,18 @@ public class BoardServiceImpl implements BoardService {
     public Long deleteBoard(Long boardId) {
         boardRepository.delete(boardId);
         return boardId;
+    }
+
+    @Override
+    public void updateBoard(Long boardId, String content) {
+        Board findBoard = boardRepository.findOne(boardId);
+
+        //DC
+        findBoard.changeContent(content);
+    }
+
+    // 테스트용 코드
+    public void fAndC() {
+        ((H2BoardRepository)boardRepository).flushAndClear();
     }
 }
