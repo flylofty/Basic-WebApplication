@@ -10,7 +10,7 @@ import java.util.List;
 public class User {
 
     @Id // @GeneratedValue // GeneratedValue 는 기본 키 매핑 자동 생성 방법임.
-    @Column(name = "user_id", length = 30, nullable = false)
+    @Column(name = "user_id", length = 30, nullable = false, unique = true)
     private String id;
 
     @Column(length = 100, nullable = false)
@@ -34,10 +34,12 @@ public class User {
     /**
      * 게시글 작성자가 본인의 글만을 확인하고 싶을 경우 필요한 것이라 생각함.
      * mappedBy 는 연관관계 주인의 변수
-     * board 는 단순 읽기만 가능함.
+     * boards 는 단순 읽기만 가능함.
      */
     @OneToMany(mappedBy = "user")
     private List<Board> boards = new ArrayList<>();
+
+    protected User() {};
 
     public User(String id, String password, String email) {
         this.id = id;
