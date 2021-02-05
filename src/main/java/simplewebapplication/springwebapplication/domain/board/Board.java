@@ -32,6 +32,9 @@ public class Board {
 
     private Long favorite;
 
+    // 기본 생성자 필수!!
+    protected Board() {};
+
     public Board(String title, String content, User user, LocalDateTime dateTime) {
         this.title = title;
         this.content = content;
@@ -65,5 +68,9 @@ public class Board {
 
     public Long getFavorite() {
         return favorite;
+    }
+
+    public void changeContent(String content) {
+        this.content = content;
     }
 }
