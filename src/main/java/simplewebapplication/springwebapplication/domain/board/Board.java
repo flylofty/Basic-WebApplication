@@ -23,7 +23,7 @@ public class Board {
      * */
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @Column(name = "writer", length = 30)
+    //@Column(name = "writer", length = 30) // @Column(s) not allowed on a @ManyToOne property !!!!!!
     private User user;
 
     private LocalDateTime dateTime;
@@ -31,6 +31,15 @@ public class Board {
     private Long views;
 
     private Long favorite;
+
+    public Board(String title, String content, User user, LocalDateTime dateTime) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.dateTime = dateTime;
+        this.views = 0L;
+        this.favorite = 0L;
+    }
 
     public Long getId() {
         return id;
@@ -44,9 +53,7 @@ public class Board {
         return content;
     }
 
-    public User getUser() {
-        return user;
-    }
+    public User getUser() { return user; }
 
     public LocalDateTime getDateTime() {
         return dateTime;
