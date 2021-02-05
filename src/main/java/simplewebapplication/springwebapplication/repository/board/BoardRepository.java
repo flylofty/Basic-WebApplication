@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface BoardRepository {
 
-    // 조회
+    // 하나만 조회
+    Board findOne(Long boardId);
+
+    // 전체 조회, 페이지네이션
     List<Board> findAll(int start, int end, int number);
 
     // 생성

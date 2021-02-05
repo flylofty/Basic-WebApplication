@@ -14,6 +14,11 @@ public class H2BoardRepository implements BoardRepository {
     private EntityManager em;
 
     @Override
+    public Board findOne(Long boardId) {
+        return em.find(Board.class, boardId);
+    }
+
+    @Override
     public List<Board> findAll(int start, int end, int number) {
         return em.createQuery("select b from Board b", Board.class)
                 .getResultList();
@@ -28,5 +33,12 @@ public class H2BoardRepository implements BoardRepository {
     public void delete(Long boardId) {
         Board findBoard = em.find(Board.class, boardId);
         em.remove(findBoard);
+    }
+
+    // 테스트용 임시 코드...
+    public void flushAndClear() {
+        System.out.println("flushAndClear()");
+        em.flush();
+        em.clear();
     }
 }
