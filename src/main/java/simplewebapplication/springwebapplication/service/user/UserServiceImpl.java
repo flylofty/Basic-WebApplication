@@ -19,12 +19,20 @@ public class UserServiceImpl implements UserService {
     @Transactional // 기본은 readOnly 이지만 이 부분은 DB에 써야하므로 애노테이션을 따로 붙임
     public String join(User user) {
 
-        // 중복 검사 미구현...
-        // 데이터베이스 "유니크" 제약 조건 고려...
+        // 중복 검사
+        validateDuplicateMember(user);
 
         userRepository.save(user);
 
         return user.getId();
+    }
+
+    private void validateDuplicateMember(User user) {
+        User findUser = userRepository.findById(user.getId());
+
+        if (findUser != null) {
+            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        }
     }
 
     @Override
