@@ -22,7 +22,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// thymeleaf 우선 임시로 추가해둠
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	compileOnly 'org.projectlombok:lombok'
