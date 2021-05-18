@@ -9,6 +9,7 @@ build.gradle
 gradlew.bat
 gradlew
 
+
 ### STS ###
 .apt_generated
 .classpath
@@ -22,6 +23,7 @@ bin/
 !**/src/test/**/bin/
 /src/test/
 /src/main/resources/
+/src/main/webapp/
 
 ### IntelliJ IDEA ###
 .idea
