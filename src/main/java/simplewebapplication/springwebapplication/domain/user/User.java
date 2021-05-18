@@ -48,11 +48,11 @@ public class User {
 
     protected User() {};
 
-    public User(String id, String password, String email) {
+    public User(String id, String password, String email, UserRoleType role) {
         this.id = id;
         this.password = password;
         this.email = email;
-        this.role = UserRoleType.USER;
+        this.role = role;
     }
 
     public String getId() {
