@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <style>
+
+        html {
+            height : 100%;
+        }
+
+        body {
+            margin : 0;
+            height : 100%;
+        }
+
+        .wrap {
+            min-height : 100%;
+            position : relative;
+            padding-bottom : 19px;
+        }
+
+        header {
+            border:1px solid #cccccc;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .myContainer {
+            width : 500px; height : 500px;
+            display: flex;
+            margin : 90px auto;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer {
+            width:100%;
+            height:60px;
+            position:absolute;
+            bottom:0;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <div class="wrap">
+        <!-- 로그인 -->
+        <header>
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+                <div class="container-fluid mx-4">
+
+                    <a class="navbar-brand fs-2" href="../">Home</a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active fs-3" aria-current="page" href="/boards">Board</a>
+                            </li>
+                        </ul>
+
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                            <li class="nav-item">
+                                <a class="nav-link active fs-3" aria-current="page" href="/users/login">Sign In</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link active fs-3" aria-current="page" href="/users/join">Sign Up</a>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </nav>
+
+        </header>
+
+        <div class="myContainer">
+
+            <form class="login" action="/users/join" method="post">
+
+                <p class="text-center mb-5 fs-2 bold">회원가입</p>
+
+                <div class="mb-3 col-12">
+                    <label for="userId" class="form-label fs-5">I D</label>
+                    <input type="text" class="form-control" id="userId" name="id">
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="userPassword" class="form-label fs-5">Password</label>
+                    <input type="password" class="form-control" id="userPassword" name="password">
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="confirmPassword" class="form-label fs-5">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="rePassword">
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="email" class="form-label fs-5">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+
+                <button type="submit" class="btn btn-primary my-3 col-12 fs-5">Sign Up</button>
+            </form>
+
+        </div>
+
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container text-center">
+                <span class="text-muted">ⓒ 2021 Company, Inc. ·Privacy ·Terms</span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>회원가입</title>-->
+<!--    <style>-->
+
+<!--        header {-->
+<!--            width: 100%; height: 70px;-->
+<!--            margin:0;-->
+<!--            border:1px solid #cccccc;-->
+<!--        }-->
+
+<!--        #h_nav {-->
+<!--            overflow: hidden;-->
+<!--            line-height: 40px;-->
+<!--        }-->
+
+<!--        a:hover {-->
+<!--            text-decoration: underline;-->
+<!--        }-->
+
+<!--        #h_nav ul li{-->
+<!--            list-style: none;-->
+<!--            font-size: 1.8em;-->
+<!--        }-->
+
+<!--        #header_nav ul li{-->
+<!--            float: left;-->
+<!--            margin-right: 20px;-->
+<!--        }-->
+
+<!--        #service {-->
+<!--            margin: 0 20px 0 0;-->
+<!--        }-->
+
+<!--        #service ul li{-->
+<!--            float: right;-->
+<!--            margin: 0 20px 0 0;-->
+<!--        }-->
+
+<!--        #content {-->
+<!--            width: 99%; height: 600px;-->
+<!--            text-align: center;-->
+<!--            margin-top: 80px;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        p {-->
+<!--            font-size : 2em;-->
+<!--        }-->
+
+<!--        #join {-->
+<!--            width: 500px; height: 500px;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--        }-->
+
+<!--        label {-->
+<!--            font-size : 1.2em;-->
+<!--            margin-top : 20px;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--        }-->
+
+<!--        input {-->
+<!--            margin-top : 10px;-->
+<!--            width : 300px; height : 30px;-->
+<!--        }-->
+
+<!--        #userId {-->
+<!--            width: 500px; height : 98px;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--        }-->
+
+<!--        #userId label {-->
+<!--            position: relative;-->
+<!--            right : 140px;-->
+<!--        }-->
+
+<!--        #userPassword {-->
+<!--            width: 500px; height : 98px;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--        }-->
+
+<!--        #userPassword label {-->
+<!--            position: relative;-->
+<!--            right : 115px;-->
+<!--        }-->
+
+<!--        #confirmPassword {-->
+<!--            width: 500px; height : 98px;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--        }-->
+
+<!--        #confirmPassword label {-->
+<!--            position: relative;-->
+<!--            right : 80px;-->
+<!--        }-->
+
+<!--        #userEmail {-->
+<!--            width: 500px; height : 98px;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--        }-->
+
+<!--        #userEmail label {-->
+<!--            position: relative;-->
+<!--            right : 130px;-->
+<!--        }-->
+
+<!--        #joinBtn {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            align-items: center;-->
+<!--            width: 500px; height : 98px;-->
+<!--&lt;!&ndash;            border: 1px solid #cccccc;&ndash;&gt;-->
+<!--        }-->
+
+<!--        #joinBtn button {-->
+<!--            width: 300px; height : 50px;-->
+<!--            font-size : 1.2em;-->
+<!--            position: relative;-->
+<!--            top : -20px;-->
+<!--        }-->
+
+<!--        footer {-->
+<!--            height: 100px;-->
+<!--            margin-top: 50px;-->
+<!--            text-align: center;-->
+<!--            border: 1px solid #cccccc;-->
+<!--            border-style: solid none none;-->
+<!--        }-->
+
+<!--    </style>-->
+
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash; 회원가입 &ndash;&gt;-->
+<!--<header>-->
+
+<!--    <div id="h_nav">-->
+
+<!--        <div id="header_nav">-->
+<!--            <ul>-->
+<!--                &lt;!&ndash; 최초 페이지 &ndash;&gt;-->
+<!--                <li> <a href="../"> Home </a> </li>-->
+<!--                &lt;!&ndash; 게시글 &ndash;&gt;-->
+<!--                <li> <a href="/boards"> Board </a> </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+<!--        <div id="service">-->
+<!--            <ul>-->
+<!--                &lt;!&ndash; 회원가입 &ndash;&gt;-->
+<!--                <li> <a href="/users/join"> Sign Up </a> </li>-->
+<!--                &lt;!&ndash; 로그인 &ndash;&gt;-->
+<!--                <li> <a href="/users/login"> Sign In </a> </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+<!--    </div>-->
+
+<!--</header>-->
+
+<!--<div id="content">-->
+
+<!--    <div id="join">-->
+<!--        <form action="/users/join" method="post">-->
+
+<!--            <p>회원가입</p>-->
+
+<!--            <div id="userId">-->
+<!--                <div>-->
+<!--                    <label for="id">I D</label>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <input type="text" id="id" name="id" placeholder="아이디를 입력하세요">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div id="userPassword">-->
+<!--                <div>-->
+<!--                    <label for="password">Password</label>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div id="confirmPassword">-->
+<!--                <div>-->
+<!--                    <label for="confirm">Confirm Password</label>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <input type="password" id="confirm" name="rePassword" placeholder="비밀번호 확인">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div id="userEmail">-->
+<!--                <div>-->
+<!--                    <label for="confirm">Email</label>-->
+<!--                </div>-->
+<!--                <div>-->
+<!--                    <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요">-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div id="joinBtn">-->
+<!--                <button type="submit"> Join </button>-->
+<!--            </div>-->
+
+<!--        </form>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--<footer> FOOTER </footer>-->
+
+<!--</body>-->
+<!--</html>-->

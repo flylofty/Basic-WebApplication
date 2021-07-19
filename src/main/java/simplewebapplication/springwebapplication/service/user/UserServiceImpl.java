@@ -78,6 +78,6 @@ public class UserServiceImpl implements UserService {
 
         Double d = (Math.random() * 10000) % 4;
 
-        return new User(id.toString(), "4321", id + email[d.intValue()], UserRoleType.NON);
+        return new User(id.toString(), "4321", id + email[d.intValue()], UserRoleType.ADMIN);
     }
 }

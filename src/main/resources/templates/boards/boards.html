@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <style>
+
+            html {
+                height : 100%;
+            }
+
+            body {
+                margin : 0;
+                height : 100%;
+            }
+
+            .wrap {
+                min-height : 100%;
+                position : relative;
+                padding-bottom : 19px;
+            }
+
+            header {
+                border:1px solid #cccccc;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            .myContainer {
+                width : 750px; height : 600px;
+                display: flex;
+                margin : 90px auto;
+                justify-content: center;
+<!--                border:1px solid #cccccc;-->
+                align-items: center;
+
+            }
+
+            .containerHeader {
+                width : 750px; height : 5px;
+<!--                border:1px solid #cccccc;-->
+                overflow : hidden;
+            }
+
+            .table {
+                position: relative;
+                top : 50px;
+            }
+
+            .containerHeader form {
+                position: relative;
+                left : 20px;
+            }
+
+            .cHeader {
+                float : left;
+                margin-right : 350px;
+                position: relative;
+                right : 10px;
+            }
+
+            .searchInput {
+                width : 200px;
+                float : left;
+                margin-right : 5px;
+            }
+
+            .write button {
+                width : 80px;
+                float : right;
+                position: relative;
+                top : 20px;
+                left : 15px;
+            }
+
+            .pages nav {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            footer {
+                width:100%;
+                height:60px;
+                position:absolute;
+                bottom:0;
+            }
+
+        </style>
+
+</head>
+
+<body>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+<div class="wrap">
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <div class="container-fluid mx-4">
+
+                <a class="navbar-brand fs-2" href="../">Home</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active fs-3" aria-current="page" href="/boards">Board</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="nav-link active fs-3" aria-current="page" href="/users/login">Sign In</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active fs-3" aria-current="page" href="/users/join">Sign Up</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <div class="myContainer row">
+
+        <div class="containerHeader">
+
+            <div class="cHeader">
+                <h1>게시글</h1>
+            </div>
+
+            <form action="/boards" method="get">
+                <div class="search">
+                    <div class="searchInput">
+                        <input type="text" class="form-control" id="specificSizeInputName" placeholder="검색어를 입력해주세요">
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">검색</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">번 호</th>
+                <th scope="col">제 목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+                <th scope="col">조 회</th>
+                <th scope="col">좋아요</th>
+            </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="board : ${boards}">
+                    <th scope="row" th:text="${board.id}">번 호</th>
+                    <td><a th:href="@{/boards/{boardId}(boardId=${board.id})}" th:text="${board.title}">제 목</a></td>
+                    <td th:text="${board.user}">작성자</td>
+                    <td th:text="${board.dateTime}">작성일</td>
+                    <td th:text="${board.views}">조 회</td>
+                    <td th:text="${board.favorite}">좋아요</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="write">
+            <button type="button" class="btn btn-primary"
+                    th:onclick="|location.href='@{/boards/write}'|">글쓰기</button>
+        </div>
+
+        <div class="pages">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">ⓒ 2021 Company, Inc. ·Privacy ·Terms</span>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+
+</html>
