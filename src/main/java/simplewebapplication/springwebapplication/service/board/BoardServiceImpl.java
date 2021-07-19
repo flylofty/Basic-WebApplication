@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
+import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.repository.board.BoardRepository;
 import simplewebapplication.springwebapplication.repository.board.H2BoardRepository;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,8 +24,29 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<Board> findBoards(int start, int end, int number) {
-        return boardRepository.findAll(start, end, number);
+    public ResponseBoard findBoard(Long boardId) {
+
+        Board fb = boardRepository.findOne(boardId);
+
+        return new ResponseBoard(fb.getId().toString(), fb.getTitle(),
+                fb.getUser().getId(), fb.getDateTime().format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm")),
+                fb.getViews().toString(), fb.getFavorite().toString(), fb.getContent());
+    }
+
+    @Override
+    public List<ResponseBoard> findBoards(int start, int end, int number) {
+
+        List<Board> findAll = boardRepository.findAll(start, end, number);
+
+        // id, title, user, dateTime, views, favorite
+        List<ResponseBoard> boards = new ArrayList<>();
+        for (Board temp : findAll) {
+            ResponseBoard rb = new ResponseBoard(temp.getId().toString(), temp.getTitle(), temp.getUser().getId(),
+                    temp.getDateTime().format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm")), temp.getViews().toString(), temp.getFavorite().toString(), temp.getContent());
+            boards.add(rb);
+        }
+
+        return boards;
     }
 
     @Override
