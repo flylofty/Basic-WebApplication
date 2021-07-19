@@ -24,7 +24,7 @@ bin/
 /src/test/
 /src/main/resources/application.properties
 /src/main/resources/application.yml
-/src/main/resources/
+/src/main/resources/static/
 /src/main/webapp/
 
 ### IntelliJ IDEA ###
