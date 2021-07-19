@@ -25,6 +25,7 @@ bin/
 /src/main/resources/application.properties
 /src/main/resources/application.yml
 /src/main/webapp/
+/src/main/resources/
 
 ### IntelliJ IDEA ###
 .idea
