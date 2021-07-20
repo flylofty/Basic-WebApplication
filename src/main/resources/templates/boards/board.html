@@ -152,8 +152,20 @@
             </div>
 
             <div class="modifyBtn">
-                <button type="button" class="btn btn-outline-primary mx-2">수 정</button>
-                <button type="button" class="btn btn-outline-danger">삭 제</button>
+                <button type="button"
+                        th:onclick="|location.href='@{/update}'|"
+                        class="btn btn-outline-primary mx-2">수 정</button>
+                <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}" th:method="delete">
+                    <button type="submit" class="btn btn-outline-danger">
+                        삭 제
+                    </button>
+                </form>
+<!--                <button type="button"-->
+<!--                        th:onclick="|location.href='@{/boards/{boardId}(boardId=${board.id})}'|"-->
+<!--                        th:method="delete"-->
+<!--                        class="btn btn-outline-danger">-->
+<!--                    삭 제-->
+<!--                </button>-->
 
                 <div class="info">
                     <div class="user" th:text="${board.user}">
