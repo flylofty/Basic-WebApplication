@@ -43,7 +43,7 @@
 <!--                justify-content: center;-->
 <!--                border:1px solid #cccccc;-->
 <!--                align-items: center;-->
-
+                overflow: hidden;
             }
 
             .containerHeader {
@@ -54,21 +54,23 @@
 
             .cHeader {
 <!--                float : left;-->
+                border:7px solid #FF0000;
                 margin-right : 350px;
                 position: relative;
                 right : 10px;
             }
 
-            .modifyBtn {
-                position: relative;
-                top : 20px;
-                right : 15px;
+            .buttons button {
+                    float: left;
+                    margin: 0, auto;
             }
 
             .info {
+<!--                border:1px solid #cccccc;-->
                 position: relative;
-                top : 20px;
-                left : 10px;
+<!--                bottom : -70px;-->
+<!--                top : 60px;-->
+<!--                left : -50px;-->
             }
 
             .line1 {
@@ -151,32 +153,28 @@
                 <h1 th:text="${board.title}">테스트 게시글1</h1>
             </div>
 
-            <div class="modifyBtn">
+            <div class="buttons">
                 <button type="button"
-                        th:onclick="|location.href='@{/update}'|"
-                        class="btn btn-outline-primary mx-2">수 정</button>
+                        th:onclick="|location.href='@{/boards/write}'|"
+                        class="btn btn-outline-primary mx-2">
+                    수 정
+                </button>
                 <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}" th:method="delete">
                     <button type="submit" class="btn btn-outline-danger">
                         삭 제
                     </button>
                 </form>
-<!--                <button type="button"-->
-<!--                        th:onclick="|location.href='@{/boards/{boardId}(boardId=${board.id})}'|"-->
-<!--                        th:method="delete"-->
-<!--                        class="btn btn-outline-danger">-->
-<!--                    삭 제-->
-<!--                </button>-->
 
-                <div class="info">
-                    <div class="user" th:text="${board.user}">
-                        <h5>작성자</h5>
-                    </div>
+            </div>
 
-                    <div class="dates" th:text="${board.dateTime}">
-                        <h5>날 짜</h5>
-                    </div>
+            <div class="info">
+                <div class="user" th:text="${board.user}">
+                    <h5>작성자</h5>
                 </div>
 
+                <div class="dates" th:text="${board.dateTime}">
+                    <h5>날 짜</h5>
+                </div>
             </div>
 
         </div>
