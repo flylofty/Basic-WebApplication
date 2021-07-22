@@ -1,12 +1,11 @@
 package simplewebapplication.springwebapplication.dto.user;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter @Setter
+@Data
 public class UserJoinFormDTO {
 
-    private String id;
+    private String userId;
     private String password;
     private String rePassword;
     private String email;
@@ -14,8 +13,8 @@ public class UserJoinFormDTO {
     public UserJoinFormDTO() {
     }
 
-    public UserJoinFormDTO(String id, String password, String rePassword, String email) {
-        this.id = id;
+    public UserJoinFormDTO(String userId, String password, String rePassword, String email) {
+        this.userId = userId;
         this.password = password;
         this.rePassword = rePassword;
         this.email = email;

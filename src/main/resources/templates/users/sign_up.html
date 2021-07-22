@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="UTF-8">
@@ -58,7 +58,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <div class="wrap">
-        <!-- 로그인 -->
+
         <header>
 
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -101,28 +101,47 @@
 
         <div class="myContainer">
 
-            <form class="login" action="/users/join" method="post">
+<!--        <form class="login" action="/users/join" th:action th:object="${item}" method="post">-->
+            <form class="login" th:action th:object="${joinInfo}" method="post">
 
                 <p class="text-center mb-5 fs-2 bold">회원가입</p>
 
                 <div class="mb-3 col-12">
                     <label for="userId" class="form-label fs-5">I D</label>
-                    <input type="text" class="form-control" id="userId" name="id">
+<!--                <input type="text" class="form-control" id="userId" name="id">  th:field="*{userId}" -->
+                    <input type="text" id="userId"
+                           th:class="${errors?.containsKey('userId')} ? 'form-control field-error' : 'form-control'"
+                           class="form-control" placeholder="아이디를 입력하세요">
+                    <div class="field-error" th:if="${errors?.containsKey('userId')}" th:text="${errors['userId']}">
+                        아이디 오류
+                    </div>
                 </div>
 
                 <div class="mb-3 col-12">
                     <label for="userPassword" class="form-label fs-5">Password</label>
-                    <input type="password" class="form-control" id="userPassword" name="password">
+                    <input type="password" class="form-control" id="userPassword" placeholder="비밀번호를 입력하세요">
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label for="confirmPassword" class="form-label fs-5">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="rePassword">
+                    <label for="rePassword" class="form-label fs-5">Confirm Password</label>
+<!--                <input type="password" class="form-control" id="confirmPassword" name="rePassword"> th:field="*{rePassword}"-->
+                    <input type="password" id="rePassword"
+                           th:class="${errors?.containsKey('rePassword')} ? 'form-control field-error' : 'form-control'"
+                           class="form-control" placeholder="비밀번호를 다시 한 번 입력하세요">
+                    <div class="field-error" th:if="${errors?.containsKey('rePassword')}" th:text="${errors['rePassword']}">
+                        비밀번호 오류
+                    </div>
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label for="email" class="form-label fs-5">Email</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <label for="userEmail" class="form-label fs-5">Email</label>
+<!--                <input type="email" class="form-control" id="email" name="email"> th:field="*{userEmail}"-->
+                    <input type="text" id="userEmail"
+                           th:class="${errors?.containsKey('userEmail')} ? 'form-control field-error' : 'form-control'"
+                           class="form-control" placeholder="이메일을 입력하세요">
+                    <div class="field-error" th:if="${errors?.containsKey('userEmail')}" th:text="${errors['userEmail']}">
+                        이메일 오류
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary my-3 col-12 fs-5">Sign Up</button>
