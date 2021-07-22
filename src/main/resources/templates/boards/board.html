@@ -40,37 +40,36 @@
                 width : 750px; height : 600px;
                 display: flex;
                 margin : 90px auto;
-<!--                justify-content: center;-->
-<!--                border:1px solid #cccccc;-->
-<!--                align-items: center;-->
+                border:1px none #cccccc;
                 overflow: hidden;
             }
 
             .containerHeader {
                 width : 750px; height : 200px;
-<!--                border:1px solid #cccccc;-->
-<!--                overflow : hidden;-->
+                border:1px none #cccccc;
             }
 
             .cHeader {
-<!--                float : left;-->
-                border:7px solid #FF0000;
-                margin-right : 350px;
-                position: relative;
                 right : 10px;
             }
 
+            .buttons {
+                width: 725px; height : 65px;
+                overflow : hidden;
+            }
+
             .buttons button {
-                    float: left;
-                    margin: 0, auto;
+                position: relative;
+                top: 10px;
+                left: -7px;
+                float: left;
+                margin: 0, auto;
             }
 
             .info {
-<!--                border:1px solid #cccccc;-->
-                position: relative;
-<!--                bottom : -70px;-->
-<!--                top : 60px;-->
-<!--                left : -50px;-->
+                 position: relative;
+                 top: 5px;
+                 left: 5px;
             }
 
             .line1 {
@@ -78,13 +77,15 @@
                 height : 0px;
                 border:1px solid #000000;
                 position: relative;
-                top : -115px;
+                top : 10px;
             }
 
             .contents {
-<!--                border:1px solid #000000;-->
+                padding: 10px;
+                width: 750px; height: 600px;
+                border:1px none #000000;
                 position: relative;
-                top : -220px;
+                top : 20px;
             }
 
             footer {
@@ -154,11 +155,13 @@
             </div>
 
             <div class="buttons">
+
                 <button type="button"
                         th:onclick="|location.href='@{/boards/write}'|"
                         class="btn btn-outline-primary mx-2">
                     수 정
                 </button>
+
                 <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}" th:method="delete">
                     <button type="submit" class="btn btn-outline-danger">
                         삭 제
@@ -172,7 +175,7 @@
                     <h5>작성자</h5>
                 </div>
 
-                <div class="dates" th:text="${board.dateTime}">
+                <div class="date" th:text="${board.dateTime}">
                     <h5>날 짜</h5>
                 </div>
             </div>
