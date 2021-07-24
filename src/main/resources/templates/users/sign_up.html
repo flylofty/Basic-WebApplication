@@ -42,6 +42,11 @@
             align-items: center;
         }
 
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
         footer {
             width:100%;
             height:60px;
@@ -109,7 +114,7 @@
                 <div class="mb-3 col-12">
                     <label for="userId" class="form-label fs-5">I D</label>
 <!--                <input type="text" class="form-control" id="userId" name="id">  th:field="*{userId}" -->
-                    <input type="text" id="userId"
+                    <input type="text" id="userId" name="userId"
                            th:class="${errors?.containsKey('userId')} ? 'form-control field-error' : 'form-control'"
                            class="form-control" placeholder="아이디를 입력하세요">
                     <div class="field-error" th:if="${errors?.containsKey('userId')}" th:text="${errors['userId']}">
@@ -118,14 +123,16 @@
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label for="userPassword" class="form-label fs-5">Password</label>
-                    <input type="password" class="form-control" id="userPassword" placeholder="비밀번호를 입력하세요">
+                    <label for="password" class="form-label fs-5">Password</label>
+                    <input type="password" class="form-control" id="password"
+                           th:class="${errors?.containsKey('rePassword')} ? 'form-control field-error' : 'form-control'"
+                           name="password" placeholder="비밀번호를 입력하세요">
                 </div>
 
                 <div class="mb-3 col-12">
                     <label for="rePassword" class="form-label fs-5">Confirm Password</label>
 <!--                <input type="password" class="form-control" id="confirmPassword" name="rePassword"> th:field="*{rePassword}"-->
-                    <input type="password" id="rePassword"
+                    <input type="password" id="rePassword" name="rePassword"
                            th:class="${errors?.containsKey('rePassword')} ? 'form-control field-error' : 'form-control'"
                            class="form-control" placeholder="비밀번호를 다시 한 번 입력하세요">
                     <div class="field-error" th:if="${errors?.containsKey('rePassword')}" th:text="${errors['rePassword']}">
@@ -134,9 +141,9 @@
                 </div>
 
                 <div class="mb-3 col-12">
-                    <label for="userEmail" class="form-label fs-5">Email</label>
+                    <label for="email" class="form-label fs-5">Email</label>
 <!--                <input type="email" class="form-control" id="email" name="email"> th:field="*{userEmail}"-->
-                    <input type="text" id="userEmail"
+                    <input type="text" id="email" name="email"
                            th:class="${errors?.containsKey('userEmail')} ? 'form-control field-error' : 'form-control'"
                            class="form-control" placeholder="이메일을 입력하세요">
                     <div class="field-error" th:if="${errors?.containsKey('userEmail')}" th:text="${errors['userEmail']}">
