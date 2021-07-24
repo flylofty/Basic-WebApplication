@@ -69,7 +69,7 @@ public class UserController {
             log.info("유저 아이디 = {}", joinInfo.getUserId());
             errors.put("userId", "회원 아이디는 필수 입니다.");
         }
-        else if (7 < joinInfo.getUserId().length() || joinInfo.getUserId().length() > 15) {
+        if (7 > joinInfo.getUserId().length() || joinInfo.getUserId().length() > 15) {
             log.info("유저 아이디 글자수 = {}", joinInfo.getUserId().length());
             errors.put("userId", "아이디의 글자 수는 7자 이상 15자 이하 입니다.");
         }
