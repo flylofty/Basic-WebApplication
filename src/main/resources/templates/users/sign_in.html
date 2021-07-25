@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="UTF-8">
@@ -40,6 +40,11 @@
             margin : 0 auto;
             justify-content: center;
             align-items: center;
+        }
+
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
         }
 
         footer {
@@ -102,17 +107,27 @@
 
         <div class="myContainer">
 
-            <form class="login" action="/users/login" method="post">
+            <form class="login" th:action th:object="${form}" method="post">
 
                 <p class="text-center mb-5 fs-2 bold">로그인</p>
 
                 <div class="mb-3 col-12">
-                    <label for="userId" class="form-label fs-5">I D</label>
-                    <input type="text" class="form-control" id="userId" name="id">
+                    <label for="id" class="form-label fs-5">I D</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                           th:class="${errors?.containsKey('loginErr')} ? 'form-control field-error' : 'form-control'"
+                           placeholder="아이디를 입력하세요">
                 </div>
+
                 <div class="mb-3 col-12">
-                    <label for="userPassowrd" class="form-label fs-5">Password</label>
-                    <input type="password" class="form-control" id="userPassowrd" name="password">
+                    <label for="password" class="form-label fs-5">Password</label>
+                    <input type="password" class="form-control" id="password" name="password"
+                           th:class="${errors?.containsKey('loginErr')} ? 'form-control field-error' : 'form-control'"
+                           placeholder="비밀번호를 입력하세요">
+
+                    <div class="field-error" th:if="${errors?.containsKey('loginErr')}" th:text="${errors['loginErr']}">
+                        로그인 오류
+                    </div>
+
                 </div>
                 <button type="submit" class="btn btn-primary my-3 col-12 fs-5">Sign In</button>
             </form>
