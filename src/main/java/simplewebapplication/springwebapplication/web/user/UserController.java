@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.user.UserJoinFormDTO;
 import simplewebapplication.springwebapplication.dto.user.UserLoginFormDTO;
 import simplewebapplication.springwebapplication.service.user.UserService;
@@ -29,22 +30,45 @@ public class UserController {
 
     // 로그인 페이지로 이동
     @GetMapping("/login")
-    public String userLogin() {
+    public String userLogin(Model model) {
+        model.addAttribute("form", new UserLoginFormDTO());
         return "users/sign_in";
     }
 
     // 로그인
     @PostMapping("/login")
-    public String checkUserLogin(UserLoginFormDTO user) {
+    public String checkUserLogin(@ModelAttribute UserLoginFormDTO form, Model model) {
 
-        // form 에서 사용자가 입력한 아이디, 비밀번호 정보가 전달됨
+        Map<String, String> errors = new HashMap<>();
 
-        // 아이디가 존재하는지?
+        // 검증 로직
 
-        // 아이디가 존재한다면 비밀번호가 맞는지?
+        // 아이디 기입 확인
+        if (form.getId().isEmpty()|| form.getPassword().isEmpty()) {
+            errors.put("loginErr", "아이디와 비밀번호를 입력해주세요.");
+        }
 
-        // 모두 맞을 경우에만 성공
-        // 하나라도 틀릴 시 경고
+        if (!errors.isEmpty()) {
+            log.info("아이디와 비밀번호를 입력해주세요.");
+            model.addAttribute("errors", errors);
+            return "users/sign_in";
+        }
+
+        User user = userService.findUser(form.getId());
+
+        if (user == null) {
+            log.info("존재하지 않는 회원!!");
+            errors.put("loginErr", "아이디와 비밀번호를 확인해주세요.");
+            model.addAttribute("errors", errors);
+            return "users/sign_in";
+        }
+
+        if (!user.getPassword().equals(form.getPassword())) {
+            log.info("비밀번호가 틀렸습니다.");
+            errors.put("loginErr", "아이디와 비밀번호를 확인해주세요.");
+            model.addAttribute("errors", errors);
+            return "users/sign_in";
+        }
 
         return "redirect:../";
     }
