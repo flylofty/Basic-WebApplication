@@ -1,6 +1,6 @@
 package simplewebapplication.springwebapplication.service.board;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
@@ -13,15 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
-
-    @Autowired
-    public BoardServiceImpl(BoardRepository boardRepository) {
-        this.boardRepository = boardRepository;
-    }
 
     @Override
     public ResponseBoard findBoard(Long boardId) {
@@ -34,9 +30,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<ResponseBoard> findBoards(int start, int end, int number) {
+    public List<ResponseBoard> findBoards(int page, int count) {
 
-        List<Board> findAll = boardRepository.findAll(start, end, number);
+        List<Board> findAll = boardRepository.findAll(page, count);
 
         // id, title, user, dateTime, views, favorite
         List<ResponseBoard> boards = new ArrayList<>();

@@ -1,17 +1,17 @@
 package simplewebapplication.springwebapplication.repository.board;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import simplewebapplication.springwebapplication.domain.board.Board;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class H2BoardRepository implements BoardRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
 
     @Override
     public Board findOne(Long boardId) {
@@ -19,7 +19,7 @@ public class H2BoardRepository implements BoardRepository {
     }
 
     @Override
-    public List<Board> findAll(int start, int end, int number) {
+    public List<Board> findAll(int page, int count) {
         return em.createQuery("select b from Board b", Board.class)
                 .getResultList();
     }
