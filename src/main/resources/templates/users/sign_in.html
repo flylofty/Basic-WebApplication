@@ -113,22 +113,21 @@
 
                 <div class="mb-3 col-12">
                     <label for="id" class="form-label fs-5">I D</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           th:class="${errors?.containsKey('loginErr')} ? 'form-control field-error' : 'form-control'"
-                           placeholder="아이디를 입력하세요">
+                    <input type="text" id="id" class="form-control" th:field="${form.id}"
+                           th:errorclass="field-error" placeholder="아이디를 입력하세요">
                 </div>
 
                 <div class="mb-3 col-12">
                     <label for="password" class="form-label fs-5">Password</label>
-                    <input type="password" class="form-control" id="password" name="password"
-                           th:class="${errors?.containsKey('loginErr')} ? 'form-control field-error' : 'form-control'"
-                           placeholder="비밀번호를 입력하세요">
-
-                    <div class="field-error" th:if="${errors?.containsKey('loginErr')}" th:text="${errors['loginErr']}">
-                        로그인 오류
-                    </div>
-
+                    <input type="password" id="password" class="form-control" th:field="${form.password}"
+                           th:errorclass="field-error" placeholder="비밀번호를 입력하세요">
                 </div>
+
+                <div th:if="${#fields.hasGlobalErrors()}">
+                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                       th:text="${err}">로그인 오류</p>
+                </div>
+
                 <button type="submit" class="btn btn-primary my-3 col-12 fs-5">Sign In</button>
             </form>
 
