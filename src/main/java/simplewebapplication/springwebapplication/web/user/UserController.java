@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,38 +40,39 @@ public class UserController {
 
     // 로그인
     @PostMapping("/login")
-    public String checkUserLogin(@ModelAttribute UserLoginForm form, Model model) {
+    public String checkUserLogin(@ModelAttribute(name = "form") UserLoginForm form, BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes, Model model)
+    {
 
-        Map<String, String> errors = new HashMap<>();
+        //Map<String, String> errors = new HashMap<>();
 
         // 검증 로직
 
         // 아이디 기입 확인
         if (form.getId().isEmpty()|| form.getPassword().isEmpty()) {
-            errors.put("loginErr", "아이디와 비밀번호를 입력해주세요.");
+            bindingResult.addError(new ObjectError("form", "아이디와 비밀번호를 입력해주세요."));
         }
 
-        if (!errors.isEmpty()) {
+        if (bindingResult.hasErrors()) {
             log.info("아이디와 비밀번호를 입력해주세요.");
-            model.addAttribute("errors", errors);
             return "users/sign_in";
         }
 
         User user = userService.findUser(form.getId());
 
-        if (user == null) {
+        if (user == null || !user.getPassword().equals(form.getPassword())) {
             log.info("존재하지 않는 회원!!");
-            errors.put("loginErr", "아이디와 비밀번호를 확인해주세요.");
-            model.addAttribute("errors", errors);
+            //errors.put("loginErr", "아이디와 비밀번호를 확인해주세요.");
+            bindingResult.addError(new ObjectError("form", "아이디와 비밀번호를 확인해주세요."));
             return "users/sign_in";
         }
 
-        if (!user.getPassword().equals(form.getPassword())) {
-            log.info("비밀번호가 틀렸습니다.");
-            errors.put("loginErr", "아이디와 비밀번호를 확인해주세요.");
-            model.addAttribute("errors", errors);
-            return "users/sign_in";
-        }
+//        if (!user.getPassword().equals(form.getPassword())) {
+//            log.info("비밀번호가 틀렸습니다.");
+//            //errors.put("loginErr", "아이디와 비밀번호를 확인해주세요.");
+//            //model.addAttribute("errors", errors);
+//            return "users/sign_in";
+//        }
 
         return "redirect:../";
     }
