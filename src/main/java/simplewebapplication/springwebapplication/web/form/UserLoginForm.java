@@ -1,18 +1,18 @@
-package simplewebapplication.springwebapplication.dto.user;
+package simplewebapplication.springwebapplication.web.form;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class UserLoginFormDTO {
+public class UserLoginForm {
 
     private String id;
     private String password;
 
-    public UserLoginFormDTO() {
+    public UserLoginForm() {
     }
 
-    public UserLoginFormDTO(String id, String password) {
+    public UserLoginForm(String id, String password) {
         this.id = id;
         this.password = password;
     }

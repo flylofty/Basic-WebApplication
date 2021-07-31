@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import simplewebapplication.springwebapplication.domain.user.User;
-import simplewebapplication.springwebapplication.dto.user.UserJoinFormDTO;
-import simplewebapplication.springwebapplication.dto.user.UserLoginFormDTO;
+import simplewebapplication.springwebapplication.web.form.UserJoinForm;
+import simplewebapplication.springwebapplication.web.form.UserLoginForm;
 import simplewebapplication.springwebapplication.service.user.UserService;
 
 import java.util.HashMap;
@@ -31,13 +30,13 @@ public class UserController {
     // 로그인 페이지로 이동
     @GetMapping("/login")
     public String userLogin(Model model) {
-        model.addAttribute("form", new UserLoginFormDTO());
+        model.addAttribute("form", new UserLoginForm());
         return "users/sign_in";
     }
 
     // 로그인
     @PostMapping("/login")
-    public String checkUserLogin(@ModelAttribute UserLoginFormDTO form, Model model) {
+    public String checkUserLogin(@ModelAttribute UserLoginForm form, Model model) {
 
         Map<String, String> errors = new HashMap<>();
 
@@ -76,13 +75,13 @@ public class UserController {
     // 회원가입 페이지로 이동
     @GetMapping("/join")
     public String userJoin(Model model) {
-        model.addAttribute("joinInfo", new UserJoinFormDTO());
+        model.addAttribute("joinInfo", new UserJoinForm());
         return "users/sign_up";
     }
 
     // 회원가입
     @PostMapping("/join")
-    public String checkUserJoinV1(@ModelAttribute UserJoinFormDTO joinInfo, Model model) {
+    public String checkUserJoinV1(@ModelAttribute UserJoinForm joinInfo, Model model) {
 
         Map<String, String> errors = new HashMap<>();
 

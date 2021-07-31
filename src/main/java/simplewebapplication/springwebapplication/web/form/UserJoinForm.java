@@ -1,19 +1,19 @@
-package simplewebapplication.springwebapplication.dto.user;
+package simplewebapplication.springwebapplication.web.form;
 
 import lombok.Data;
 
 @Data
-public class UserJoinFormDTO {
+public class UserJoinForm {
 
     private String userId;
     private String password;
     private String rePassword;
     private String email;
 
-    public UserJoinFormDTO() {
+    public UserJoinForm() {
     }
 
-    public UserJoinFormDTO(String userId, String password, String rePassword, String email) {
+    public UserJoinForm(String userId, String password, String rePassword, String email) {
         this.userId = userId;
         this.password = password;
         this.rePassword = rePassword;
