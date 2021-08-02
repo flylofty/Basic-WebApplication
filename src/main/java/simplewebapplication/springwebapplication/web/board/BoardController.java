@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
-import simplewebapplication.springwebapplication.dto.board.WriteFormDTO;
+import simplewebapplication.springwebapplication.web.form.WriteForm;
 import simplewebapplication.springwebapplication.service.board.BoardService;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public String saveWriteForm(WriteFormDTO write) {
+    public String saveWriteForm(WriteForm write) {
         return "redirect:/boards";
     }
 
