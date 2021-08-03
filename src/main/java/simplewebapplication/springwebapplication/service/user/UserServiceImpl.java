@@ -1,5 +1,6 @@
 package simplewebapplication.springwebapplication.service.user;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.user.User;
@@ -7,33 +8,47 @@ import simplewebapplication.springwebapplication.domain.user.UserRoleType;
 import simplewebapplication.springwebapplication.repository.user.UserRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service // @Service 애노테이션은 컴포넌트 스캔의 대상임.
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     @Transactional // 기본은 readOnly 이지만 이 부분은 DB에 써야하므로 애노테이션을 따로 붙임
     public String join(User user) {
 
         // 중복 검사
-        validateDuplicateMember(user);
+        if (validateDuplicateMember(user)) {
+            userRepository.save(user);
+            return user.getId();
+        }
 
-        userRepository.save(user);
+        return null;
+    }
 
-        return user.getId();
+    @Override
+    public User login(String id, String password) {
+
+        return userRepository.findById(id)
+                .filter(u -> u.getPassword().equals(password))
+                .orElse(null);
     }
 
     @Override
     public User findUser(String userId) {
-        return userRepository.findById(userId);
+
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isEmpty()) {
+            throw new IllegalStateException("존재하지 않는 사용자 입니다.");
+        }
+
+        return optionalUser.get();
     }
 
     @Override
@@ -49,23 +64,26 @@ public class UserServiceImpl implements UserService {
         return joinedUser;
     }
 
-    private void validateDuplicateMember(User user) {
-        User findUser = userRepository.findById(user.getId());
+    private boolean validateDuplicateMember(User user) {
 
-        if (findUser != null) {
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
+        Optional<User> optionalUser = userRepository.findById(user.getId());
+
+        if (optionalUser.isPresent()) {
+            //throw new IllegalStateException("이미 존재하는 회원입니다.");
+            return false;
         }
+
+        return true;
     }
 
     private User makeRandomUserId() {
 
         // 랜덤유저 만들기
-
         Set<Integer> set = new HashSet<>();
 
         while (set.size() < 5) {
-            Double d = (Math.random() * 10000) % 26;
-            set.add(d.intValue());
+            double d = (Math.random() * 10000) % 26;
+            set.add((int) d);
         }
 
         StringBuilder id = new StringBuilder();
@@ -76,8 +94,8 @@ public class UserServiceImpl implements UserService {
 
         String[] email = {"@naver.com", "@daum.net", "gmail.com", "nate.com"};
 
-        Double d = (Math.random() * 10000) % 4;
+        double d = (Math.random() * 10000) % 4;
 
-        return new User(id.toString(), "4321", id + email[d.intValue()], UserRoleType.ADMIN);
+        return new User(id.toString(), "4321", id + email[(int) d], UserRoleType.ADMIN);
     }
 }

@@ -7,6 +7,9 @@ public interface UserService {
     // 회원 가입
     String join(User user);
 
+    // 로그인
+    User login(String id, String password);
+
     // 회원 조회
     User findUser(String userId);
 
