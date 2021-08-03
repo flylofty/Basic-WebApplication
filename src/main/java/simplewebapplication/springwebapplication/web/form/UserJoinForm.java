@@ -1,6 +1,8 @@
 package simplewebapplication.springwebapplication.web.form;
 
 import lombok.Data;
+import simplewebapplication.springwebapplication.domain.user.User;
+import simplewebapplication.springwebapplication.domain.user.UserRoleType;
 
 @Data
 public class UserJoinForm {
@@ -18,5 +20,9 @@ public class UserJoinForm {
         this.password = password;
         this.rePassword = rePassword;
         this.email = email;
+    }
+
+    public User createUser() {
+        return new User(this.userId, this.password, this.email, UserRoleType.USER);
     }
 }
