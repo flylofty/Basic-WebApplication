@@ -166,11 +166,14 @@
 
                 <button type="button"
                         th:onclick="|location.href='@{/boards/write}'|"
+                        th:if="${session.loginUser.id == board.user}"
                         class="btn btn-outline-primary mx-2">
                     수 정
                 </button>
 
-                <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}" th:method="delete">
+                <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}"
+                      th:if="${session.loginUser.id == board.user}"
+                      th:method="delete">
                     <button type="submit" class="btn btn-outline-danger">
                         삭 제
                     </button>
