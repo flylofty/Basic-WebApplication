@@ -36,7 +36,7 @@ public class UserController {
     }
 
     // 로그아웃
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
 
@@ -78,7 +78,7 @@ public class UserController {
         // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
         HttpSession session = request.getSession();
         //세션에 로그인 회원 정보를 보관
-        session.setAttribute(SessionConst.LOGIN_MEMBER, loginUser);
+        session.setAttribute(SessionConst.LOGIN_USER, loginUser);
 
         return "redirect:" + redirectURL;
     }
