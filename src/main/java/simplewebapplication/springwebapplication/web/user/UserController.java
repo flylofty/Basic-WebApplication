@@ -80,6 +80,9 @@ public class UserController {
         //세션에 로그인 회원 정보를 보관
         session.setAttribute(SessionConst.LOGIN_USER, loginUser);
 
+        // 세션 만료 시간 설정 (임시)
+        session.setMaxInactiveInterval(10);
+
         return "redirect:" + redirectURL;
     }
 
