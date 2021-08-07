@@ -24,7 +24,6 @@ public class BoardController {
                              @RequestParam(required = false) Integer count,
                              Model model)
     {
-
         if (page == null) {
             page = 1;
         }
@@ -39,7 +38,7 @@ public class BoardController {
         // 원하는 page 번호에 count 수 만큼 게시글 목록을 한 페이지에 보임
         // 정렬된 count 개수 만큼의 게시글 목록 정보 리스트
         // 전체 게시글 수를 담은 변수
-        List<ResponseBoard> boards = boardService.findBoards(page, count);
+        List<ResponseBoard> boards = boardService.findBoardPageList(page);
         model.addAttribute("boards", boards);
         return "boards/boards";
     }

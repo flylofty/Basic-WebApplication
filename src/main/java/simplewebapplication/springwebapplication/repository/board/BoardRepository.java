@@ -10,8 +10,11 @@ public interface BoardRepository {
     // 하나만 조회
     Board findOne(Long boardId);
 
-    // 전체 조회, 페이지네이션
+    // 전체 조회
     List<Board> findAll(int page, int count);
+
+    // 게시글 페이지 네이션
+    List<Board> findPage(int page);
 
     // 생성
     public void save(Board board);

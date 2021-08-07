@@ -25,6 +25,16 @@ public class H2BoardRepository implements BoardRepository {
     }
 
     @Override
+    public List<Board> findPage(int page) {
+
+        int start = 10 * page - 10;
+        return em.createQuery("select b from Board b order by b.id asc", Board.class)
+                .setFirstResult(start)
+                .setMaxResults(start + 10)
+                .getResultList();
+    }
+
+    @Override
     public void save(Board board) {
         em.persist(board);
     }

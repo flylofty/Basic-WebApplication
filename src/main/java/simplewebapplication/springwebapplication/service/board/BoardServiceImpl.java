@@ -46,6 +46,21 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public List<ResponseBoard> findBoardPageList(int page) {
+        List<Board> boardList = boardRepository.findPage(page);
+
+        // id, title, user, dateTime, views, favorite
+        List<ResponseBoard> boards = new ArrayList<>();
+        for (Board board : boardList) {
+            ResponseBoard rb = new ResponseBoard(board.getId().toString(), board.getTitle(), board.getUser().getId(),
+                    board.getDateTime().format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm")), board.getViews().toString(), board.getFavorite().toString(), board.getContent());
+            boards.add(rb);
+        }
+
+        return boards;
+    }
+
+    @Override
     @Transactional
     public Long createBoard(Board board) {
         boardRepository.save(board);
