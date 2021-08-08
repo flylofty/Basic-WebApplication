@@ -22,6 +22,7 @@ public class WriteForm {
     }
 
     public Board makeBoard(User user) {
+
         return new Board(this.title, this.content, user, LocalDateTime.now());
     }
 }
