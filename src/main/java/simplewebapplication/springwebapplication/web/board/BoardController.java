@@ -79,7 +79,6 @@ public class BoardController {
 
         // 3. Board 를 만들고 BoardService 를 통해 새로운 게시글을 만듦
         Long boardId = boardService.createBoard(form.makeBoard(sessionUser));
-
         return "redirect:/boards/" + boardId.toString();
     }
 
