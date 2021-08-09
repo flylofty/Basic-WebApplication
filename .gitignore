@@ -24,6 +24,7 @@ bin/
 /src/test/
 /src/main/resources/application.properties
 /src/main/resources/application.yml
+/src/main/resources/data.sql
 /src/main/resources/static/
 /src/main/webapp/
 
