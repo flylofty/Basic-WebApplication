@@ -83,4 +83,8 @@ public class Board {
     public void changeContent(String content) {
         this.content = content;
     }
+
+    public void changeViews(long addValue) {
+        this.views += addValue;
+    }
 }
