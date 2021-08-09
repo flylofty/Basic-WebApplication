@@ -20,13 +20,14 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
 
     @Override
+    @Transactional
     public ResponseBoard findBoard(Long boardId) {
 
-        Board fb = boardRepository.findOne(boardId);
+        Board board = boardRepository.findOne(boardId);
 
-        return new ResponseBoard(fb.getId().toString(), fb.getTitle(),
-                fb.getUser().getId(), fb.getDateTime().format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm")),
-                fb.getViews().toString(), fb.getFavorite().toString(), fb.getContent());
+        return new ResponseBoard(board.getId().toString(), board.getTitle(),
+                board.getUser().getId(), board.getDateTime().format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm")),
+                board.getViews().toString(), board.getFavorite().toString(), board.getContent());
     }
 
     @Override
