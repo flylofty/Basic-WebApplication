@@ -86,6 +86,9 @@ public class BoardController {
     public String findBoard(@PathVariable Long boardId, Model model) {
         ResponseBoard board = boardService.findBoard(boardId);
         model.addAttribute("board", board);
+        //게시글 개행 처리
+        String nlString = System.getProperty("line.separator").toString();
+        model.addAttribute("nlString", nlString);
         return "boards/board";
     }
 
