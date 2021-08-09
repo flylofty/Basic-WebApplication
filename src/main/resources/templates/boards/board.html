@@ -47,6 +47,9 @@
             .containerHeader {
                 width : 750px; height : 200px;
                 border:1px none #cccccc;
+                position: relative;
+                top: 10px;
+                left: -7px;
             }
 
             .cHeader {
@@ -61,9 +64,14 @@
             .buttons button {
                 position: relative;
                 top: 10px;
-                left: -7px;
+                left: -15px;
                 float: left;
-                margin: 0, auto;
+<!--                margin: 0, auto;-->
+            }
+
+            .back {
+                position: relative;
+                left: 8px;
             }
 
             .info {
@@ -80,9 +88,26 @@
                 top : 10px;
             }
 
+            .line2 {
+                width : 800px;
+                height : 100px;
+<!--                border:1px solid #000000;-->
+
+                position: relative;
+                top : 10px;
+            }
+
+            .user {
+                float : left;
+            }
+
+            .date {
+                float : left;
+            }
+
             .contents {
                 padding: 10px;
-                width: 750px; height: 600px;
+                width: 750px; height: 300px;
                 border:1px none #000000;
                 position: relative;
                 top : 20px;
@@ -164,6 +189,14 @@
 
             <div class="buttons">
 
+                <div class="back">
+                    <button type="button"
+                            th:onclick="|location.href='@{/boards}'|"
+                            class="btn btn-outline-success mx-2">
+                        목 록
+                    </button>
+                </div>
+                <!-- post 방식이 적합할 것 같음 -->
                 <button type="button"
                         th:onclick="|location.href='@{/boards/write}'|"
                         th:if="${session.loginUser.id == board.user}"
@@ -182,22 +215,31 @@
             </div>
 
             <div class="info">
-                <div class="user" th:text="${board.user}">
-                    <h5>작성자</h5>
+                <div>
+<!--                    <h5 class="user">작성자 : &nbsp</h5>-->
+                    <h5 th:text="${board.user}">User01</h5>
                 </div>
 
-                <div class="date" th:text="${board.dateTime}">
-                    <h5>날 짜</h5>
+                <div>
+<!--                    <h5 class="date">날 &nbsp&nbsp&nbsp짜 : &nbsp</h5>-->
+                    <h5 class="date" th:text="${board.dateTime}">21.08.08</h5>
+                    <h5 class="date">&nbsp&nbsp조회 &nbsp</h5>
+                    <h5 th:text="${board.views}"> 1 </h5>
+
                 </div>
+
             </div>
 
         </div>
 
         <div class="line1"></div>
 
-        <div class="contents" th:text="${board.content}">
+<!--        <div class="contents" th:text="${board.content}">-->
+        <div class="contents" th:utext="${#strings.replace(board.content, nlString, '&lt;br /&gt;')}">
             게시글 내용
         </div>
+
+        <div class="line2"></div>
 
     </div>
 
