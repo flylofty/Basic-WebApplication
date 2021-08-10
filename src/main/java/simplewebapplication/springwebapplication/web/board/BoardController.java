@@ -95,6 +95,8 @@ public class BoardController {
     @DeleteMapping("/{boardId}")
     public String deleteBoard(@PathVariable Long boardId) {
         // 게시글 삭제
+        log.info("삭제할 게시글 번호 = {}", boardId);
+        boardService.deleteBoard(boardId);
         return "redirect:/boards";
     }
 }
