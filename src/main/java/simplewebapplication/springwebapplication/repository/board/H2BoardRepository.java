@@ -3,6 +3,7 @@ package simplewebapplication.springwebapplication.repository.board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import simplewebapplication.springwebapplication.domain.board.Board;
+import simplewebapplication.springwebapplication.domain.board.BoardStatusType;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -31,7 +32,10 @@ public class H2BoardRepository implements BoardRepository {
 
         // 페이지네이션 시간상 최신글 우선 순서
         int start = 10 * page - 10;
-        return em.createQuery("select b from Board b order by b.dateTime desc", Board.class)
+        return em.createQuery("select b from Board b " +
+                        " where b.status = :status" +
+                        " order by b.dateTime desc", Board.class)
+                .setParameter("status", BoardStatusType.CREATED)
                 .setFirstResult(start)
                 .setMaxResults(start + 10)
                 .getResultList();
@@ -44,8 +48,11 @@ public class H2BoardRepository implements BoardRepository {
 
     @Override
     public void delete(Long boardId) {
-        Board findBoard = em.find(Board.class, boardId);
-        em.remove(findBoard);
+        Board board = em.find(Board.class, boardId);
+
+        // 해당 게시글을 삭제하지 않고 상태만을 변경
+        //em.remove(findBoard);
+        board.deleteBoard();
     }
 
     // 테스트용 임시 코드...
