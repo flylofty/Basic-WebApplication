@@ -32,6 +32,10 @@ public class Board {
     @Column(nullable = false)
     private LocalDateTime dateTime;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BoardStatusType status;
+
     private Long views;
 
     private Long favorite;
@@ -50,6 +54,7 @@ public class Board {
         this.content = content;
         this.user = user;
         this.dateTime = dateTime;
+        this.status = BoardStatusType.CREATED;
         this.views = 0L;
         this.favorite = 0L;
     }
@@ -72,6 +77,10 @@ public class Board {
         return dateTime;
     }
 
+    public BoardStatusType getStatus() {
+        return status;
+    }
+
     public Long getViews() {
         return views;
     }
@@ -86,5 +95,9 @@ public class Board {
 
     public void changeViews(long addValue) {
         this.views += addValue;
+    }
+
+    public void deleteBoard() {
+        this.status = BoardStatusType.DELETED;
     }
 }
