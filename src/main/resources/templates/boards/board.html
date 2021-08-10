@@ -37,11 +37,49 @@
             }
 
             .myContainer {
-                width : 750px; height : 600px;
+                width : 750px; height : 500px;
                 display: flex;
+                position: relative;
+                top: -30px;
                 margin : 90px auto;
                 border:1px none #cccccc;
                 overflow: hidden;
+            }
+
+            .comments {
+                width : 750px; height : 300px;
+                display: flex;
+                position: relative;
+                top: -120px;
+                border:1px none #cccccc;
+                margin : 90px auto;
+                overflow: hidden;
+            }
+
+            .line2 {
+                width : 800px;
+                height : 0px;
+                border:1px solid #000000;
+                position: relative;
+                top : -130px;
+            }
+
+            .heart1 {
+                float: left;
+                position: relative;
+                left: -10px;
+            }
+
+            .heart2 {
+                float: left;
+                position: relative;
+                left: -10px;
+            }
+
+            .like {
+                float: left;
+                position: relative;
+                left: -5px;
             }
 
             .containerHeader {
@@ -84,15 +122,6 @@
                 width : 800px;
                 height : 0px;
                 border:1px solid #000000;
-                position: relative;
-                top : 10px;
-            }
-
-            .line2 {
-                width : 800px;
-                height : 100px;
-<!--                border:1px solid #000000;-->
-
                 position: relative;
                 top : 10px;
             }
@@ -196,7 +225,7 @@
                         목 록
                     </button>
                 </div>
-                <!-- post 방식이 적합할 것 같음 -->
+
                 <button type="button"
                         th:onclick="|location.href='@{/boards/write}'|"
                         th:if="${session.loginUser.id == board.user}"
@@ -216,12 +245,12 @@
 
             <div class="info">
                 <div>
-<!--                    <h5 class="user">작성자 : &nbsp</h5>-->
+                    <!--                    <h5 class="user">작성자 : &nbsp</h5>-->
                     <h5 th:text="${board.user}">User01</h5>
                 </div>
 
                 <div>
-<!--                    <h5 class="date">날 &nbsp&nbsp&nbsp짜 : &nbsp</h5>-->
+                    <!--                    <h5 class="date">날 &nbsp&nbsp&nbsp짜 : &nbsp</h5>-->
                     <h5 class="date" th:text="${board.dateTime}">21.08.08</h5>
                     <h5 class="date">&nbsp&nbsp조회 &nbsp</h5>
                     <h5 th:text="${board.views}"> 1 </h5>
@@ -234,9 +263,42 @@
 
         <div class="line1"></div>
 
-<!--        <div class="contents" th:text="${board.content}">-->
+        <!--        <div class="contents" th:text="${board.content}">-->
         <div class="contents" th:utext="${#strings.replace(board.content, nlString, '&lt;br /&gt;')}">
             게시글 내용
+        </div>
+
+    </div>
+
+    <div class="comments row">
+
+        <div>
+
+            <div class="heart1"
+                 th:if="${session.loginUser.id == board.user}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                     fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                </svg>
+            </div>
+
+            <div class="heart2"
+                 th:if="${session.loginUser.id != board.user}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                     fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+            </div>
+
+            <div>
+                <div class="like">
+                    좋아요
+                </div>
+                <div th:text="${board.favorite}">
+                    1
+                </div>
+            </div>
+
         </div>
 
         <div class="line2"></div>
