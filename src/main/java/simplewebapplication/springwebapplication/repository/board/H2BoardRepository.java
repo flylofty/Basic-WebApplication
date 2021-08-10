@@ -29,8 +29,9 @@ public class H2BoardRepository implements BoardRepository {
     @Override
     public List<Board> findPage(int page) {
 
+        // 페이지네이션 시간상 최신글 우선 순서
         int start = 10 * page - 10;
-        return em.createQuery("select b from Board b order by b.id asc", Board.class)
+        return em.createQuery("select b from Board b order by b.dateTime desc", Board.class)
                 .setFirstResult(start)
                 .setMaxResults(start + 10)
                 .getResultList();
