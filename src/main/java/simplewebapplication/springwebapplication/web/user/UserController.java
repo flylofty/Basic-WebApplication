@@ -11,6 +11,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import simplewebapplication.springwebapplication.domain.user.User;
+import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.UserJoinForm;
 import simplewebapplication.springwebapplication.web.form.UserLoginForm;
@@ -28,6 +29,7 @@ import java.util.regex.Pattern;
 public class UserController {
 
     private final UserService userService;
+    private final BoardService boardService;
 
     // 로그인 페이지로 이동
     @GetMapping("/login")
@@ -151,8 +153,19 @@ public class UserController {
         return "redirect:../";
     }
 
-    public static boolean isValidEmail(String email) {
+    // 마이페이지로 이동
+    @GetMapping("/{userId}")
+    public String myPage(@PathVariable String userId, Model model) {
+        User findUser = userService.findUser(userId);
+        Long boardCount = boardService.findBoardCount(findUser.getId());
 
+        model.addAttribute("id", findUser.getId());
+        model.addAttribute("email", findUser.getEmail());
+        model.addAttribute("boardCount", boardCount);
+        return "users/myPage";
+    }
+
+    public static boolean isValidEmail(String email) {
         // 출처 : http://develop.sunshiny.co.kr/592
         boolean err = false; String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
         Pattern p = Pattern.compile(regex);
