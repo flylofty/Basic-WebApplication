@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이페이지</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+  <style>
+            html {
+                height : 100%;
+            }
+
+            body {
+                margin : 0;
+                height : 100%;
+            }
+
+            .wrap {
+                min-height : 100%;
+                position : relative;
+                padding-bottom : 19px;
+            }
+
+            header {
+                border:1px solid #cccccc;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            .myPage {
+                width : 750px; height : 500px;
+                display: flex;
+                position: relative;
+                top: -30px;
+                margin : 90px auto;
+                border:1px none #cccccc;
+                overflow: hidden;
+            }
+
+            .modify {
+                width : 360px; height : 200px;
+                position: relative;
+                left: 365px;
+                border:1px solid #cccccc;
+            }
+
+            .modifyTitle {
+                position: relative;
+                bottom: 180px;
+                left: 25px;
+            }
+
+            .modifyContent {
+                width : 300px; height : 100px;
+                position: relative;
+                bottom: 180px;
+                left: 40px;
+                border:1px none #cccccc;
+            }
+
+            .info {
+                position: relative;
+                left: 20px;
+                top: 20px;
+            }
+
+            .out {
+                position: relative;
+                left: 20px;
+                top: 25px;
+            }
+
+            .myPageHeader {
+                width : 750px; height : 50px;
+                position: relative;
+                border:1px none #cccccc;
+            }
+
+            .userInfo {
+                width : 750px; height : 200px;
+                position: relative;
+                border:1px none #cccccc;
+            }
+
+            .userId {
+                position: relative;
+                top: 25px;
+                left: 50px;
+            }
+
+            .userEmail {
+                position: relative;
+                top: 35px;
+                left: 48px;
+            }
+
+            .userInfoChange {
+                position: relative;
+<!--                top: 47px;-->
+<!--                left: 38px;-->
+            }
+
+            .change {
+                float: left;
+                margin-left: 10px;
+            }
+
+            .userLeft {
+                float: left;
+            }
+
+            .userRight {
+                position: relative;
+                left: 15px;
+            }
+
+            .userHistory {
+                width : 750px; height : 200px;
+                position: relative;
+                bottom: 10px;
+                border:1px none #cccccc;
+                overflow: hidden;
+            }
+
+            .basic {
+                width : 360px; height : 200px;
+                position: relative;
+                float: left;
+                border:1px solid #cccccc;
+            }
+
+            .create {
+                width : 360px; height : 200px;
+                position: relative;
+                float: left;
+                border:1px solid #cccccc;
+            }
+
+            .createMainText {
+                position: relative;
+                top: 20px;
+                left: 26px;
+            }
+
+            .report {
+                width : 360px; height : 200px;
+                position: relative;
+                left: 365px;
+                border:1px solid #cccccc;
+            }
+
+            .postLeft {
+                float: left;
+                position: relative;
+                left: 50px;
+                top: 35px;
+            }
+
+            .postRight {
+                position: relative;
+                left: 60px;
+                top: 35px;
+            }
+
+            .commentTitle {
+                float: left;
+                position: relative;
+                left: 50px;
+                top: 40px;
+            }
+
+            .commentContents {
+                float: left;
+                position: relative;
+                margin-left: 10px;
+                left: 55px;
+                top: 40px;
+            }
+
+            footer {
+                width:100%;
+                height:60px;
+                position:absolute;
+                bottom:0;
+            }
+        </style>
+
+</head>
+
+<body>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+<div class="wrap">
+
+  <header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <div class="container-fluid mx-4">
+
+        <a class="navbar-brand fs-2" href="../">Home</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active fs-3" aria-current="page" href="/boards">Board</a>
+            </li>
+          </ul>
+
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+            <li class="nav-item" th:if="${session.loginUser == null}">
+              <a class="nav-link active fs-3" aria-current="page" href="/users/login">Sign In</a>
+            </li>
+
+            <li class="nav-item" th:if="${session.loginUser == null}">
+              <a class="nav-link active fs-3" aria-current="page" href="/users/join">Sign Up</a>
+            </li>
+
+            <li class="nav-item" th:if="${session.loginUser != null}">
+              <a class="nav-link active fs-3" aria-current="page" href="/users/mypage">My Page</a>
+            </li>
+
+            <li class="nav-item" th:if="${session.loginUser != null}">
+              <a class="nav-link active fs-3" aria-current="page" href="/users/logout">Logout</a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+  <div class="myPage row">
+
+    <div class="myPageHeader">
+      <h1>마이페이지</h1>
+    </div>
+
+    <div class="userInfo">
+
+      <div class="basic">
+
+        <h3 class="createMainText">
+          기본 정보
+        </h3>
+
+        <div class="posts">
+
+          <h4 class="postLeft">
+            I D :
+          </h4>
+
+          <h4 class="postRight"
+              th:text="${id}">
+            user
+          </h4>
+
+        </div>
+
+        <div class="comments">
+          <h4 class="commentTitle">EMAIL : </h4>
+          <h4 class="commentContents"
+              th:text="${email}">
+            abc@naver.com
+          </h4>
+        </div>
+
+      </div>
+
+      <div class="modify">
+        <h3 class="modifyTitle">
+          변경 및 탈퇴
+        </h3>
+
+        <div class="modifyContent">
+          <h5 class="info">
+            <a href="/users/change">
+              정보 변경
+            </a>
+          </h5>
+
+          <h5 class="out">
+            <a href="/users/withdrawal">
+              회원 탈퇴
+            </a>
+          </h5>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="userHistory">
+
+      <div class="create">
+
+        <h3 class="createMainText">
+          활동 내역
+        </h3>
+
+        <div class="posts">
+
+          <h4 class="postLeft">
+            작성 게시글 :
+          </h4>
+
+          <h4>
+            <a class="postRight"
+               th:text="${boardCount}"
+               th:href="@{/users/posts/{userId}(userId=${id})}">
+              10
+            </a>
+          </h4>
+
+        </div>
+
+        <div class="comments">
+<!--          <h4 class="commentTitle">작성 댓글 :</h4>-->
+<!--          <h4 class="commentContents">-->
+<!--            <a href="{}"-->
+<!--               th:text="${}-->
+<!--                   th:href="@{/users/comments/{userId}(userId=${id})}">-->
+<!--              5-->
+<!--            </a>-->
+<!--          </h4>-->
+<!--          <h4 class="commentContents"> / </h4>-->
+<!--          <h4 class="commentContents">10</h4>-->
+<!--          <h4 class="commentContents">posts</h4>-->
+        </div>
+
+      </div>
+
+      <div class="report">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container text-center">
+      <span class="text-muted">ⓒ 2021 Company, Inc. ·Privacy ·Terms</span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+
+</html>
