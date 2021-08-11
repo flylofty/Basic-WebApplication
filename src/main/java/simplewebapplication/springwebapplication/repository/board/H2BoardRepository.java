@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.domain.board.BoardStatusType;
+import simplewebapplication.springwebapplication.domain.user.User;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -39,6 +40,16 @@ public class H2BoardRepository implements BoardRepository {
                 .setFirstResult(start)
                 .setMaxResults(start + 10)
                 .getResultList();
+    }
+
+    @Override // 개선 필요...ㅠㅠ
+    public Long findBoardCount(String userId) {
+        User findUser = em.find(User.class, userId);
+        List<Board> boardList = em.createQuery("select b from Board b " +
+                        "where b.user = :findUser", Board.class)
+                .setParameter("findUser", findUser)
+                .getResultList();
+        return Long.parseLong(String.valueOf(boardList.size()));
     }
 
     @Override

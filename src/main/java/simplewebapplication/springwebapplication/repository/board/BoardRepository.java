@@ -16,6 +16,9 @@ public interface BoardRepository {
     // 게시글 페이지 네이션
     List<Board> findPage(int page);
 
+    // 사용자 게시글 수
+    Long findBoardCount(String userId);
+
     // 생성
     public void save(Board board);
 
