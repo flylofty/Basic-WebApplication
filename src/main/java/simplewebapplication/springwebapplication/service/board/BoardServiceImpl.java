@@ -31,6 +31,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public Long findBoardCount(String userId) {
+        return boardRepository.findBoardCount(userId);
+    }
+
+    @Override
     public List<ResponseBoard> findBoards(int page, int count) {
 
         List<Board> findAll = boardRepository.findAll(page, count);

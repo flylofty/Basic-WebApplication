@@ -16,6 +16,9 @@ public interface BoardService {
     // 게시글 하나 조회
     ResponseBoard findBoard(Long boardId);
 
+    // 사용자 게시글 수 조회
+    Long findBoardCount(String userId);
+
     // 게시글 생성
     Long createBoard(Board board);
 
