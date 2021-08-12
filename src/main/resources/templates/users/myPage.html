@@ -3,12 +3,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>마이페이지</title>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
   <style>
@@ -36,7 +34,7 @@
             }
 
             .myPage {
-                width : 750px; height : 500px;
+                width : 750px; height : 800px;
                 display: flex;
                 position: relative;
                 top: -30px;
@@ -45,144 +43,32 @@
                 overflow: hidden;
             }
 
-            .modify {
-                width : 360px; height : 200px;
-                position: relative;
-                left: 365px;
-                border:1px solid #cccccc;
-            }
-
-            .modifyTitle {
-                position: relative;
-                bottom: 180px;
-                left: 25px;
-            }
-
-            .modifyContent {
-                width : 300px; height : 100px;
-                position: relative;
-                bottom: 180px;
-                left: 40px;
-                border:1px none #cccccc;
-            }
-
-            .info {
-                position: relative;
-                left: 20px;
-                top: 20px;
-            }
-
-            .out {
-                position: relative;
-                left: 20px;
-                top: 25px;
-            }
-
             .myPageHeader {
                 width : 750px; height : 50px;
                 position: relative;
                 border:1px none #cccccc;
             }
 
-            .userInfo {
-                width : 750px; height : 200px;
-                position: relative;
-                border:1px none #cccccc;
-            }
-
-            .userId {
-                position: relative;
-                top: 25px;
-                left: 50px;
-            }
-
-            .userEmail {
-                position: relative;
-                top: 35px;
-                left: 48px;
-            }
-
-            .userInfoChange {
-                position: relative;
-<!--                top: 47px;-->
-<!--                left: 38px;-->
-            }
-
-            .change {
-                float: left;
-                margin-left: 10px;
-            }
-
-            .userLeft {
+            .l {
                 float: left;
             }
 
-            .userRight {
+            .r {
                 position: relative;
                 left: 15px;
             }
 
-            .userHistory {
-                width : 750px; height : 200px;
+            .commentInfo {
                 position: relative;
-                bottom: 10px;
-                border:1px none #cccccc;
-                overflow: hidden;
+                right: 15px;
             }
 
-            .basic {
-                width : 360px; height : 200px;
-                position: relative;
-                float: left;
-                border:1px solid #cccccc;
-            }
-
-            .create {
-                width : 360px; height : 200px;
-                position: relative;
-                float: left;
-                border:1px solid #cccccc;
-            }
-
-            .createMainText {
-                position: relative;
-                top: 20px;
-                left: 26px;
-            }
-
-            .report {
-                width : 360px; height : 200px;
-                position: relative;
-                left: 365px;
-                border:1px solid #cccccc;
-            }
-
-            .postLeft {
+            .cr {
                 float: left;
                 position: relative;
-                left: 50px;
-                top: 35px;
-            }
-
-            .postRight {
-                position: relative;
-                left: 60px;
-                top: 35px;
-            }
-
-            .commentTitle {
-                float: left;
-                position: relative;
-                left: 50px;
-                top: 40px;
-            }
-
-            .commentContents {
-                float: left;
-                position: relative;
-                margin-left: 10px;
-                left: 55px;
-                top: 40px;
+                font-size: 20px;
+                left: 15px;
+                margin-left: 15px;
             }
 
             footer {
@@ -256,102 +142,78 @@
       <h1>마이페이지</h1>
     </div>
 
-    <div class="userInfo">
+    <div>
 
-      <div class="basic">
-
-        <h3 class="createMainText">
-          기본 정보
-        </h3>
-
-        <div class="posts">
-
-          <h4 class="postLeft">
-            I D :
-          </h4>
-
-          <h4 class="postRight"
-              th:text="${id}">
-            user
-          </h4>
-
+      <div class="card">
+        <h4 class="card-header">기본 정보</h4>
+        <div class="card-body">
+          <br>
+          <div>
+            <h5 class="l">I&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspD &nbsp: </h5>
+            <h5 class="r" th:text="${id}"> ABC </h5>
+          </div>
+          <br>
+          <div>
+            <h5 class="l">EMAIL : </h5>
+            <h5 class="r" th:text="${email}"> abc@naver.com </h5>
+          </div>
+          <br>
         </div>
-
-        <div class="comments">
-          <h4 class="commentTitle">EMAIL : </h4>
-          <h4 class="commentContents"
-              th:text="${email}">
-            abc@naver.com
-          </h4>
-        </div>
-
-      </div>
-
-      <div class="modify">
-        <h3 class="modifyTitle">
-          변경 및 탈퇴
-        </h3>
-
-        <div class="modifyContent">
-          <h5 class="info">
-            <a href="/users/change">
-              정보 변경
-            </a>
-          </h5>
-
-          <h5 class="out">
-            <a href="/users/withdrawal">
-              회원 탈퇴
-            </a>
-          </h5>
-        </div>
-
       </div>
 
     </div>
 
-    <div class="userHistory">
+    <div>
 
-      <div class="create">
+      <div class="card">
+        <h4 class="card-header">활동 내역</h4>
+        <div class="card-body">
+          <br>
+          <div>
+            <h5 class="l">게시글 : </h5>
+            <h5>
+              <a class="r"
+                 th:text="${boardCount}"
+                 th:href="@{/users/posts/{userId}(userId=${id})}">
+                10
+              </a>
+            </h5>
+          </div>
+          <br>
 
-        <h3 class="createMainText">
-          활동 내역
-        </h3>
-
-        <div class="posts">
-
-          <h4 class="postLeft">
-            작성 게시글 :
-          </h4>
-
-          <h4>
-            <a class="postRight"
-               th:text="${boardCount}"
-               th:href="@{/users/posts/{userId}(userId=${id})}">
-              10
-            </a>
-          </h4>
-
-        </div>
-
-        <div class="comments">
-<!--          <h4 class="commentTitle">작성 댓글 :</h4>-->
-<!--          <h4 class="commentContents">-->
-<!--            <a href="{}"-->
-<!--               th:text="${}-->
+<!--          <div>-->
+<!--            <h5 class="l">댓&nbsp&nbsp&nbsp&nbsp글 : </h5>-->
+<!--            <div class="commentInfo">-->
+<!--              <h5 class="cr">-->
+<!--                <a href="{}"-->
+<!--                   th:text="${}"-->
 <!--                   th:href="@{/users/comments/{userId}(userId=${id})}">-->
-<!--              5-->
-<!--            </a>-->
-<!--          </h4>-->
-<!--          <h4 class="commentContents"> / </h4>-->
-<!--          <h4 class="commentContents">10</h4>-->
-<!--          <h4 class="commentContents">posts</h4>-->
-        </div>
+<!--                  5-->
+<!--                </a>-->
+<!--              </h5>-->
+<!--              <h4 class="cr"> / </h4>-->
+<!--              <h4 class="cr">10</h4>-->
+<!--              <h4 class="cr">posts</h4>-->
+<!--            </div>-->
+<!--          </div>-->
 
+          <br>
+        </div>
       </div>
 
-      <div class="report">
+    </div>
 
+    <div>
+
+      <div class="card">
+        <h4 class="card-header">정보 변경 및 탈퇴</h4>
+        <div class="card-body">
+          <br>
+          <h5><a href="/">정보 변경</a></h5>
+          <br>
+          <h5><a href="/">회원 탈퇴</a></h5>
+          <br>
+        </div>
       </div>
 
     </div>
