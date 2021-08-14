@@ -24,12 +24,12 @@
 
             .wrap {
                 min-height : 100%;
-                position : relative;
                 padding-bottom : 19px;
+<!--                position : relative;-->
             }
 
             header {
-                border:1px solid #cccccc;
+<!--                border:1px solid #cccccc;-->
             }
 
             a:hover {
@@ -37,56 +37,73 @@
             }
 
             .myContainer {
-                width : 750px; height : 600px;
-                display: flex;
-                margin : 90px auto;
-                justify-content: center;
+                width : 760px; height : 620px;
+                margin : 70px auto;
 <!--                border:1px solid #cccccc;-->
-                align-items: center;
-
             }
 
             .containerHeader {
-                width : 750px; height : 5px;
-<!--                border:1px solid #cccccc;-->
+                width : 760px; height : 60px;
                 overflow : hidden;
+<!--                border:1px solid #cccccc;-->
             }
 
-            .table {
-                position: relative;
-                top : 50px;
+            .containerHeaderText {
+                margin-top: 6px;
+                float: left;
             }
 
-            .containerHeader form {
-                position: relative;
-                left : 20px;
+           .searchForm {
+                width: 263px; height: 40px;
+                float: right;
+                margin-top: 8px;
+                margin-right: -12px;
+                overflow: hidden;
+<!--                border:1px solid #cccccc;-->
             }
 
-            .cHeader {
-                float : left;
-                margin-right : 350px;
-                position: relative;
-                right : 10px;
+            .searchForm div {
+                float: left;
             }
 
-            .searchInput {
-                width : 200px;
-                float : left;
-                margin-right : 5px;
+            .searchText {
+                width: 200px;
             }
 
-            .write button {
-                width : 80px;
-                float : right;
-                position: relative;
-                top : 45px;
-                left : 15px;
+            .searchBtn {
+                margin-left: 4px;
             }
 
-            .pages nav {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
+            .boardList {
+                width: 760px; height: 465px;
+                margin-top: 10px;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .boardList::-webkit-scrollbar {
+                display: none;
+            }
+
+            .writeBtn {
+                width: 760px; height: 40px;
+                overflow: hidden;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .writeBtn button {
+                margin-right: -9px;
+                float: right;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .pageBtn {
+                width: 760px; height: 40px;
+                text-align: center;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .pageBtn nav {
+                display: inline-block;
             }
 
             footer {
@@ -163,36 +180,42 @@
 
         <div class="containerHeader">
 
-            <div class="cHeader">
+            <div class="containerHeaderText">
                 <h1>게시글</h1>
             </div>
 
-            <form action="/boards" method="get">
-                <div class="search">
-                    <div class="searchInput">
+            <div class="searchForm">
+                <form action="/boards" method="get">
+
+                    <div class="searchText">
                         <input type="text" class="form-control" id="specificSizeInputName" placeholder="검색어를 입력해주세요">
                     </div>
-                    <div>
+
+                    <div class="searchBtn">
                         <button type="submit" class="btn btn-primary">검색</button>
                     </div>
-                </div>
-            </form>
+
+                </form>
+            </div>
 
         </div>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">번 호</th>
-                <th scope="col">제 목</th>
-                <th scope="col">작성자</th>
-                <th scope="col">작성일</th>
-                <th scope="col">조 회</th>
-                <th scope="col">좋아요</th>
-            </tr>
-            </thead>
+        <div class="boardList"
+             style="overflow:auto">
 
-            <tbody>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">번 호</th>
+                    <th scope="col">제 목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">작성일</th>
+                    <th scope="col">조 회</th>
+                    <th scope="col">좋아요</th>
+                </tr>
+                </thead>
+
+                <tbody>
                 <tr th:each="board : ${boards}">
                     <th scope="row" th:text="${board.id}">번 호</th>
                     <td><a th:href="@{/boards/{boardId}(boardId=${board.id})}" th:text="${board.title}">제 목</a></td>
@@ -201,15 +224,16 @@
                     <td th:text="${board.views}">조 회</td>
                     <td th:text="${board.favorite}">좋아요</td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
 
-        <div class="write">
+        <div class="writeBtn">
             <button type="button" class="btn btn-primary"
                     th:onclick="|location.href='@{/boards/write}'|">글쓰기</button>
         </div>
 
-        <div class="pages">
+        <div class="pageBtn">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
@@ -223,7 +247,7 @@
                            href=""
                            th:href="@{/boards?page={pageNum}(pageNum=${seq})}">1</a>
                     </li>
-<!--                    <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+                    <!--                    <li class="page-item"><a class="page-link" href="#">1</a></li>-->
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
