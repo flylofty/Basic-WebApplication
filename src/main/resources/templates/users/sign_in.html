@@ -36,13 +36,52 @@
 
         .myContainer {
             width : 500px; height : 500px;
+            margin : 90px auto;
+            overflow: hidden;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .signHeaderText {
+            width: 800px; height: 50px;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .signHeaderText h1 {
+            margin-left: 25%;
+        }
+
+        .signInForm {
             display: flex;
-            margin : 0 auto;
+            margin-top: 40px;
+            width: 510px; height: 270px;
             justify-content: center;
-            align-items: center;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .formUserId {
+            margin-top: 5px;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .formUserPassword {
+            margin-top: 5px;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .formErr {
+            height: 30px;
+            margin-top: 10px;
+            border:1px none #cccccc;
+        }
+
+        .formBtn {
+            margin-top: -10px;
+<!--            border:1px solid #cccccc;-->
         }
 
         .field-error {
+            display: flex;
+            justify-content: center;
             border-color: #dc3545;
             color: #dc3545;
         }
@@ -59,87 +98,101 @@
 </head>
 <body>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-    <div class="wrap">
+<div class="wrap">
 
-        <!-- 로그인 -->
-        <header>
+    <!-- 로그인 -->
+    <header>
 
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                <div class="container-fluid mx-4">
+            <div class="container-fluid mx-4">
 
-                    <a class="navbar-brand fs-2" href="../">Home</a>
+                <a class="navbar-brand fs-2" href="../">Home</a>
 
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active fs-3" aria-current="page" href="/boards">Board</a>
-                            </li>
-                        </ul>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active fs-3" aria-current="page" href="/boards">Board</a>
+                        </li>
+                    </ul>
 
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-                            <li class="nav-item">
-                                <a class="nav-link active fs-3" aria-current="page" href="/users/login">Sign In</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link active fs-3" aria-current="page" href="/users/login">Sign In</a>
+                        </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link active fs-3" aria-current="page" href="/users/join">Sign Up</a>
-                            </li>
+                        <li class="nav-item">
+                            <a class="nav-link active fs-3" aria-current="page" href="/users/join">Sign Up</a>
+                        </li>
 
-                        </ul>
-
-                    </div>
+                    </ul>
 
                 </div>
 
-            </nav>
+            </div>
 
-        </header>
+        </nav>
 
-        <div class="myContainer">
+    </header>
 
+    <div class="myContainer">
+
+        <div class="signHeaderText">
+            <h1>로그인</h1>
+        </div>
+
+        <div class="signInForm">
             <form class="login" th:action th:object="${form}" method="post">
 
-                <p class="text-center mb-5 fs-2 bold">로그인</p>
-
-                <div class="mb-3 col-12">
+                <div class="formUserId">
                     <label for="id" class="form-label fs-5">I D</label>
                     <input type="text" id="id" class="form-control" th:field="${form.id}"
                            th:errorclass="field-error" placeholder="아이디를 입력하세요">
                 </div>
 
-                <div class="mb-3 col-12">
+                <div class="formUserPassword">
                     <label for="password" class="form-label fs-5">Password</label>
                     <input type="password" id="password" class="form-control" th:field="${form.password}"
                            th:errorclass="field-error" placeholder="비밀번호를 입력하세요">
                 </div>
 
-                <div th:if="${#fields.hasGlobalErrors()}">
+                <div class="formErr">
                     <p class="field-error" th:each="err : ${#fields.globalErrors()}"
                        th:text="${err}">로그인 오류</p>
                 </div>
 
-                <button type="submit" class="btn btn-primary my-3 col-12 fs-5">Sign In</button>
+                <div class="formBtn">
+                    <button type="submit" class="btn btn-primary my-3 col-12 fs-5">로그인</button>
+                </div>
             </form>
+        </div>
+
+        <div class="findPassword">
 
         </div>
 
-        <footer class="footer mt-auto py-3 bg-light">
-            <div class="container text-center">
-                <span class="text-muted">ⓒ 2021 Company, Inc. ·Privacy ·Terms</span>
-            </div>
-        </footer>
+        <div class="signUp">
+
+        </div>
 
     </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">ⓒ 2021 Company, Inc. ·Privacy ·Terms</span>
+        </div>
+    </footer>
+
+</div>
 
 </body>
 </html>
