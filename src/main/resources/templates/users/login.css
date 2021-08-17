@@ -1,0 +1,81 @@
+        html {
+            height : 100%;
+        }
+
+        body {
+            margin : 0;
+            height : 100%;
+        }
+
+        .wrap {
+            min-height : 100%;
+            position : relative;
+            padding-bottom : 19px;
+        }
+
+        header {
+            border:1px solid #cccccc;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .myContainer {
+            width : 500px; height : 500px;
+            margin : 90px auto;
+            overflow: hidden;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .signHeaderText {
+            width: 800px; height: 50px;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .signHeaderText h1 {
+            margin-left: 25%;
+        }
+
+        .signInForm {
+            display: flex;
+            margin-top: 40px;
+            width: 510px; height: 270px;
+            justify-content: center;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .formUserId {
+            margin-top: 5px;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .formUserPassword {
+            margin-top: 5px;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .formErr {
+            height: 30px;
+            margin-top: 10px;
+            border:1px none #cccccc;
+        }
+
+        .formBtn {
+            margin-top: -10px;
+<!--            border:1px solid #cccccc;-->
+        }
+
+        .field-error {
+            display: flex;
+            justify-content: center;
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
+        footer {
+            width:100%;
+            height:60px;
+            position:absolute;
+            bottom:0;
+        }
