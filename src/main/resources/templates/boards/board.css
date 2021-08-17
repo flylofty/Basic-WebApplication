@@ -1,0 +1,244 @@
+            html {
+                height : 100%;
+            }
+
+            body {
+                margin : 0;
+                height : 100%;
+            }
+
+            .wrap {
+                min-height : 100%;
+                position : relative;
+                padding-bottom : 19px;
+            }
+
+            header {
+<!--                border:1px solid #cccccc;-->
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            .myContainer {
+                width : 760px; height : 750px;
+                margin: 50px auto;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .myContainer::-webkit-scrollbar {
+                display: none;
+            }
+
+            .post {
+                width : 740px; height : 500px;
+                margin: 0px auto;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .postHeader {
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .postInfo {
+                width : 740px; height : 135px;
+                margin: 0px auto;
+                border-bottom: 3px;
+                border-bottom-style: solid;
+<!--                border:1px solid #bbbbbb;-->
+            }
+
+            .btnList {
+                width : 740px; height : 44px;
+                margin: 0px auto;
+<!--                border:1px solid #bbbbbb;-->
+                overflow: hidden;
+            }
+
+            .btnList button {
+                float: left;
+            }
+
+            .postUser {
+                width : 740px; height : 44px;
+                margin: 0px auto;
+                padding: 10px 0px;
+<!--                border:1px solid #bbbbbb;-->
+            }
+
+            .postUser h5 {
+                float: left;
+            }
+
+            .postEtc {
+                width : 740px; height : 44px;
+                overflow: hidden;
+                margin: 0px auto;
+<!--                border:1px solid #bbbbbb;-->
+            }
+
+            .postEtc h5 {
+                float: left;
+            }
+
+            .postEtcViews {
+                margin-top: 1px;
+            }
+
+            .postContent {
+                width : 740px; height : 270px;
+                padding: 20px 0px;
+<!--                border:1px solid #bbbbbb;-->
+<!--                border-bottom: 3px;-->
+<!--                border-bottom-style: solid;-->
+            }
+
+            .postEnd {
+                width : 740px; height : 42px;
+<!--                overflow: hidden;-->
+<!--                border:1px solid #bbbbbb;-->
+                border-bottom: 3px;
+                border-bottom-style: solid;
+            }
+
+            .postEnd button {
+                border: 0px;
+            }
+
+            .postEnd div {
+                float: left;
+            }
+
+            .postEnd span {
+                color: black;
+            }
+
+            .commentCount {
+                margin-top: 6px;
+            }
+
+            .commentCountText {
+                margin-left: 5px;
+            }
+
+            .commentArea {
+                width : 740px; height : 300px;
+                margin: 0px auto;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .commentArea::-webkit-scrollbar {
+                display: none;
+            }
+
+            .commentFormArea {
+                width : 740px; height : 100px;
+                overflow: hidden;
+                margin-top: 10px;
+                border-bottom: 1px;
+                border-bottom-style: solid;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .commentForm {
+                border:1px solid #cccccc;
+            }
+
+            .formWrite {
+                margin-left: 17px;
+                overflow: hidden;
+            }
+
+            .formWrite div {
+                float: left;
+            }
+
+            .formWrite textarea {
+                width: 600px; height: 90px;
+            }
+
+            .formWrite button {
+                margin-top: 0px;
+                margin-left: 5px;
+                width: 100px; height: 57px;
+            }
+
+            .formWrite label {
+                font-size: 15px;
+                opacity: 0.4;
+            }
+
+            .commentErr {
+                margin-top: 10px;
+                margin-left: 20px;
+            }
+
+            .field-error {
+                border-color: #dc3545;
+                color: #dc3545;
+            }
+
+            .commentLevelOne {
+                height: 90px;
+                margin-top: 10px;
+<!--                border-bottom: 1px;-->
+<!--                border-bottom-style: solid;-->
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .commentOwner {
+                height: 20px;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .commentOwner h6 {
+                margin-left: 18px;
+                margin-top: 1px;
+                opacity: 0.9;
+            }
+
+            .commentContentOuter {
+                height: 40px;
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .commentContent {
+                width: 650px; height: 40px;
+                margin-top: 2px;
+                margin-left: 16px;
+                border:1px solid #cccccc;
+            }
+
+            .commentEtc {
+                height: 23px;
+<!--                border:1px solid #cccccc;-->
+                overflow: hidden;
+            }
+
+            .commentReply {
+                font-size: 14px;
+            }
+
+            .commentLevelTwo {
+                margin-top: 3px;
+                margin-left: 30px;
+                height: 90px;
+<!--                border-bottom: 1px;-->
+<!--                border-bottom-style: solid;-->
+<!--                border:1px solid #cccccc;-->
+            }
+
+            .commentContentTwo {
+                width: 620px; height: 40px;
+                margin-top: 2px;
+                margin-left: 16px;
+                border:1px solid #cccccc;
+            }
+
+            footer {
+                width:100%;
+                height:60px;
+                position:absolute;
+                bottom:0;
+            }
