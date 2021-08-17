@@ -102,29 +102,37 @@ public class UserController {
         // 아이디 확인
         if (!StringUtils.hasText(form.getUserId())) {
             log.info("유저 아이디 = {}", form.getUserId());
-            bindingResult.addError(new FieldError("joinInfo", "userId", "회원 아이디는 필수 입니다."));
+            bindingResult.addError(new FieldError("joinInfo", "userId", "회원 아이디는 필수 입니다"));
         }
-        if (7 > form.getUserId().length() || form.getUserId().length() > 15) {
+        else if (7 > form.getUserId().length() || form.getUserId().length() > 15) {
             log.info("유저 아이디 글자수 = {}", form.getUserId().length());
-            bindingResult.addError(new FieldError("joinInfo", "userId", "아이디의 글자 수는 7자 이상 15자 이하 입니다."));
+            bindingResult.addError(new FieldError("joinInfo", "userId", "아이디는 7자 이상 15자 이하 입니다"));
         }
 
         // 비밀번호 확인
         if (!StringUtils.hasText(form.getPassword()) || !StringUtils.hasText(form.getRePassword())) {
             log.info("유저 비번 = {}", form.getPassword());
             log.info("유저 재비번 = {}", form.getRePassword());
-            bindingResult.addError(new FieldError("joinInfo", "rePassword", "회원 비밀번호는 필수 입니다."));
+
+            if (!StringUtils.hasText(form.getPassword())) {
+                bindingResult.addError(new FieldError("joinInfo", "password", "비밀번호는 필수 입니다"));
+            }
+
+            if (!StringUtils.hasText(form.getRePassword())) {
+                bindingResult.addError(new FieldError("joinInfo", "rePassword", "비밀번호는 필수 입니다"));
+            }
+
         } else if (!form.getPassword().equals(form.getRePassword())) {
-            bindingResult.addError(new FieldError("joinInfo", "rePassword", "입력하신 비밀번호가 일치하지 않습니다."));
+            bindingResult.addError(new FieldError("joinInfo", "rePassword", "입력하신 비밀번호가 일치하지 않습니다"));
         }
 
         // 이메일 확인
         if (!StringUtils.hasText(form.getEmail())) {
             log.info("유저 이메일 = {}", form.getEmail());
-            bindingResult.addError(new FieldError("joinInfo", "email", "회원 이메일은 필수 입니다."));
+            bindingResult.addError(new FieldError("joinInfo", "email", "회원 이메일은 필수 입니다"));
         }
         else if (!isValidEmail(form.getEmail())) {
-            bindingResult.addError(new FieldError("joinInfo", "email", "유효한 이메일 형식이 아닙니다."));
+            bindingResult.addError(new FieldError("joinInfo", "email", "유효한 이메일 형식이 아닙니다"));
         }
 
         // 검증 실패 시 입력 폼으로 되돌림
