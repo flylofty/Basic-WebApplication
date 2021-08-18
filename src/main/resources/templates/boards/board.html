@@ -163,88 +163,88 @@
             </div>
         </div>
 
-        <div class="commentArea"
-             style="overflow:auto">
+<!--        <div class="commentArea"-->
+<!--             style="overflow:auto">-->
 
-            <div class="commentFormArea">
+<!--            <div class="commentFormArea">-->
 
-                <form class="formWrite">
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here"
-                                  id="floatingTextarea" style="resize: none"></textarea>
-                        <label for="floatingTextarea">댓글을 남겨보세요</label>
-                    </div>
-                    <div class="formButton">
-                        <button type="submit" class="btn btn-primary">작 성</button>
-                    </div>
-                </form>
+<!--                <form class="formWrite">-->
+<!--                    <div class="form-floating">-->
+<!--                        <textarea class="form-control" placeholder="Leave a comment here"-->
+<!--                                  id="floatingTextarea" style="resize: none"></textarea>-->
+<!--                        <label for="floatingTextarea">댓글을 남겨보세요</label>-->
+<!--                    </div>-->
+<!--                    <div class="formButton">-->
+<!--                        <button type="submit" class="btn btn-primary">작 성</button>-->
+<!--                    </div>-->
+<!--                </form>-->
 
-                <div class="commentErr" th:if="${#fields.hasGlobalErrors()}">
-                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"
-                       th:text="${err}">댓글을 작성해주세요</p>
-                </div>
+<!--                <div class="commentErr" th:if="${#fields.hasGlobalErrors()}">-->
+<!--                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"-->
+<!--                       th:text="${err}">댓글을 작성해주세요</p>-->
+<!--                </div>-->
 
-            </div>
+<!--            </div>-->
 
-            <div class="commentLevelOne">
+<!--            <div class="commentLevelOne">-->
 
-                <div class="commentOwner">
-                    <h6>
-                        User02
-                    </h6>
-                </div>
+<!--                <div class="commentOwner">-->
+<!--                    <h6>-->
+<!--                        User02-->
+<!--                    </h6>-->
+<!--                </div>-->
 
-                <div class="commentContentOuter">
+<!--                <div class="commentContentOuter">-->
 
-                    <div class="commentContent"
-                         style="overflow:auto"
-                         th:utext="${#strings.replace(comment.content, nlString, '&lt;br /&gt;')}">
-                        댓글 내용
-                    </div>
+<!--                    <div class="commentContent"-->
+<!--                         style="overflow:auto"-->
+<!--                         th:utext="${#strings.replace(comment.content, nlString, '&lt;br /&gt;')}">-->
+<!--                        댓글 내용-->
+<!--                    </div>-->
 
-                </div>
+<!--                </div>-->
 
-                <div class="commentEtc">
-                    <span>&nbsp&nbsp&nbsp&nbsp</span>
-                    <span class="commentTime">
-                        21.08.09 12:31
-                    </span>
-                    <span>&nbsp</span>
-                    <span class="commentReply">
-                        답글쓰기
-                    </span>
-                </div>
+<!--                <div class="commentEtc">-->
+<!--                    <span>&nbsp&nbsp&nbsp&nbsp</span>-->
+<!--                    <span class="commentTime">-->
+<!--                        21.08.09 12:31-->
+<!--                    </span>-->
+<!--                    <span>&nbsp</span>-->
+<!--                    <span class="commentReply">-->
+<!--                        답글쓰기-->
+<!--                    </span>-->
+<!--                </div>-->
 
-            </div>
+<!--            </div>-->
 
-            <div class="commentLevelTwo">
+<!--            <div class="commentLevelTwo">-->
 
-                <div class="commentOwner">
-                    <h6>
-                        User03
-                    </h6>
-                </div>
+<!--                <div class="commentOwner">-->
+<!--                    <h6>-->
+<!--                        User03-->
+<!--                    </h6>-->
+<!--                </div>-->
 
-                <div class="commentContentOuter">
+<!--                <div class="commentContentOuter">-->
 
-                    <div class="commentContentTwo"
-                         style="overflow:auto"
-                         th:utext="${#strings.replace(comment.content, nlString, '&lt;br /&gt;')}">
-                        대댓글 내용
-                    </div>
+<!--                    <div class="commentContentTwo"-->
+<!--                         style="overflow:auto"-->
+<!--                         th:utext="${#strings.replace(comment.content, nlString, '&lt;br /&gt;')}">-->
+<!--                        대댓글 내용-->
+<!--                    </div>-->
 
-                </div>
+<!--                </div>-->
 
-                <div class="commentEtc">
-                    <span>&nbsp&nbsp&nbsp&nbsp</span>
-                    <span class="commentTime">
-                        21.08.09 12:48
-                    </span>
-                </div>
+<!--                <div class="commentEtc">-->
+<!--                    <span>&nbsp&nbsp&nbsp&nbsp</span>-->
+<!--                    <span class="commentTime">-->
+<!--                        21.08.09 12:48-->
+<!--                    </span>-->
+<!--                </div>-->
 
-            </div>
+<!--            </div>-->
 
-        </div>
+<!--        </div>-->
 
     </div>
 
