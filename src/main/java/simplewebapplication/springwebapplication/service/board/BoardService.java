@@ -2,6 +2,7 @@ package simplewebapplication.springwebapplication.service.board;
 
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
+import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 
 import java.util.List;
 
@@ -11,13 +12,16 @@ public interface BoardService {
     List<ResponseBoard> findBoards(int page, int count);
 
     // 원하는 페이지 게시글 리스트 조회
-    List<ResponseBoard> findBoardPageList(int page);
+    List<ResponseBoard> findBoardPageList(Long page);
 
     // 게시글 하나 조회
     ResponseBoard findBoard(Long boardId);
 
     // 사용자 게시글 수 조회
     Long findBoardCount(String userId);
+
+    // 페이지네이션 객체 생성
+    BoardPagination createBoardPagination(Long currentPage, int currentBoardNumber);
 
     // 게시글 생성
     Long createBoard(Board board);

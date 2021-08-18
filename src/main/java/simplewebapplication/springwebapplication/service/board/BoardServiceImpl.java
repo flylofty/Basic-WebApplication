@@ -7,6 +7,7 @@ import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.repository.board.BoardRepository;
 import simplewebapplication.springwebapplication.repository.board.H2BoardRepository;
+import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -36,6 +37,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    public BoardPagination createBoardPagination(Long currentPage, int currentBoardNumber) {
+        Long boardTotalNumber = boardRepository.findBoardTotalNumber();
+        return new BoardPagination(boardTotalNumber, currentPage, currentBoardNumber);
+    }
+
+    @Override
     public List<ResponseBoard> findBoards(int page, int count) {
 
         List<Board> findAll = boardRepository.findAll(page, count);
@@ -52,7 +59,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<ResponseBoard> findBoardPageList(int page) {
+    public List<ResponseBoard> findBoardPageList(Long page) {
         List<Board> boardList = boardRepository.findPage(page);
 
         // id, title, user, dateTime, views, favorite
