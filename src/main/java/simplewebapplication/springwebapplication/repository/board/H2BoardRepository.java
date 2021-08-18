@@ -29,16 +29,15 @@ public class H2BoardRepository implements BoardRepository {
     }
 
     @Override
-    public List<Board> findPage(int page) {
-
+    public List<Board> findPage(Long page) {
         // 페이지네이션 시간상 최신글 우선 순서
-        int start = 10 * page - 10;
+        int start = Math.toIntExact((int) 10 * page - 10);
         return em.createQuery("select b from Board b " +
                         " where b.status = :status" +
                         " order by b.dateTime desc", Board.class)
                 .setParameter("status", BoardStatusType.CREATED)
                 .setFirstResult(start)
-                .setMaxResults(start + 10)
+                .setMaxResults(10)
                 .getResultList();
     }
 
@@ -50,6 +49,12 @@ public class H2BoardRepository implements BoardRepository {
                 .setParameter("findUser", findUser)
                 .getResultList();
         return Long.parseLong(String.valueOf(boardList.size()));
+    }
+
+    @Override
+    public Long findBoardTotalNumber() {
+        return (long) em.createQuery("select count(*) from Board")
+                .getSingleResult();
     }
 
     @Override
