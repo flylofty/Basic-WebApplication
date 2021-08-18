@@ -13,6 +13,7 @@ import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.WriteForm;
 import simplewebapplication.springwebapplication.service.board.BoardService;
+import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,26 +28,23 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping
-    public String findBoards(@RequestParam(required = false) Integer page,
-                             @RequestParam(required = false) Integer count,
+    public String findBoards(@RequestParam(required = false) Long page,
+                             @RequestParam(required = false) Integer number,
                              Model model)
     {
         if (page == null) {
-            page = 1;
+            page = 1L;
         }
 
-        if (count == null) {
-            count = 10;
+        if (number == null) {
+            number = 10;
         }
 
-        log.info("Page Number = {}", page);
-        log.info("Count = {}", count);
-
-        // 원하는 page 번호에 count 수 만큼 게시글 목록을 한 페이지에 보임
-        // 정렬된 count 개수 만큼의 게시글 목록 정보 리스트
-        // 전체 게시글 수를 담은 변수
         List<ResponseBoard> boards = boardService.findBoardPageList(page);
+        BoardPagination pagination = boardService.createBoardPagination(page, number);
+
         model.addAttribute("boards", boards);
+        model.addAttribute("pagination", pagination);
         return "boards/boards";
     }
 
