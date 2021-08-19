@@ -20,15 +20,43 @@ public class BoardPagination {
         if (totalBoardNumber % this.currentBoardNumber != 0)
             this.lastPageNumber++;
 
+        initPageList(currentPage);
+    }
+
+    private void initPageList(long currentPage) {
         pageList = new ArrayList<>();
-        for(long page = this.currentPage - 2; page < this.currentPage; ++page) {
-            if (page > 0)
-                pageList.add(page);
+
+        if (currentPage == 1) {
+            for(long page = 1; page <= 5; ++page) {
+                if (page <= this.lastPageNumber) {
+                    pageList.add(page);
+                }
+            }
         }
-        pageList.add(currentPage);
-        for(long page = this.currentPage + 1; page <= this.currentPage + 2; ++page) {
-            if (page <= this.lastPageNumber)
-                pageList.add(page);
+        else if (currentPage == this.lastPageNumber) {
+            for(long page = currentPage - 4; page <= currentPage; ++page)
+                if (page > 0) {
+                    pageList.add(page);
+                }
+        }
+        else if (currentPage == 2) {
+            for(long page = 1; page <= currentPage + 3; ++page) {
+                if (page <= this.lastPageNumber)
+                    pageList.add(page);
+            }
+        }
+        else if (currentPage == this.lastPageNumber - 1) {
+            for(long page = currentPage - 3; page <= this.lastPageNumber; ++page)
+                if (page > 0) {
+                    pageList.add(page);
+                }
+        }
+        else {
+            for(long page = this.currentPage - 2; page <= this.currentPage + 2; ++page) {
+                if (0 < page && page <= this.lastPageNumber) {
+                    pageList.add(page);
+                }
+            }
         }
     }
 
