@@ -135,8 +135,9 @@
                 <ul class="pagination">
 
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
+                        <a class="page-link" th:href="@{/boards?page={pageNum}(pageNum=${pagination.prev})}"
+                           href="#" aria-label="Previous">
+                            <span aria-hidden="true"> &laquo; </span>
                         </a>
                     </li>
 
@@ -150,7 +151,8 @@
                     </li>
 
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
+                        <a class="page-link" th:href="@{/boards?page={pageNum}(pageNum=${pagination.next})}"
+                           href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

@@ -1,6 +1,7 @@
 package simplewebapplication.springwebapplication.web.pagination;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BoardPagination {
 
@@ -8,6 +9,8 @@ public class BoardPagination {
     private Long currentPage;
     private Long lastPageNumber;
     private Integer currentBoardNumber; // 현재 페이지에서 보여줄 게시물 개수
+    private Long prev;
+    private Long next;
 
     public BoardPagination() {
     }
@@ -21,6 +24,25 @@ public class BoardPagination {
             this.lastPageNumber++;
 
         initPageList(currentPage);
+
+        setPrevAndNext();
+    }
+
+    private void setPrevAndNext() {
+
+        if (pageList.get(0) == 1) {
+            this.prev = 1L;
+        }
+        else {
+            this.prev = pageList.get(0) - 1;
+        }
+
+        if (Objects.equals(pageList.get(pageList.size() - 1), this.lastPageNumber)) {
+            this.next = this.lastPageNumber;
+        }
+        else {
+            this.next = pageList.get(pageList.size() - 1) + 1;
+        }
     }
 
     private void initPageList(long currentPage) {
@@ -90,5 +112,21 @@ public class BoardPagination {
 
     public void setCurrentBoardNumber(Integer currentBoardNumber) {
         this.currentBoardNumber = currentBoardNumber;
+    }
+
+    public Long getPrev() {
+        return prev;
+    }
+
+    public void setPrev(Long prev) {
+        this.prev = prev;
+    }
+
+    public Long getNext() {
+        return next;
+    }
+
+    public void setNext(Long next) {
+        this.next = next;
     }
 }
