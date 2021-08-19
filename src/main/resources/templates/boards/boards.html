@@ -115,7 +115,7 @@
                 <tbody>
                 <tr th:each="board : ${boards}">
                     <th scope="row" th:text="${board.id}">번 호</th>
-                    <td><a th:href="@{/boards/{boardId}(boardId=${board.id})}" th:text="${board.title}">제 목</a></td>
+                    <td><a th:href="@{/boards/{boardId}(boardId=${board.id}, page=${pagination.currentPage})}" th:text="${board.title}">제 목</a></td>
                     <td th:text="${board.user}">작성자</td>
                     <td th:text="${board.dateTime}">작성일</td>
                     <td th:text="${board.views}">조 회</td>
