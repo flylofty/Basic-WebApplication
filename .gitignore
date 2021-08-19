@@ -26,6 +26,7 @@ bin/
 /src/main/resources/application.yml
 /src/main/resources/data.sql
 /src/main/webapp/
+/src/main/resources/static/css/temp/
 
 ### IntelliJ IDEA ###
 .idea
