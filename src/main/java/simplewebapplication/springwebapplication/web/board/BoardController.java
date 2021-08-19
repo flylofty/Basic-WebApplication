@@ -81,12 +81,16 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String findBoard(@PathVariable Long boardId, Model model) {
+    public String findBoard(@PathVariable Long boardId, Model model,
+                            @RequestParam(required = false) Long page)
+    {
         ResponseBoard board = boardService.findBoard(boardId);
         model.addAttribute("board", board);
         //게시글 개행 처리
-        String nlString = System.getProperty("line.separator").toString();
+        //String nlString = System.getProperty("line.separator").toString();
+        String nlString = System.getProperty("line.separator");
         model.addAttribute("nlString", nlString);
+        model.addAttribute("page", page);
         return "boards/board";
     }
 
