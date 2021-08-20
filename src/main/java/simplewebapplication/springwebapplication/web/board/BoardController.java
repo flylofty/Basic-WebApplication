@@ -81,8 +81,8 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String findBoard(@PathVariable Long boardId, Model model,
-                            @RequestParam(required = false) Long page)
+    public String findBoardVs(@PathVariable Long boardId, Model model,
+                              HttpServletRequest request)
     {
         ResponseBoard board = boardService.findBoard(boardId);
         model.addAttribute("board", board);
@@ -90,7 +90,7 @@ public class BoardController {
         //String nlString = System.getProperty("line.separator").toString();
         String nlString = System.getProperty("line.separator");
         model.addAttribute("nlString", nlString);
-        model.addAttribute("page", page);
+        model.addAttribute("prevPage", request.getHeader("Referer"));
         return "boards/board";
     }
 

@@ -90,7 +90,7 @@
 
                     <div class="btnBack">
                         <button type="button"
-                                th:onclick="|location.href='@{/boards?page={pageNum}(pageNum=${page})}'|"
+                                th:onclick="|location.href='@{${prevPage}}'|"
                                 class="btn btn-outline-success">
                             목 록
                         </button>
