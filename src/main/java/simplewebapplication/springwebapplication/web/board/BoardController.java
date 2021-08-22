@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.web.SessionConst;
+import simplewebapplication.springwebapplication.web.form.CommentForm;
 import simplewebapplication.springwebapplication.web.form.WriteForm;
 import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
@@ -18,6 +19,7 @@ import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Controller
@@ -54,7 +56,8 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public String saveWriteForm(@ModelAttribute(name = "form") WriteForm form, BindingResult bindingResult,
+    public String saveWriteForm(@ModelAttribute(name = "form") WriteForm form,
+                                BindingResult bindingResult,
                                 HttpServletRequest request)
     {
         // 1. 제목과 내용은 공백일 수 없음 == Validation
@@ -81,16 +84,36 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String findBoardVs(@PathVariable Long boardId, Model model,
-                              HttpServletRequest request)
+    public String findBoard(@ModelAttribute(name = "commentLevelOne") CommentForm commentLevelOne,
+                            BindingResult bindingResult,
+                            @PathVariable Long boardId, Model model,
+                            HttpServletRequest request)
     {
+        // 게시글 객체
         ResponseBoard board = boardService.findBoard(boardId);
         model.addAttribute("board", board);
+
+        // 댓글 Level 1 객체 (Depth 1, 댓글)
+        //model.addAttribute("commentLevelOne", new CommentForm(boardId));
+        commentLevelOne.setBoardId(boardId);
+        // 댓글 Level 2 객체 (Depth 2, 대댓글)
+        //model.addAttribute("commentLevelTwo", new CommentForm(boardId));
+
+        // comment 에러 확인
+        Boolean isLevelOneErr = (Boolean) model.asMap().get("levelOneErr");
+        if (isLevelOneErr != null && isLevelOneErr) {
+            //bindingResult.addError(new FieldError("commentValid", "levelOneErr", "내용을 입력해주세요"));
+            model.addAttribute("levelOneErr", "내용을 입력해주세요");
+        }
+
         //게시글 개행 처리
         //String nlString = System.getProperty("line.separator").toString();
         String nlString = System.getProperty("line.separator");
         model.addAttribute("nlString", nlString);
+
+        // 이전 게시글 page URL
         model.addAttribute("prevPage", request.getHeader("Referer"));
+
         return "boards/board";
     }
 
