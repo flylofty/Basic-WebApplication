@@ -1,18 +1,23 @@
 package simplewebapplication.springwebapplication.service.comment;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.domain.comment.Comment;
 import simplewebapplication.springwebapplication.domain.user.User;
+import simplewebapplication.springwebapplication.dto.comment.RequestCommentLevelOne;
 import simplewebapplication.springwebapplication.repository.board.BoardRepository;
 import simplewebapplication.springwebapplication.repository.comment.CommentRepository;
 import simplewebapplication.springwebapplication.repository.user.UserRepository;
 import simplewebapplication.springwebapplication.web.form.CommentForm;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -29,5 +34,17 @@ public class CommentServiceImpl implements CommentService {
         Board findBoard = boardRepository.findOne(form.getBoardId());
         Comment comment = new Comment(findBoard, findUser, form.getContent(), null, form.getLevel(), LocalDateTime.now());
         commentRepository.save(comment);
+    }
+
+    @Override
+    public List<RequestCommentLevelOne> findCommentLevelOneList(Long boardId) {
+        List<Comment> commentListByBoardId = commentRepository.findCommentListByBoardId(boardId);
+
+        List<RequestCommentLevelOne> commentList = new ArrayList<>();
+        for (Comment comment : commentListByBoardId) {
+            commentList.add(new RequestCommentLevelOne(comment));
+        }
+
+        return commentList;
     }
 }

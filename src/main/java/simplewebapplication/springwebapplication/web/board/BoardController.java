@@ -8,8 +8,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import simplewebapplication.springwebapplication.domain.comment.Comment;
 import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
+import simplewebapplication.springwebapplication.dto.comment.RequestCommentLevelOne;
+import simplewebapplication.springwebapplication.service.comment.CommentService;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.CommentForm;
 import simplewebapplication.springwebapplication.web.form.WriteForm;
@@ -28,6 +31,7 @@ import java.util.Objects;
 public class BoardController {
 
     private final BoardService boardService;
+    private final CommentService commentService;
 
     @GetMapping
     public String findBoards(@RequestParam(required = false) Long page,
@@ -105,6 +109,9 @@ public class BoardController {
             //bindingResult.addError(new FieldError("commentValid", "levelOneErr", "내용을 입력해주세요"));
             model.addAttribute("levelOneErr", "내용을 입력해주세요");
         }
+
+        List<RequestCommentLevelOne> commentLevelOneList = commentService.findCommentLevelOneList(boardId);
+        model.addAttribute("commentLevelOneList", commentLevelOneList);
 
         //게시글 개행 처리
         //String nlString = System.getProperty("line.separator").toString();

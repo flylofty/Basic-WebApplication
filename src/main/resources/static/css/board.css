@@ -203,7 +203,7 @@
 
             .commentContentOuter {
                 height: 40px;
-<!--                border:1px solid #cccccc;-->
+<!--                border:1px none #cccccc;-->
             }
 
             .commentContent {
@@ -211,6 +211,7 @@
                 margin-top: 2px;
                 margin-left: 16px;
                 border:1px solid #cccccc;
+                border-width: thin;
             }
 
             .commentEtc {

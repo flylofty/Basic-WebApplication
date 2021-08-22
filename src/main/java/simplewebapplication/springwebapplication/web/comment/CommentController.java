@@ -54,7 +54,6 @@ public class CommentController {
 
         commentService.createComment(form);
 
-        return "redirect:/boards";
-        //return "redirect:/boards/{boardId}";
+        return "redirect:/boards/{boardId}";
     }
 }

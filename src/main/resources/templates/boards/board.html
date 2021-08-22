@@ -156,7 +156,7 @@
                     </div>
                     <div class="commentCountText">
                         <span>댓 글</span>
-                        <span th:text="${board.favorite}">10</span>
+                        <span th:text="${#lists.size(commentLevelOneList)}">10</span>
                     </div>
                 </div>
 
@@ -195,36 +195,36 @@
 
             </div>
 
-<!--            <div class="commentLevelOne">-->
+            <div th:each="level1 : ${commentLevelOneList}" class="commentLevelOne">
 
-<!--                <div class="commentOwner">-->
-<!--                    <h6>-->
-<!--                        User02-->
-<!--                    </h6>-->
-<!--                </div>-->
+                <div class="commentOwner">
+                    <h6 th:text="${level1.writer}">
+                        User02
+                    </h6>
+                </div>
 
-<!--                <div class="commentContentOuter">-->
+                <div class="commentContentOuter">
 
-<!--                    <div class="commentContent"-->
-<!--                         style="overflow:auto"-->
-<!--                         th:utext="${#strings.replace(comment.content, nlString, '&lt;br /&gt;')}">-->
-<!--                        댓글 내용-->
-<!--                    </div>-->
+                    <div class="commentContent"
+                         style="overflow:auto"
+                         th:utext="${#strings.replace(level1.content, nlString, '&lt;br /&gt;')}">
+                        댓글 내용
+                    </div>
 
-<!--                </div>-->
+                </div>
 
-<!--                <div class="commentEtc">-->
-<!--                    <span>&nbsp&nbsp&nbsp&nbsp</span>-->
-<!--                    <span class="commentTime">-->
-<!--                        21.08.09 12:31-->
-<!--                    </span>-->
-<!--                    <span>&nbsp</span>-->
-<!--                    <span class="commentReply">-->
-<!--                        답글쓰기-->
-<!--                    </span>-->
-<!--                </div>-->
+                <div class="commentEtc">
+                    <span>&nbsp&nbsp&nbsp&nbsp</span>
+                    <span th:text="${level1.dateTime}" class="commentTime">
+                        21.08.09 12:31
+                    </span>
+                    <span>&nbsp</span>
+                    <span class="commentReply">
+                        답글쓰기
+                    </span>
+                </div>
 
-<!--            </div>-->
+            </div>
 
 <!--            <div class="commentLevelTwo">-->
 
