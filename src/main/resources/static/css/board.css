@@ -170,13 +170,16 @@
             }
 
             .commentErr {
+                width: 598px; height: 25px;
                 margin-top: 10px;
                 margin-left: 20px;
+                border:1px none #cccccc;
             }
 
             .field-error {
                 border-color: #dc3545;
                 color: #dc3545;
+                border:1px none #dc3545;
             }
 
             .commentLevelOne {

@@ -163,28 +163,37 @@
             </div>
         </div>
 
-<!--        <div class="commentArea"-->
-<!--             style="overflow:auto">-->
+        <div class="commentArea"
+             style="overflow:auto">
 
-<!--            <div class="commentFormArea">-->
+            <div class="commentFormArea">
 
-<!--                <form class="formWrite">-->
-<!--                    <div class="form-floating">-->
-<!--                        <textarea class="form-control" placeholder="Leave a comment here"-->
-<!--                                  id="floatingTextarea" style="resize: none"></textarea>-->
-<!--                        <label for="floatingTextarea">댓글을 남겨보세요</label>-->
-<!--                    </div>-->
-<!--                    <div class="formButton">-->
-<!--                        <button type="submit" class="btn btn-primary">작 성</button>-->
-<!--                    </div>-->
-<!--                </form>-->
+                <form class="formWrite" th:object="${commentLevelOne}"
+                      th:action="@{'/boards/{boardId}/comments/level1'(boardId=${commentLevelOne.boardId})}"
+                      method="post">
 
-<!--                <div class="commentErr" th:if="${#fields.hasGlobalErrors()}">-->
-<!--                    <p class="field-error" th:each="err : ${#fields.globalErrors()}"-->
-<!--                       th:text="${err}">댓글을 작성해주세요</p>-->
-<!--                </div>-->
+                    <div class="form-floating">
+                        <textarea class="form-control"
+                                  th:field="${commentLevelOne.content}"
+                                  placeholder="Leave a comment here"
+                                  id="content"
+                                  style="resize: none"></textarea>
+                        <label for="content">댓글을 남겨보세요</label>
+                    </div>
+                    <div class="formButton">
+                        <button type="submit" class="btn btn-primary">작 성</button>
+                    </div>
+                </form>
 
-<!--            </div>-->
+                <div class="commentErr">
+                    <div th:if="${levelOneErr != null}"
+                         th:text="${levelOneErr}"
+                         class="field-error">
+                        댓글을 작성해주세요
+                    </div>
+                </div>
+
+            </div>
 
 <!--            <div class="commentLevelOne">-->
 
@@ -244,7 +253,7 @@
 
 <!--            </div>-->
 
-<!--        </div>-->
+        </div>
 
     </div>
 
