@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Comment {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     @Column(name = "comment_id")
     private Long id;
 
@@ -24,9 +24,9 @@ public class Comment {
     @Lob @Column(nullable = false)
     private String content;
 
-    private Long group;
+    private Long group_number;
 
-    private Long level;
+    private Integer group_depth;
 
     @Column(nullable = false)
     private LocalDateTime dateTime;
@@ -34,13 +34,12 @@ public class Comment {
     // 기본 생성자
     protected Comment(){};
 
-    public Comment(Long id, Board board, User user, String content, Long group, Long level, LocalDateTime dateTime, String cId) {
-        this.id = id;
+    public Comment(Board board, User user, String content, Long group_number, Integer group_depth, LocalDateTime dateTime) {
         this.board = board;
         this.user = user;
         this.content = content;
-        this.group = group;
-        this.level = level;
+        this.group_number = group_number;
+        this.group_depth = group_depth;
         this.dateTime = dateTime;
     }
 
@@ -60,12 +59,12 @@ public class Comment {
         return content;
     }
 
-    public Long getGroup() {
-        return group;
+    public Long getGroup_number() {
+        return group_number;
     }
 
-    public Long getLevel() {
-        return level;
+    public Integer getGroup_depth() {
+        return group_depth;
     }
 
     public LocalDateTime getDateTime() {

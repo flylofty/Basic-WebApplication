@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/boards/{boardId}/comments")
 public class CommentController {
 
-//    private final CommentService commentService;
+    private final CommentService commentService;
     private final BoardService boardService;
 
     @PostMapping("/level1")
@@ -49,12 +49,10 @@ public class CommentController {
             return "redirect:/boards/" + boardId;
         }
 
-        {
-            User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
-            form.initCommentForm(1, boardId, loginUser.getId());
-        }
+        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        form.initCommentForm(1, boardId, loginUser.getId());
 
-        //commentService.createComment(form);
+        commentService.createComment(form);
 
         return "redirect:/boards";
         //return "redirect:/boards/{boardId}";
