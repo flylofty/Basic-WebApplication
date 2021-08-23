@@ -32,7 +32,7 @@
             }
 
             .post {
-                width : 740px; height : 500px;
+                width : 740px; height : 460px;
                 margin: 0px auto;
 <!--                border:1px solid #cccccc;-->
             }
@@ -42,18 +42,29 @@
             }
 
             .postInfo {
-                width : 740px; height : 135px;
+                width : 740px; height : 90px;
                 margin: 0px auto;
                 border-bottom: 3px;
                 border-bottom-style: solid;
-<!--                border:1px solid #bbbbbb;-->
             }
 
             .btnList {
-                width : 740px; height : 44px;
+                width : 250px; height : 40px;
                 margin: 0px auto;
-<!--                border:1px solid #bbbbbb;-->
+                float: right;
                 overflow: hidden;
+                border:1px none #bbbbbb;
+            }
+
+            .btnList div {
+                float: right;
+            }
+
+            .btnModify {
+                width: 145px; height: 40px;
+                position: relative;
+                left: 2px;
+                border:1px none #bbbbbb;
             }
 
             .btnList button {
@@ -75,7 +86,7 @@
                 width : 740px; height : 44px;
                 overflow: hidden;
                 margin: 0px auto;
-<!--                border:1px solid #bbbbbb;-->
+                border:1px none #bbbbbb;
             }
 
             .postEtc h5 {
@@ -125,7 +136,7 @@
             .commentArea {
                 width : 740px; height : 600px;
                 margin: 0px auto;
-<!--                border:1px solid #cccccc;-->
+                border:1px none #cccccc;
             }
 
             .commentArea::-webkit-scrollbar {
@@ -135,7 +146,7 @@
             .commentFormArea {
                 width : 740px; height : 85px;
                 overflow: hidden;
-                margin-top: 10px;
+                margin-top: 8px;
 <!--                border-bottom: 1px;-->
 <!--                border-bottom-style: solid;-->
 <!--                border:1px solid #cccccc;-->
@@ -183,12 +194,12 @@
             }
 
             .commentLevelOne {
-                height: 90px;
+                height: 95px;
                 margin-left: 10px;
                 margin-top: 10px;
                 border-width: thin;
                 border-top-style: ridge;
-<!--                border:1px solid #cccccc;-->
+                <!--border:1px none #cccccc;-->
             }
 
             .commentOwner {
@@ -212,13 +223,14 @@
                 width: 650px; height: 40px;
                 margin-top: 4px;
                 margin-left: 16px;
-<!--                border:1px solid #cccccc;-->
+                border:1px none #cccccc;
                 border-width: thin;
             }
 
             .commentEtc {
                 height: 23px;
-<!--                border:1px solid #cccccc;-->
+                margin-left: -3px;
+                border:1px none #cccccc;
                 overflow: hidden;
             }
 
