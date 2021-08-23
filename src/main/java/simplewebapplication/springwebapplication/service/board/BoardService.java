@@ -30,5 +30,5 @@ public interface BoardService {
     Long deleteBoard(Long boardId);
 
     // 게시글 수정
-    void updateBoard(Long boardId, String Content);
+    void updateBoard(Long boardId, String content);
 }

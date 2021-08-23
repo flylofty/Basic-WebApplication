@@ -1,6 +1,7 @@
 package simplewebapplication.springwebapplication.repository.board;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.domain.board.BoardStatusType;
@@ -9,6 +10,7 @@ import simplewebapplication.springwebapplication.domain.user.User;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class H2BoardRepository implements BoardRepository {
@@ -73,10 +75,9 @@ public class H2BoardRepository implements BoardRepository {
         board.deleteBoard();
     }
 
-    // 테스트용 임시 코드...
-    public void flushAndClear() {
-        System.out.println("flushAndClear()");
-        em.flush();
-        em.clear();
+    @Override
+    public void updateOne(Long boardId, String content) {
+        Board findBoard = em.find(Board.class, boardId);
+        findBoard.updateBoardContent(content);
     }
 }

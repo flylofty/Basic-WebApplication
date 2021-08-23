@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.repository.board.BoardRepository;
-import simplewebapplication.springwebapplication.repository.board.H2BoardRepository;
 import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 
 import java.time.format.DateTimeFormatter;
@@ -88,15 +87,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional
     public void updateBoard(Long boardId, String content) {
-        Board findBoard = boardRepository.findOne(boardId);
-
-        //DC
-        findBoard.changeContent(content);
-    }
-
-    // 테스트용 코드
-    public void fAndC() {
-        ((H2BoardRepository)boardRepository).flushAndClear();
+        boardRepository.updateOne(boardId, content);
     }
 }

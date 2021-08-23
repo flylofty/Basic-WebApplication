@@ -100,4 +100,8 @@ public class Board {
     public void deleteBoard() {
         this.status = BoardStatusType.DELETED;
     }
+
+    public void updateBoardContent(String content) {
+        this.content = content;
+    }
 }

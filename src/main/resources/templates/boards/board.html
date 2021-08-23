@@ -141,12 +141,13 @@
                         <div class="btnModify"
                              th:if="${session.loginUser.id == board.user}">
 
-                            <button type="button"
-                                    th:onclick="|location.href='@{/boards/write}'|"
-                                    th:if="${session.loginUser.id == board.user}"
-                                    class="btn btn-outline-primary mx-2">
-                                수 정
-                            </button>
+                            <form th:action="@{'/boards/{boardId}/write'(boardId=${board.id})}"
+                                  th:if="${session.loginUser.id == board.user}"
+                                  th:method="post">
+                                <button type="submit" class="btn btn-outline-primary mx-2">
+                                    수 정
+                                </button>
+                            </form>
 
                             <form th:action="@{'/boards/{boardId}'(boardId=${board.id})}"
                                   th:if="${session.loginUser.id == board.user}"

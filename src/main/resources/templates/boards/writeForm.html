@@ -79,7 +79,11 @@
             <h1>글쓰기</h1>
         </div>
 
-        <form action="board.html" th:action th:object="${form}" method="post">
+        <form th:action="@{'/boards/write'}"
+              action="board.html"
+              th:object="${form}" method="post">
+
+            <input type="hidden" id="boardId" th:field="${form.boardId}">
 
             <div class="formTitle">
                 <div class="ips mb-3">
@@ -117,7 +121,11 @@
                 <button type="button" class="btn btn-secondary mx-2"
                         th:onclick="|location.href='@{/boards}'|">취 소</button>
 
-                <button type="submit" class="btn btn-primary">작 성</button>
+                <button type="submit"
+                        class="btn btn-primary">
+                    <span th:if="${form.boardId == null}">작 성</span>
+                    <span th:if="${form.boardId != null}">수 정</span>
+                </button>
 
             </div>
 

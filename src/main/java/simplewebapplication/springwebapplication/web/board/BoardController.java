@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import simplewebapplication.springwebapplication.domain.comment.Comment;
 import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
@@ -55,8 +56,25 @@ public class BoardController {
     }
 
     @GetMapping("/write")
-    public String openWriteForm(@ModelAttribute("form") WriteForm form) {
+    public String openWriteForm(@ModelAttribute("form") WriteForm form, Model model,
+                                HttpServletRequest request)
+    {
+        Long boardId = (Long) model.asMap().get("rewrite");
+
+        if (boardId != null) {
+            ResponseBoard board = boardService.findBoard(boardId);
+            form.responseBoardToWriteForm(board);
+        }
+
         return "boards/writeForm";
+    }
+
+    @PostMapping("/{boardId}/write")
+    public String reWriteForm(@PathVariable Long boardId,
+                              RedirectAttributes redirectAttributes)
+    {
+        redirectAttributes.addFlashAttribute("rewrite", boardId);
+        return "redirect:/boards/write";
     }
 
     @PostMapping("/write")
@@ -77,13 +95,21 @@ public class BoardController {
             return "boards/writeForm";
         }
 
-        // 2. 작성자를 UserService 에서 찾아와야함
-        // 세션에 담을 정보를 간소화 해야할 필요가 있음.
-        HttpSession session = request.getSession(false);
-        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        Long boardId = 0L;
+        if (form.getBoardId() == null) {
+            // 2. 작성자를 UserService 에서 찾아와야함
+            // 세션에 담을 정보를 간소화 해야할 필요가 있음.
+            HttpSession session = request.getSession(false);
+            User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
 
-        // 3. Board 를 만들고 BoardService 를 통해 새로운 게시글을 만듦
-        Long boardId = boardService.createBoard(form.makeBoard(sessionUser));
+            // 3. Board 를 만들고 BoardService 를 통해 새로운 게시글을 만듦
+            boardId = boardService.createBoard(form.makeBoard(sessionUser));
+        }
+        else {
+            boardService.updateBoard(form.getBoardId(), form.getContent());
+            boardId = form.getBoardId();
+        }
+
         return "redirect:/boards/" + boardId.toString();
     }
 

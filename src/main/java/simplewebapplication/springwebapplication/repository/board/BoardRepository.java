@@ -23,8 +23,11 @@ public interface BoardRepository {
     Long findBoardTotalNumber();
 
     // 생성
-    public void save(Board board);
+    void save(Board board);
 
     // 삭제
-    public void delete(Long boardId);
+    void delete(Long boardId);
+
+    // 게시글 하나 내용 수정
+    void updateOne(Long boardId, String content);
 }
