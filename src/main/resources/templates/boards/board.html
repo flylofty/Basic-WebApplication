@@ -86,31 +86,31 @@
 
             <div class="postInfo">
 
-                <div class="btnList">
+<!--                <div class="btnList">-->
 
-                    <div class="btnBack">
-                        <button type="button"
-                                th:onclick="|location.href='@{${prevPage}}'|"
-                                class="btn btn-outline-success">
-                            목 록
-                        </button>
-                    </div>
+<!--                    <div class="btnBack">-->
+<!--                        <button type="button"-->
+<!--                                th:onclick="|location.href='@{${prevPage}}'|"-->
+<!--                                class="btn btn-outline-success">-->
+<!--                            목 록-->
+<!--                        </button>-->
+<!--                    </div>-->
 
-                    <button type="button"
-                            th:onclick="|location.href='@{/boards/write}'|"
-                            th:if="${session.loginUser.id == board.user}"
-                            class="btn btn-outline-primary mx-2">
-                        수 정
-                    </button>
+<!--                    <button type="button"-->
+<!--                            th:onclick="|location.href='@{/boards/write}'|"-->
+<!--                            th:if="${session.loginUser.id == board.user}"-->
+<!--                            class="btn btn-outline-primary mx-2">-->
+<!--                        수 정-->
+<!--                    </button>-->
 
-                    <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}"
-                          th:if="${session.loginUser.id == board.user}"
-                          th:method="delete">
-                        <button type="submit" class="btn btn-outline-danger">
-                            삭 제
-                        </button>
-                    </form>
-                </div>
+<!--                    <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}"-->
+<!--                          th:if="${session.loginUser.id == board.user}"-->
+<!--                          th:method="delete">-->
+<!--                        <button type="submit" class="btn btn-outline-danger">-->
+<!--                            삭 제-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                </div>-->
 
                 <div class="postUser">
                     <h5 class="user">작성자 : &nbsp</h5>
@@ -118,12 +118,48 @@
                 </div>
 
                 <div class="postEtc">
-                    <h5 class="date">날 &nbsp&nbsp&nbsp짜 : &nbsp</h5>
-                    <h5 class="date" th:text="${board.dateTime}">21.08.08</h5>
-                    <div class="postEtcViews">
-                        <h5 class="date">&nbsp&nbsp&nbsp&nbsp조회 &nbsp</h5>
-                        <h5 th:text="${board.views}"> 1 </h5>
+
+                    <div class="etc">
+                        <h5 class="date">날 &nbsp&nbsp&nbsp짜 : &nbsp</h5>
+                        <h5 class="date" th:text="${board.dateTime}">21.08.08</h5>
+                        <div class="postEtcViews">
+                            <h5 class="date">&nbsp&nbsp&nbsp&nbsp조회 &nbsp</h5>
+                            <h5 th:text="${board.views}"> 1 </h5>
+                        </div>
                     </div>
+
+                    <div class="btnList">
+
+                        <div class="btnBack">
+                            <button type="button"
+                                    th:onclick="|location.href='@{${prevPage}}'|"
+                                    class="btn btn-outline-success">
+                                목 록
+                            </button>
+                        </div>
+
+                        <div class="btnModify"
+                             th:if="${session.loginUser.id == board.user}">
+
+                            <button type="button"
+                                    th:onclick="|location.href='@{/boards/write}'|"
+                                    th:if="${session.loginUser.id == board.user}"
+                                    class="btn btn-outline-primary mx-2">
+                                수 정
+                            </button>
+
+                            <form th:action="@{'/boards/{boardId}'(boardId=${board.id})}"
+                                  th:if="${session.loginUser.id == board.user}"
+                                  th:method="delete">
+                                <button type="submit" class="btn btn-outline-danger">
+                                    삭 제
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
