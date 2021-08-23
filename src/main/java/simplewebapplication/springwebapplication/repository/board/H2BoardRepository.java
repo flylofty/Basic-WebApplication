@@ -53,7 +53,9 @@ public class H2BoardRepository implements BoardRepository {
 
     @Override
     public Long findBoardTotalNumber() {
-        return (long) em.createQuery("select count(*) from Board")
+        return (long) em.createQuery("select count(*) from Board b " +
+                        " where b.status = :status")
+                .setParameter("status", BoardStatusType.CREATED)
                 .getSingleResult();
     }
 
