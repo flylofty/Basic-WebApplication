@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import simplewebapplication.springwebapplication.domain.comment.Comment;
 import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.dto.comment.RequestCommentLevelOne;
@@ -20,10 +19,13 @@ import simplewebapplication.springwebapplication.web.form.WriteForm;
 import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -56,13 +58,12 @@ public class BoardController {
     }
 
     @GetMapping("/write")
-    public String openWriteForm(@ModelAttribute("form") WriteForm form, Model model,
-                                HttpServletRequest request)
-    {
+    public String openWriteForm(@ModelAttribute("form") WriteForm form, Model model) {
+
         Long boardId = (Long) model.asMap().get("rewrite");
 
         if (boardId != null) {
-            ResponseBoard board = boardService.findBoard(boardId);
+            ResponseBoard board = boardService.findBoard(boardId, true);
             form.responseBoardToWriteForm(board);
         }
 
@@ -79,8 +80,7 @@ public class BoardController {
 
     @PostMapping("/write")
     public String saveWriteForm(@ModelAttribute(name = "form") WriteForm form,
-                                BindingResult bindingResult,
-                                HttpServletRequest request)
+                                BindingResult bindingResult, HttpServletRequest request)
     {
         // 1. 제목과 내용은 공백일 수 없음 == Validation
         if (!StringUtils.hasText(form.getTitle())) {
@@ -114,13 +114,14 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
-    public String findBoard(@ModelAttribute(name = "commentLevelOne") CommentForm commentLevelOne,
-                            BindingResult bindingResult,
+    public String findBoard(@ModelAttribute(name = "commentLevelOne") CommentForm commentLevelOne, BindingResult bindingResult,
                             @PathVariable Long boardId, Model model,
-                            HttpServletRequest request)
+                            HttpServletResponse response, HttpServletRequest request)
     {
+        boolean isVisited = viewDuplicateCheck(boardId, request, response);
+
         // 게시글 객체
-        ResponseBoard board = boardService.findBoard(boardId);
+        ResponseBoard board = boardService.findBoard(boardId, isVisited);
         model.addAttribute("board", board);
 
         // 댓글 Level 1 객체 (Depth 1, 댓글)
@@ -156,5 +157,34 @@ public class BoardController {
         log.info("삭제할 게시글 번호 = {}", boardId);
         boardService.deleteBoard(boardId);
         return "redirect:/boards";
+    }
+
+    private boolean viewDuplicateCheck(Long boardId, HttpServletRequest request, HttpServletResponse response) {
+
+        // 조회 중복 방지 로직
+        Cookie[] cookies = request.getCookies();
+        Map map = new HashMap();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                map.put(cookie.getName(), cookie.getValue());
+            }
+        }
+
+        String readCount = (String) map.get("read_count");
+        String newReadCount = "|" + boardId;
+
+        boolean isVisited = true;
+
+        if (readCount == null || !readCount.contains(newReadCount)) {
+
+            if (readCount == null) {
+                readCount = "";
+            }
+
+            Cookie newCookie = new Cookie("read_count", readCount + newReadCount);
+            response.addCookie(newCookie);
+            isVisited = false;
+        }
+        return isVisited;
     }
 }

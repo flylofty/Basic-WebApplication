@@ -20,7 +20,7 @@ public class H2BoardRepository implements BoardRepository {
     @Override
     public Board findOne(Long boardId) {
         Board board = em.find(Board.class, boardId);
-        board.changeViews(1);
+        //board.changeViews(1);
         return board;
     }
 

@@ -21,9 +21,13 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional
-    public ResponseBoard findBoard(Long boardId) {
+    public ResponseBoard findBoard(Long boardId, boolean isVisited) {
 
         Board board = boardRepository.findOne(boardId);
+
+        if (!isVisited) {
+            board.changeViews(1);
+        }
 
         return new ResponseBoard(board.getId().toString(), board.getTitle(),
                 board.getUser().getId(), board.getDateTime().format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm")),
