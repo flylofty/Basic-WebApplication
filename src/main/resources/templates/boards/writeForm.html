@@ -91,7 +91,9 @@
                     <label for="title" class="form-label fs-4">제 목</label>
 
                     <input type="text" id="title" th:field="${form.title}"
-                           th:errorclass="field-error" class="form-control" placeholder="제목을 입력하세요.">
+                           th:readonly="${form.boardId != null}"
+                           th:errorclass="field-error" class="form-control"
+                           placeholder="제목을 입력하세요.">
 
                     <div class="field-error" th:errors="*{title}">
                         제목 오류
