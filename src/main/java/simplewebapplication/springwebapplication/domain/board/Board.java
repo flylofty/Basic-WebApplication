@@ -1,6 +1,7 @@
 package simplewebapplication.springwebapplication.domain.board;
 
 import simplewebapplication.springwebapplication.domain.comment.Comment;
+import simplewebapplication.springwebapplication.domain.like.Like;
 import simplewebapplication.springwebapplication.domain.user.User;
 
 import javax.persistence.*;
@@ -45,6 +46,9 @@ public class Board {
      */
     @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "board")
+    private List<Like> likes = new ArrayList<>();
 
     // 기본 생성자 필수!!
     protected Board() {};
