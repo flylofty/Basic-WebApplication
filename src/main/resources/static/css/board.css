@@ -109,12 +109,8 @@
                 width : 740px; height : 42px;
                 border-bottom: 3px;
                 border-bottom-style: solid;
-<!--                overflow: hidden;-->
 <!--                border:1px solid #bbbbbb;-->
-            }
-
-            .postEnd button {
-                border: 0px;
+<!--                overflow: hidden;-->
             }
 
             .postEnd div {
@@ -125,8 +121,18 @@
                 color: black;
             }
 
+            .likeCount {
+                margin-top: 10px;
+                border:1px none #cccccc;
+            }
+
+            .likeText {
+                margin-left: 5px;
+            }
+
             .commentCount {
-                margin-top: 6px;
+                margin-top: 10px;
+                margin-left: 8px;
             }
 
             .commentCountText {
