@@ -1,7 +1,7 @@
 package simplewebapplication.springwebapplication.domain.board;
 
 import simplewebapplication.springwebapplication.domain.comment.Comment;
-import simplewebapplication.springwebapplication.domain.like.Like;
+import simplewebapplication.springwebapplication.domain.like.Likes;
 import simplewebapplication.springwebapplication.domain.user.User;
 
 import javax.persistence.*;
@@ -48,7 +48,7 @@ public class Board {
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "board")
-    private List<Like> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
     // 기본 생성자 필수!!
     protected Board() {};
@@ -107,5 +107,9 @@ public class Board {
 
     public void updateBoardContent(String content) {
         this.content = content;
+    }
+
+    public void updateFavorite(Long cnt) {
+        this.favorite += cnt;
     }
 }
