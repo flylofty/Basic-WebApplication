@@ -15,7 +15,7 @@ public interface BoardService {
     List<ResponseBoard> findBoardPageList(Long page);
 
     // 게시글 하나 조회
-    ResponseBoard findBoard(Long boardId, boolean isVisited);
+    ResponseBoard findBoard(Long boardId, Boolean isVisited);
 
     // 사용자 게시글 수 조회
     Long findBoardCount(String userId);

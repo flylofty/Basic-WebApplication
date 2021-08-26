@@ -1,6 +1,7 @@
 package simplewebapplication.springwebapplication.service.board;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
@@ -21,11 +22,11 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional
-    public ResponseBoard findBoard(Long boardId, boolean isVisited) {
+    public ResponseBoard findBoard(Long boardId, Boolean isVisited) {
 
         Board board = boardRepository.findOne(boardId);
 
-        if (!isVisited) {
+        if (isVisited == false) {
             board.changeViews(1);
         }
 
