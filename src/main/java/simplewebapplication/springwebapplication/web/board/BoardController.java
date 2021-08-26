@@ -13,8 +13,10 @@ import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.dto.comment.RequestCommentLevelOne;
 import simplewebapplication.springwebapplication.service.comment.CommentService;
+import simplewebapplication.springwebapplication.service.like.LikeService;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.CommentForm;
+import simplewebapplication.springwebapplication.web.form.LikeForm;
 import simplewebapplication.springwebapplication.web.form.WriteForm;
 import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
@@ -35,6 +37,7 @@ public class BoardController {
 
     private final BoardService boardService;
     private final CommentService commentService;
+    private final LikeService likeService;
 
     @GetMapping
     public String findBoards(@RequestParam(required = false) Long page,
@@ -118,11 +121,20 @@ public class BoardController {
                             @PathVariable Long boardId, Model model,
                             HttpServletResponse response, HttpServletRequest request)
     {
-        boolean isVisited = viewDuplicateCheck(boardId, request, response);
-
         // 게시글 객체
-        ResponseBoard board = boardService.findBoard(boardId, isVisited);
+        ResponseBoard board = boardService.findBoard(boardId, viewDuplicateCheck(boardId, request, response));
         model.addAttribute("board", board);
+
+        //게시글 개행 처리
+        //String nlString = System.getProperty("line.separator").toString();
+        String nlString = System.getProperty("line.separator");
+        model.addAttribute("nlString", nlString);
+
+        // 좋아요
+        HttpSession session = request.getSession(false);
+        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        LikeForm likeForm = likeService.findLikeId(sessionUser, boardId);
+        model.addAttribute("likeForm", likeForm);
 
         // 댓글 Level 1 객체 (Depth 1, 댓글)
         //model.addAttribute("commentLevelOne", new CommentForm(boardId));
@@ -140,12 +152,7 @@ public class BoardController {
         List<RequestCommentLevelOne> commentLevelOneList = commentService.findCommentLevelOneList(boardId);
         model.addAttribute("commentLevelOneList", commentLevelOneList);
 
-        //게시글 개행 처리
-        //String nlString = System.getProperty("line.separator").toString();
-        String nlString = System.getProperty("line.separator");
-        model.addAttribute("nlString", nlString);
-
-        // 이전 게시글 page URL
+        // 이전 게시글 page URL, 개선해야할 점 많음...ㅠㅠ
         model.addAttribute("prevPage", request.getHeader("Referer"));
 
         return "boards/board";
@@ -157,6 +164,24 @@ public class BoardController {
         log.info("삭제할 게시글 번호 = {}", boardId);
         boardService.deleteBoard(boardId);
         return "redirect:/boards";
+    }
+
+    @PostMapping("{boardId}/like")
+    public String likeBoard(@ModelAttribute(name = "likeForm") LikeForm form,
+                            @PathVariable Long boardId,
+                            HttpServletRequest request)
+    {
+        // 좋아요를 수행한 경우
+        if (form.isPressedLikeButton()) {
+            HttpSession session = request.getSession(false);
+            User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+            likeService.createLike(sessionUser, boardId);
+        }
+        else { // 좋아요를 취소한 경우
+            likeService.deleteById(form.getLikeId());
+        }
+
+        return "redirect:/boards/" + boardId;
     }
 
     private boolean viewDuplicateCheck(Long boardId, HttpServletRequest request, HttpServletResponse response) {
