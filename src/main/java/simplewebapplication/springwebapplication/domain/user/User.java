@@ -2,7 +2,7 @@ package simplewebapplication.springwebapplication.domain.user;
 
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.domain.comment.Comment;
-import simplewebapplication.springwebapplication.domain.like.Like;
+import simplewebapplication.springwebapplication.domain.like.Likes;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class User {
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Like> likes = new ArrayList<>();
+    private List<Likes> likes = new ArrayList<>();
 
     protected User() {};
 
