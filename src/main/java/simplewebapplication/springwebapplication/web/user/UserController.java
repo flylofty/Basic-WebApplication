@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.service.board.BoardService;
+import simplewebapplication.springwebapplication.service.comment.CommentService;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.UserJoinForm;
 import simplewebapplication.springwebapplication.web.form.UserLoginForm;
@@ -19,6 +20,7 @@ import simplewebapplication.springwebapplication.service.user.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +32,7 @@ public class UserController {
 
     private final UserService userService;
     private final BoardService boardService;
+    private final CommentService commentService;
 
     // 로그인 페이지로 이동
     @GetMapping("/login")
@@ -166,10 +169,13 @@ public class UserController {
     public String myPage(@PathVariable String userId, Model model) {
         User findUser = userService.findUser(userId);
         Long boardCount = boardService.findBoardCount(findUser.getId());
+        List<Long> commentCountList = commentService.findCommentCount(findUser.getId());
 
         model.addAttribute("id", findUser.getId());
         model.addAttribute("email", findUser.getEmail());
         model.addAttribute("boardCount", boardCount);
+        model.addAttribute("commentCountByPost", commentCountList.get(0));
+        model.addAttribute("commentCount", commentCountList.get(1));
         return "users/myPage";
     }
 
