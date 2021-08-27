@@ -114,21 +114,22 @@
           </div>
           <br>
 
-<!--          <div>-->
-<!--            <h5 class="l">댓&nbsp&nbsp&nbsp&nbsp글 : </h5>-->
-<!--            <div class="commentInfo">-->
-<!--              <h5 class="cr">-->
-<!--                <a href="{}"-->
-<!--                   th:text="${}"-->
-<!--                   th:href="@{/users/comments/{userId}(userId=${id})}">-->
-<!--                  5-->
-<!--                </a>-->
-<!--              </h5>-->
-<!--              <h4 class="cr"> / </h4>-->
-<!--              <h4 class="cr">10</h4>-->
-<!--              <h4 class="cr">posts</h4>-->
-<!--            </div>-->
-<!--          </div>-->
+          <div>
+            <h5 class="l">댓&nbsp&nbsp&nbsp&nbsp글 : </h5>
+            <div class="commentInfo">
+              <h5 class="cr">
+                <a href="{}"
+                   th:text="${commentCount}"
+                   th:href="@{/users/comments/{userId}(userId=${id})}">
+                  5
+                </a>
+              </h5>
+              <h4 class="cr"> / </h4>
+              <h4 class="cr" th:text="${commentCountByPost}">10</h4>
+              <h4 class="cr">post</h4>
+              <h4 class="cr" th:if="${commentCountByPost > 1}">s</h4>
+            </div>
+          </div>
 
           <br>
         </div>
