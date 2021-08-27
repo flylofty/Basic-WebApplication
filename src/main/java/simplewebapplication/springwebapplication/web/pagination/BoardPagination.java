@@ -19,6 +19,10 @@ public class BoardPagination {
         this.currentPage = currentPage;
         this.currentBoardNumber = currentBoardNumber;
 
+        if (this.currentBoardNumber == 0) {
+            return;
+        }
+
         this.lastPageNumber = totalBoardNumber / this.currentBoardNumber;
         if (totalBoardNumber % this.currentBoardNumber != 0)
             this.lastPageNumber++;
