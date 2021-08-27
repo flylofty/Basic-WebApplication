@@ -49,6 +49,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<Long> findCommentCount(String userId) {
+        return commentRepository.findCommentCount(userId);
+    }
+
+    @Override
     @Transactional
     public void updateComment(Long commentId, String content) {
         commentRepository.updateCommentById(commentId, content);

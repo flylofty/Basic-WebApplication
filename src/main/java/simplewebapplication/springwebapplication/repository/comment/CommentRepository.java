@@ -12,6 +12,9 @@ public interface CommentRepository {
     // 게시글 페이지 네이션, 게시글 가져오기
     List<Comment> findCommentListByBoardId(Long boardId);
 
+    // 사용자 댓글 수
+    List<Long> findCommentCount(String userId);
+
     // 댓글 수정
     void updateCommentById(Long commentId, String content);
 

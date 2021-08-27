@@ -5,8 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.domain.comment.Comment;
+import simplewebapplication.springwebapplication.domain.user.User;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -31,6 +33,31 @@ public class H2CommentRepository implements CommentRepository {
                         " order by c.dateTime asc", Comment.class)
                 .setParameter("findBoard", findBoard)
                 .getResultList();
+    }
+
+    @Override
+    public List<Long> findCommentCount(String userId) {
+
+        List<Long> list = new ArrayList<>();
+
+        User findUser = em.find(User.class, userId);
+
+        List<Comment> findCommentListByPost = em.createQuery("select c from Comment c " +
+                        " where c.user = :findUser " +
+                        " order by c.board", Comment.class)
+                .setParameter("findUser", findUser)
+                .getResultList();
+
+        list.add(Long.parseLong(String.valueOf(findCommentListByPost.size())));
+
+        List<Comment> commentList = em.createQuery("select c from Comment c " +
+                        " where c.user = :findUser", Comment.class)
+                .setParameter("findUser", findUser)
+                .getResultList();
+
+        list.add(Long.parseLong(String.valueOf(commentList.size())));
+
+        return list;
     }
 
     @Override

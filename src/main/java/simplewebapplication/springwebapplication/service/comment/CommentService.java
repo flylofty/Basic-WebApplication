@@ -13,6 +13,9 @@ public interface CommentService {
     // read
     List<CommentLevelOneForm> findCommentLevelOneList(Long boardId);
 
+    // 사용자 댓글 수 조회
+    List<Long> findCommentCount(String userId);
+
     // update
     void updateComment(Long commentId, String content);
 
