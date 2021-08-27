@@ -3,21 +3,15 @@ package simplewebapplication.springwebapplication.web.comment;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import simplewebapplication.springwebapplication.domain.user.User;
-import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.service.comment.CommentService;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.CommentForm;
+import simplewebapplication.springwebapplication.web.form.CommentModifyForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +24,30 @@ public class CommentController {
 
     private final CommentService commentService;
     private final BoardService boardService;
+
+    @PostMapping
+    public String modifyLevelOneComment(CommentModifyForm form,
+                                        @PathVariable Long boardId)
+    {
+        // 내용이 있을 경우만 처리
+        if (StringUtils.hasText(form.getCommentContent())) {
+            commentService.updateComment(form.getCommentId(), form.getCommentContent());
+        }
+
+        return "redirect:/boards/" + boardId;
+    }
+
+    @DeleteMapping
+    public String deleteLevelOneComment(CommentModifyForm form,
+                                        @PathVariable Long boardId)
+    {
+        log.info("게시글 댓글 {}을 삭제하겠습니다", form.getCommentId());
+
+        commentService.deleteComment(form.getCommentId());
+
+        log.info("게시글 {}로 돌아가겠습니다", boardId);
+        return "redirect:/boards/" + boardId;
+    }
 
     @PostMapping("/level1")
     public String createLevelOneComment(@ModelAttribute(name = "commentLevelOne") CommentForm form,

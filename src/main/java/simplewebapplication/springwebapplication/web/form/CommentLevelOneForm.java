@@ -1,34 +1,34 @@
-package simplewebapplication.springwebapplication.dto.comment;
+package simplewebapplication.springwebapplication.web.form;
 
 import simplewebapplication.springwebapplication.domain.comment.Comment;
 
 import java.time.format.DateTimeFormatter;
 
-public class RequestCommentLevelOne {
+public class CommentLevelOneForm {
 
-    private Long id;
+    private Long commentId;
     private String writer;
     private String content;
     private Long group;
     private String dateTime;
 
-    public RequestCommentLevelOne() {
+    public CommentLevelOneForm() {
     }
 
-    public RequestCommentLevelOne(Comment comment) {
-        this.id = comment.getId();
+    public CommentLevelOneForm(Comment comment) {
+        this.commentId = comment.getId();
         this.writer = comment.getUser().getId();
         this.content = comment.getContent();
         this.group = comment.getGroup_number();
         this.dateTime = comment.getDateTime().format(DateTimeFormatter.ofPattern("yy-MM-dd HH:mm"));
     }
 
-    public Long getId() {
-        return id;
+    public Long getCommentId() {
+        return commentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     public String getWriter() {

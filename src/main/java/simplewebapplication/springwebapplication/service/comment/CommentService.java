@@ -1,7 +1,6 @@
 package simplewebapplication.springwebapplication.service.comment;
 
-import simplewebapplication.springwebapplication.domain.comment.Comment;
-import simplewebapplication.springwebapplication.dto.comment.RequestCommentLevelOne;
+import simplewebapplication.springwebapplication.web.form.CommentLevelOneForm;
 import simplewebapplication.springwebapplication.web.form.CommentForm;
 
 import java.util.List;
@@ -12,9 +11,11 @@ public interface CommentService {
     void createComment(CommentForm form);
 
     // read
-    List<RequestCommentLevelOne> findCommentLevelOneList(Long boardId);
+    List<CommentLevelOneForm> findCommentLevelOneList(Long boardId);
 
     // update
+    void updateComment(Long commentId, String content);
 
     // delete
+    void deleteComment(Long commentId);
 }

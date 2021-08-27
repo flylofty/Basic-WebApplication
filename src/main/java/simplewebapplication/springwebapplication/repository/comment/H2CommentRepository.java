@@ -12,7 +12,7 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class H2CommentRepository implements CommentRepository{
+public class H2CommentRepository implements CommentRepository {
 
     private final EntityManager em;
 
@@ -31,5 +31,17 @@ public class H2CommentRepository implements CommentRepository{
                         " order by c.dateTime asc", Comment.class)
                 .setParameter("findBoard", findBoard)
                 .getResultList();
+    }
+
+    @Override
+    public void updateCommentById(Long commentId, String content) {
+        Comment findComment = em.find(Comment.class, commentId);
+        findComment.updateContent(content);
+    }
+
+    @Override
+    public void deleteCommentById(Long commentId) {
+        Comment findComment = em.find(Comment.class, commentId);
+        em.remove(findComment);
     }
 }

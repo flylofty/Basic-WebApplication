@@ -240,6 +240,40 @@
                 overflow: hidden;
             }
 
+            .modal-dialog {
+                margin-top: 400px;
+                margin-left: 230px;
+            }
+
+            .modal-content {
+                width: 610px; height: 220px;
+            }
+
+            .modal-body {
+                height: 90px;
+            }
+
+            .modal-footer {
+                height: 60px;
+            }
+
+            .commentEtc div {
+                float: left;
+            }
+
+            .commentEtcDelete {
+                margin-left: 4px;
+            }
+
+            .etcMainBtn button {
+                width: 45px; height: 20px;
+            }
+
+            .commentEtcBtnTitle {
+                margin-top: -2px;
+                font-size: 10px;
+            }
+
             .commentReply {
                 font-size: 14px;
             }

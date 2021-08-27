@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
-import simplewebapplication.springwebapplication.dto.comment.RequestCommentLevelOne;
+import simplewebapplication.springwebapplication.web.form.CommentLevelOneForm;
 import simplewebapplication.springwebapplication.service.comment.CommentService;
 import simplewebapplication.springwebapplication.service.like.LikeService;
 import simplewebapplication.springwebapplication.web.SessionConst;
@@ -149,7 +149,7 @@ public class BoardController {
             model.addAttribute("levelOneErr", "내용을 입력해주세요");
         }
 
-        List<RequestCommentLevelOne> commentLevelOneList = commentService.findCommentLevelOneList(boardId);
+        List<CommentLevelOneForm> commentLevelOneList = commentService.findCommentLevelOneList(boardId);
         model.addAttribute("commentLevelOneList", commentLevelOneList);
 
         // 이전 게시글 page URL, 개선해야할 점 많음...ㅠㅠ

@@ -70,4 +70,8 @@ public class Comment {
     public LocalDateTime getDateTime() {
         return dateTime;
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
 }

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.domain.comment.Comment;
 import simplewebapplication.springwebapplication.domain.user.User;
-import simplewebapplication.springwebapplication.dto.comment.RequestCommentLevelOne;
+import simplewebapplication.springwebapplication.web.form.CommentLevelOneForm;
 import simplewebapplication.springwebapplication.repository.board.BoardRepository;
 import simplewebapplication.springwebapplication.repository.comment.CommentRepository;
 import simplewebapplication.springwebapplication.repository.user.UserRepository;
@@ -37,14 +37,26 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<RequestCommentLevelOne> findCommentLevelOneList(Long boardId) {
+    public List<CommentLevelOneForm> findCommentLevelOneList(Long boardId) {
         List<Comment> commentListByBoardId = commentRepository.findCommentListByBoardId(boardId);
 
-        List<RequestCommentLevelOne> commentList = new ArrayList<>();
+        List<CommentLevelOneForm> commentList = new ArrayList<>();
         for (Comment comment : commentListByBoardId) {
-            commentList.add(new RequestCommentLevelOne(comment));
+            commentList.add(new CommentLevelOneForm(comment));
         }
 
         return commentList;
+    }
+
+    @Override
+    @Transactional
+    public void updateComment(Long commentId, String content) {
+        commentRepository.updateCommentById(commentId, content);
+    }
+
+    @Override
+    @Transactional
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteCommentById(commentId);
     }
 }
