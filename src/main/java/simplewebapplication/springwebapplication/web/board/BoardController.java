@@ -59,6 +59,11 @@ public class BoardController {
         }
 
         List<ResponseBoard> boards = boardService.findBoardPageList(page, searchWord);
+
+        if (boards.isEmpty()) {
+            number = 0;
+        }
+
         BoardPagination pagination = boardService.createBoardPagination(page, number, searchWord);
 
         model.addAttribute("boards", boards);
