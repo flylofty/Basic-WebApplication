@@ -41,8 +41,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardPagination createBoardPagination(Long currentPage, int currentBoardNumber) {
-        Long boardTotalNumber = boardRepository.findBoardTotalNumber();
+    public BoardPagination createBoardPagination(Long currentPage, int currentBoardNumber, String searchWord) {
+        Long boardTotalNumber = boardRepository.findBoardTotalNumber(searchWord);
         return new BoardPagination(boardTotalNumber, currentPage, currentBoardNumber);
     }
 
@@ -63,8 +63,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<ResponseBoard> findBoardPageList(Long page) {
-        List<Board> boardList = boardRepository.findPage(page);
+    public List<ResponseBoard> findBoardPageList(Long page, String searchWord) {
+        List<Board> boardList = boardRepository.findPage(page, searchWord);
 
         // id, title, user, dateTime, views, favorite
         List<ResponseBoard> boards = new ArrayList<>();

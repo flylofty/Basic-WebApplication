@@ -31,13 +31,16 @@ public class H2BoardRepository implements BoardRepository {
     }
 
     @Override
-    public List<Board> findPage(Long page) {
+    public List<Board> findPage(Long page, String searchWord) {
         // 페이지네이션 시간상 최신글 우선 순서
+        String keyword = "%" + searchWord + "%";
         int start = Math.toIntExact((int) 10 * page - 10);
         return em.createQuery("select b from Board b " +
-                        " where b.status = :status" +
+                        " where b.status = :status " +
+                        " and b.title like :keyword" +
                         " order by b.dateTime desc", Board.class)
                 .setParameter("status", BoardStatusType.CREATED)
+                .setParameter("keyword", keyword)
                 .setFirstResult(start)
                 .setMaxResults(10)
                 .getResultList();
@@ -54,10 +57,13 @@ public class H2BoardRepository implements BoardRepository {
     }
 
     @Override
-    public Long findBoardTotalNumber() {
+    public Long findBoardTotalNumber(String searchWord) {
+        String keyword = "%" + searchWord + "%";
         return (long) em.createQuery("select count(*) from Board b " +
-                        " where b.status = :status")
+                        " where b.status = :status " +
+                        " and b.title like :keyword")
                 .setParameter("status", BoardStatusType.CREATED)
+                .setParameter("keyword", keyword)
                 .getSingleResult();
     }
 

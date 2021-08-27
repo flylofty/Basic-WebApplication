@@ -12,7 +12,7 @@ public interface BoardService {
     List<ResponseBoard> findBoards(int page, int count);
 
     // 원하는 페이지 게시글 리스트 조회
-    List<ResponseBoard> findBoardPageList(Long page);
+    List<ResponseBoard> findBoardPageList(Long page, String searchWord);
 
     // 게시글 하나 조회
     ResponseBoard findBoard(Long boardId, Boolean isVisited);
@@ -21,7 +21,7 @@ public interface BoardService {
     Long findBoardCount(String userId);
 
     // 페이지네이션 객체 생성
-    BoardPagination createBoardPagination(Long currentPage, int currentBoardNumber);
+    BoardPagination createBoardPagination(Long currentPage, int currentBoardNumber, String searchWord);
 
     // 게시글 생성
     Long createBoard(Board board);

@@ -14,13 +14,13 @@ public interface BoardRepository {
     List<Board> findAll(int page, int count);
 
     // 게시글 페이지 네이션
-    List<Board> findPage(Long page);
+    List<Board> findPage(Long page, String searchWord);
 
     // 사용자 게시글 수
     Long findBoardCount(String userId);
 
     // 전체 게시글 수
-    Long findBoardTotalNumber();
+    Long findBoardTotalNumber(String searchWord);
 
     // 생성
     void save(Board board);

@@ -42,8 +42,14 @@ public class BoardController {
     @GetMapping
     public String findBoards(@RequestParam(required = false) Long page,
                              @RequestParam(required = false) Integer number,
+                             @RequestParam(required = false, name = "searchWord") String searchWord,
                              Model model)
     {
+
+        if (searchWord == null) {
+            searchWord = "";
+        }
+
         if (page == null) {
             page = 1L;
         }
@@ -52,8 +58,8 @@ public class BoardController {
             number = 10;
         }
 
-        List<ResponseBoard> boards = boardService.findBoardPageList(page);
-        BoardPagination pagination = boardService.createBoardPagination(page, number);
+        List<ResponseBoard> boards = boardService.findBoardPageList(page, searchWord);
+        BoardPagination pagination = boardService.createBoardPagination(page, number, searchWord);
 
         model.addAttribute("boards", boards);
         model.addAttribute("pagination", pagination);
