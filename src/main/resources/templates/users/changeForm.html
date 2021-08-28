@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비밀번호 변경</title>
+
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../../static/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+          crossorigin="anonymous">
+    <link th:href="@{/css/changeForm.css}"
+          href="../../static/css/changeForm.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="wrap">
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <div class="container-fluid mx-4">
+
+                <a class="navbar-brand fs-2" href="../">Home</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active fs-3" aria-current="page" href="/boards">Board</a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item" th:if="${session.loginUser == null}">
+                            <a class="nav-link active fs-3" aria-current="page" href="/users/login">Sign In</a>
+                        </li>
+
+                        <li class="nav-item" th:if="${session.loginUser == null}">
+                            <a class="nav-link active fs-3" aria-current="page" href="/users/join">Sign Up</a>
+                        </li>
+
+                        <li class="nav-item" th:if="${session.loginUser != null}">
+                            <a class="nav-link active fs-3" aria-current="page"
+                               href="/users/myInfo"
+                               th:href="@{/users/myInfo}">
+                                My Page
+                            </a>
+                        </li>
+
+                        <li class="nav-item" th:if="${session.loginUser != null}">
+                            <a class="nav-link active fs-3" aria-current="page" href="/users/logout">Logout</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <div class="myContainer">
+
+        <div class="signHeaderText">
+            <h1>비밀번호 변경</h1>
+        </div>
+
+        <div class="signUpForm">
+            <form class="join" th:action="@{'/users/myInfo/changePw'}"
+                  th:object="${changeForm}" method="post">
+
+                <div class="formUserId">
+                    <label for="userId" class="form-label fs-5">I D</label>
+                    <input type="text" id="userId" th:field="${changeForm.userId}"
+                           readonly class="form-control" placeholder="User01">
+                </div>
+
+                <div class="formUserCurrentPassword">
+                    <label for="currentPassword" class="form-label fs-5">Current password</label>
+                    <input type="password" id="currentPassword" th:field="${changeForm.currentPassword}"
+                           th:errorclass="field-error" class="form-control" placeholder="현재 비밀번호를 입력하세요">
+                    <div class="Err">
+                        <div class="field-error" th:errors="*{currentPassword}">
+                            현재 비밀번호 입력 오류
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formUserPassword">
+                    <label for="newPassword" class="form-label fs-5">New password</label>
+                    <input type="password" id="newPassword" th:field="${changeForm.newPassword}"
+                           th:errorclass="field-error" class="form-control" placeholder="새로운 비밀번호를 입력하세요">
+                    <div class="Err">
+                        <div class="field-error" th:errors="*{newPassword}">
+                            새로운 비밀번호 오류
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formUserRePassword">
+                    <label for="rePassword" class="form-label fs-5">Confirm new password</label>
+                    <input type="password" id="rePassword" th:field="${changeForm.rePassword}"
+                           th:errorclass="field-error" class="form-control" placeholder="새로운 비밀번호를 재입력하세요">
+                    <div class="Err">
+                        <div class="field-error" th:errors="*{rePassword}">
+                            새로운 비밀번호 확인 오류
+                        </div>
+                    </div>
+                </div>
+
+                <div class="formBtn">
+                    <button type="submit" class="btn btn-primary my-3 col-12 fs-5">Change</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">ⓒ 2021 Company, Inc. ·Privacy ·Terms</span>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>
