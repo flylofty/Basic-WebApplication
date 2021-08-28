@@ -109,8 +109,8 @@
                 width : 740px; height : 42px;
                 border-bottom: 3px;
                 border-bottom-style: solid;
+                overflow: hidden;
 <!--                border:1px solid #bbbbbb;-->
-<!--                overflow: hidden;-->
             }
 
             .postEnd div {
@@ -121,13 +121,21 @@
                 color: black;
             }
 
+            #heartBtn {
+                width: 18px; height: 23px;
+                margin-bottom: 2px;
+                border-style: none;
+            }
+
+            #heart1 {
+                position: relative;
+                right: 8px;
+                bottom: 6px;
+            }
+
             .likeCount {
                 margin-top: 10px;
                 border:1px none #cccccc;
-            }
-
-            .likeText {
-                margin-left: 5px;
             }
 
             .commentCount {

@@ -10,13 +10,13 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-<!--    <link th:href="@{/css/bootstrap.min.css}"-->
-<!--          href="../../static/css/bootstrap.min.css"-->
-<!--          rel="stylesheet"-->
-<!--          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"-->
-<!--          crossorigin="anonymous">-->
+    <!--    <link th:href="@{/css/bootstrap.min.css}"-->
+    <!--          href="../../static/css/bootstrap.min.css"-->
+    <!--          rel="stylesheet"-->
+    <!--          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"-->
+    <!--          crossorigin="anonymous">-->
     <link th:href="@{/css/board.css}"
-          href="../../static/css/board.css" rel="stylesheet">
+          href="../../static/css/boardHeartTest.css" rel="stylesheet">
 
 </head>
 
@@ -92,31 +92,31 @@
 
             <div class="postInfo">
 
-<!--                <div class="btnList">-->
+                <!--                <div class="btnList">-->
 
-<!--                    <div class="btnBack">-->
-<!--                        <button type="button"-->
-<!--                                th:onclick="|location.href='@{${prevPage}}'|"-->
-<!--                                class="btn btn-outline-success">-->
-<!--                            목 록-->
-<!--                        </button>-->
-<!--                    </div>-->
+                <!--                    <div class="btnBack">-->
+                <!--                        <button type="button"-->
+                <!--                                th:onclick="|location.href='@{${prevPage}}'|"-->
+                <!--                                class="btn btn-outline-success">-->
+                <!--                            목 록-->
+                <!--                        </button>-->
+                <!--                    </div>-->
 
-<!--                    <button type="button"-->
-<!--                            th:onclick="|location.href='@{/boards/write}'|"-->
-<!--                            th:if="${session.loginUser.id == board.user}"-->
-<!--                            class="btn btn-outline-primary mx-2">-->
-<!--                        수 정-->
-<!--                    </button>-->
+                <!--                    <button type="button"-->
+                <!--                            th:onclick="|location.href='@{/boards/write}'|"-->
+                <!--                            th:if="${session.loginUser.id == board.user}"-->
+                <!--                            class="btn btn-outline-primary mx-2">-->
+                <!--                        수 정-->
+                <!--                    </button>-->
 
-<!--                    <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}"-->
-<!--                          th:if="${session.loginUser.id == board.user}"-->
-<!--                          th:method="delete">-->
-<!--                        <button type="submit" class="btn btn-outline-danger">-->
-<!--                            삭 제-->
-<!--                        </button>-->
-<!--                    </form>-->
-<!--                </div>-->
+                <!--                    <form action="#" th:action="@{'/boards/{boardId}'(boardId=${board.id})}"-->
+                <!--                          th:if="${session.loginUser.id == board.user}"-->
+                <!--                          th:method="delete">-->
+                <!--                        <button type="submit" class="btn btn-outline-danger">-->
+                <!--                            삭 제-->
+                <!--                        </button>-->
+                <!--                    </form>-->
+                <!--                </div>-->
 
                 <div class="postUser">
                     <h5 class="user">작성자 : &nbsp</h5>
@@ -186,8 +186,19 @@
                         <form class="likeForm" th:object="${likeForm}"
                               th:action="@{'/boards/{boardId}/like'(boardId=*{boardId})}"
                               method="post">
+
                             <input th:type="hidden" th:id="likeId" th:field="*{likeId}">
-                            <button type="submit" class="btn btn-outline-danger">
+
+                            <button type="submit" id="heartBtn" class="btn btn-outline-danger">
+
+                                <svg th:if="${likeForm.likeId == 0}" xmlns="http://www.w3.org/2000/svg" id="heart1" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                </svg>
+
+                                <svg th:if="${likeForm.likeId != 0}" xmlns="http://www.w3.org/2000/svg" id="heart1" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                </svg>
+
                             </button>
                         </form>
                     </div>
@@ -372,49 +383,49 @@
                             </div>
                         </div>
 
-<!--                        <form th:action="@{'/boards/{boardId}/comments/{commentId}'(boardId=${board.id}, commentId=${level1.commentId})}"-->
-<!--                              method="post">-->
-<!--                            <div class="etcMainBtn">-->
-<!--                                <button type="submit" class="btn btn-outline-danger">-->
-<!--                                    <h6 class="commentEtcBtnTitle">-->
-<!--                                        삭제-->
-<!--                                    </h6>-->
-<!--                                </button>-->
-<!--                            </div>-->
+                        <!--                        <form th:action="@{'/boards/{boardId}/comments/{commentId}'(boardId=${board.id}, commentId=${level1.commentId})}"-->
+                        <!--                              method="post">-->
+                        <!--                            <div class="etcMainBtn">-->
+                        <!--                                <button type="submit" class="btn btn-outline-danger">-->
+                        <!--                                    <h6 class="commentEtcBtnTitle">-->
+                        <!--                                        삭제-->
+                        <!--                                    </h6>-->
+                        <!--                                </button>-->
+                        <!--                            </div>-->
 
-<!--                        </form>-->
+                        <!--                        </form>-->
                     </div>
 
                 </div>
 
             </div>
 
-<!--            <div class="commentLevelTwo">-->
+            <!--            <div class="commentLevelTwo">-->
 
-<!--                <div class="commentOwner">-->
-<!--                    <h6>-->
-<!--                        User03-->
-<!--                    </h6>-->
-<!--                </div>-->
+            <!--                <div class="commentOwner">-->
+            <!--                    <h6>-->
+            <!--                        User03-->
+            <!--                    </h6>-->
+            <!--                </div>-->
 
-<!--                <div class="commentContentOuter">-->
+            <!--                <div class="commentContentOuter">-->
 
-<!--                    <div class="commentContentTwo"-->
-<!--                         style="overflow:auto"-->
-<!--                         th:utext="${#strings.replace(comment.content, nlString, '&lt;br /&gt;')}">-->
-<!--                        대댓글 내용-->
-<!--                    </div>-->
+            <!--                    <div class="commentContentTwo"-->
+            <!--                         style="overflow:auto"-->
+            <!--                         th:utext="${#strings.replace(comment.content, nlString, '&lt;br /&gt;')}">-->
+            <!--                        대댓글 내용-->
+            <!--                    </div>-->
 
-<!--                </div>-->
+            <!--                </div>-->
 
-<!--                <div class="commentEtc">-->
-<!--                    <span>&nbsp&nbsp&nbsp&nbsp</span>-->
-<!--                    <span class="commentTime">-->
-<!--                        21.08.09 12:48-->
-<!--                    </span>-->
-<!--                </div>-->
+            <!--                <div class="commentEtc">-->
+            <!--                    <span>&nbsp&nbsp&nbsp&nbsp</span>-->
+            <!--                    <span class="commentTime">-->
+            <!--                        21.08.09 12:48-->
+            <!--                    </span>-->
+            <!--                </div>-->
 
-<!--            </div>-->
+            <!--            </div>-->
 
         </div>
 
