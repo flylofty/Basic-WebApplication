@@ -11,4 +11,7 @@ public interface UserRepository {
 
     // 아이디로 한 유저 찾기
     Optional<User> findById(String id);
+
+    // 회원 탈퇴
+    void delete(String userId);
 }

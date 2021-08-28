@@ -83,6 +83,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    @Transactional
+    public void deleteAccount(String userId) {
+        userRepository.delete(userId);
+    }
+
     private boolean validateDuplicateMember(User user) {
 
         Optional<User> optionalUser = userRepository.findById(user.getId());

@@ -22,8 +22,6 @@ public interface UserService {
     // 비밀번호 변경
     void changePassword(String userId, String newPassword);
 
-    // 로그인
-    // 로그아웃
     // 회원 탈퇴
-    // 회원 정보 변경
+    void deleteAccount(String userId);
 }

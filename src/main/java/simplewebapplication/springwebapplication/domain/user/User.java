@@ -90,4 +90,12 @@ public class User {
     public void changePassword(String newPassword) {
         this.password = newPassword;
     }
+
+    public void deleteAccount() {
+        this.password = "";
+        this.role = UserRoleType.DELETED;
+        this.token = null;
+        this.tokenExp = null;
+        this.avatar = null;
+    }
 }

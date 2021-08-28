@@ -15,6 +15,7 @@ import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.service.comment.CommentService;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.ChangePasswordForm;
+import simplewebapplication.springwebapplication.web.form.DeleteForm;
 import simplewebapplication.springwebapplication.web.form.UserJoinForm;
 import simplewebapplication.springwebapplication.web.form.UserLoginForm;
 import simplewebapplication.springwebapplication.service.user.UserService;
@@ -240,6 +241,40 @@ public class UserController {
         userService.changePassword(form.getUserId(), form.getNewPassword());
 
         return "redirect:/users/myInfo";
+    }
+
+    @GetMapping("/myInfo/delete")
+    public String deleteForm(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession(false);
+        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+
+        model.addAttribute("deleteForm", new DeleteForm(sessionUser.getId()));
+        return "users/deleteForm";
+    }
+
+    @PostMapping("/myInfo/delete")
+    public String deleteAccount(@ModelAttribute(name = "deleteForm") DeleteForm form,
+                                BindingResult bindingResult)
+    {
+        if (!StringUtils.hasText(form.getConfirmPassword())) {
+            bindingResult.addError(new FieldError("deleteForm",
+                    "confirmPassword", "비밀번호를 입력해주세요"));
+        }
+
+        // 입력한 비밀번호가 같지 않을 경우
+        if (userService.confirmCurrentPassword(form.getUserId(), form.getConfirmPassword())) {
+            bindingResult.addError(new FieldError("deleteForm",
+                    "confirmPassword", "비밀번호가 정확하지 않습니다"));
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("deleteAccount errors = {}", bindingResult);
+            return "users/deleteForm";
+        }
+
+        userService.deleteAccount(form.getUserId());
+        return "redirect:/users/logout";
     }
 
     public static boolean isValidEmail(String email) {
