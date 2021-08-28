@@ -14,6 +14,7 @@ import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.service.comment.CommentService;
 import simplewebapplication.springwebapplication.web.SessionConst;
+import simplewebapplication.springwebapplication.web.form.ChangePasswordForm;
 import simplewebapplication.springwebapplication.web.form.UserJoinForm;
 import simplewebapplication.springwebapplication.web.form.UserLoginForm;
 import simplewebapplication.springwebapplication.service.user.UserService;
@@ -182,6 +183,63 @@ public class UserController {
         model.addAttribute("commentCountByPost", commentCountList.get(0));
         model.addAttribute("commentCount", commentCountList.get(1));
         return "users/myPage";
+    }
+
+    @GetMapping("/myInfo/changePw")
+    public String changePasswordForm(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession(false);
+        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+
+        model.addAttribute("changeForm", new ChangePasswordForm(sessionUser.getId()));
+        return "users/changeForm";
+    }
+
+    @PostMapping("/myInfo/changePw")
+    public String changePassword(@ModelAttribute(name = "changeForm") ChangePasswordForm form,
+                                 BindingResult bindingResult)
+    {
+        // 검증 로직
+        // 현재 비밀번호 확인
+        log.info("변경// 유저 아이디 = {}",form.getUserId());
+        log.info("변경// 현재 비밀번호 = {}",form.getCurrentPassword());
+        if (!StringUtils.hasText(form.getCurrentPassword())) {
+            bindingResult.addError(new FieldError("changeForm",
+                    "currentPassword", "현재 비밀번호를 입력해주세요"));
+        }
+        else if (userService.confirmCurrentPassword(form.getUserId(), form.getCurrentPassword())) {
+            bindingResult.addError(new FieldError("changeForm",
+                    "currentPassword", "비밀번호가 틀렸습니다"));
+        }
+
+        // 새로입력한 비밀번호 인증
+        log.info("변경// 새로운 유저 아이디 = {}",form.getNewPassword());
+        log.info("변경// 새로운 유저 아이디 한 번 더 = {}",form.getRePassword());
+        if (!StringUtils.hasText(form.getNewPassword()) || !StringUtils.hasText(form.getRePassword())) {
+
+            if (!StringUtils.hasText(form.getNewPassword())) {
+                bindingResult.addError(new FieldError("changeForm",
+                        "newPassword", "새로운 비밀번호를 입력해주세요"));
+            }
+
+            if (!StringUtils.hasText(form.getRePassword())) {
+                bindingResult.addError(new FieldError("changeForm",
+                        "rePassword", "새로운 비밀번호를 입력해주세요"));
+            }
+        }
+        else if (!form.getNewPassword().equals(form.getRePassword())) {
+            bindingResult.addError(new FieldError("changeForm",
+                    "rePassword", "새로운 비밀번호가 일치하지 않습니다"));
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("PwForm errors = {}", bindingResult);
+            return "users/changeForm";
+        }
+
+        userService.changePassword(form.getUserId(), form.getNewPassword());
+
+        return "redirect:/users/myInfo";
     }
 
     public static boolean isValidEmail(String email) {

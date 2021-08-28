@@ -16,6 +16,12 @@ public interface UserService {
     // 비회원 로그인
     String createReadOnlyUser();
 
+    // 현재 비밀번호 확인
+    boolean confirmCurrentPassword(String formUserId, String formCurrentPassword);
+
+    // 비밀번호 변경
+    void changePassword(String userId, String newPassword);
+
     // 로그인
     // 로그아웃
     // 회원 탈퇴

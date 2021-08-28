@@ -64,6 +64,25 @@ public class UserServiceImpl implements UserService {
         return joinedUser;
     }
 
+    @Override
+    public boolean confirmCurrentPassword(String formUserId, String formCurrentPassword) {
+        User findUser = this.findUser(formUserId);
+
+        // 틀렸을 경우
+        return findUser == null || !findUser.getPassword().equals(formCurrentPassword);
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(String userId, String newPassword) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if (optionalUser.isPresent()) {
+            User findUser = optionalUser.get();
+            findUser.changePassword(newPassword);
+        }
+    }
+
     private boolean validateDuplicateMember(User user) {
 
         Optional<User> optionalUser = userRepository.findById(user.getId());

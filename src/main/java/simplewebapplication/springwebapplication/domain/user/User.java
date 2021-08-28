@@ -86,4 +86,8 @@ public class User {
     public String getAvatar() {
         return avatar;
     }
+
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }
