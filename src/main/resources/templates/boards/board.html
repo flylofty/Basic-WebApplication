@@ -59,8 +59,8 @@
 
                         <li class="nav-item" th:if="${session.loginUser != null}">
                             <a class="nav-link active fs-3" aria-current="page"
-                               href="/users/mypage"
-                               th:href="@{/users/{userId}(userId=${session.loginUser.getId()})}">
+                               href="/users/myInfo"
+                               th:href="@{/users/myInfo}">
                                 My Page
                             </a>
                         </li>

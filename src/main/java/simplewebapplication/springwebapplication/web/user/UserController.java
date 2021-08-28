@@ -165,14 +165,19 @@ public class UserController {
     }
 
     // 마이페이지로 이동
-    @GetMapping("/{userId}")
-    public String myPage(@PathVariable String userId, Model model) {
-        User findUser = userService.findUser(userId);
-        Long boardCount = boardService.findBoardCount(findUser.getId());
-        List<Long> commentCountList = commentService.findCommentCount(findUser.getId());
+    @GetMapping("/myInfo")
+    public String myPage(HttpServletRequest request, Model model) {
+        //User findUser = userService.findUser(userId);
 
-        model.addAttribute("id", findUser.getId());
-        model.addAttribute("email", findUser.getEmail());
+        HttpSession session = request.getSession(false);
+        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+
+        Long boardCount = boardService.findBoardCount(sessionUser.getId());
+
+        List<Long> commentCountList = commentService.findCommentCount(sessionUser.getId());
+
+        model.addAttribute("id", sessionUser.getId());
+        model.addAttribute("email", sessionUser.getEmail());
         model.addAttribute("boardCount", boardCount);
         model.addAttribute("commentCountByPost", commentCountList.get(0));
         model.addAttribute("commentCount", commentCountList.get(1));
