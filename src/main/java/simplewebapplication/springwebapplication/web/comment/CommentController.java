@@ -6,12 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import simplewebapplication.springwebapplication.domain.user.User;
-import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.service.comment.CommentService;
 import simplewebapplication.springwebapplication.web.SessionConst;
 import simplewebapplication.springwebapplication.web.form.CommentForm;
 import simplewebapplication.springwebapplication.web.form.CommentModifyForm;
+import simplewebapplication.springwebapplication.web.user.SessionUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpSession;
 public class CommentController {
 
     private final CommentService commentService;
-    private final BoardService boardService;
 
     @PostMapping
     public String modifyLevelOneComment(CommentModifyForm form,
@@ -67,7 +65,7 @@ public class CommentController {
             return "redirect:/boards/" + boardId;
         }
 
-        User loginUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        SessionUser loginUser = (SessionUser) session.getAttribute(SessionConst.LOGIN_USER);
         form.initCommentForm(1, boardId, loginUser.getId());
 
         commentService.createComment(form);

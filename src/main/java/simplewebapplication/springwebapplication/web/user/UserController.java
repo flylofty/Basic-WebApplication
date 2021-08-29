@@ -81,11 +81,13 @@ public class UserController {
             return "users/sign_in";
         }
 
+        SessionUser sessionUser = new SessionUser(loginUser.getId(), loginUser.getRole().toString());
+
         // 로그인 성공 처리
         // 세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
         HttpSession session = request.getSession();
         //세션에 로그인 회원 정보를 보관
-        session.setAttribute(SessionConst.LOGIN_USER, loginUser);
+        session.setAttribute(SessionConst.LOGIN_USER, sessionUser);
 
         return "redirect:" + redirectURL;
     }
@@ -172,14 +174,14 @@ public class UserController {
         //User findUser = userService.findUser(userId);
 
         HttpSession session = request.getSession(false);
-        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        SessionUser sessionUser = (SessionUser) session.getAttribute(SessionConst.LOGIN_USER);
 
+        User user = userService.findUser(sessionUser.getId());
         Long boardCount = boardService.findBoardCount(sessionUser.getId());
-
         List<Long> commentCountList = commentService.findCommentCount(sessionUser.getId());
 
-        model.addAttribute("id", sessionUser.getId());
-        model.addAttribute("email", sessionUser.getEmail());
+        model.addAttribute("id", user.getId());
+        model.addAttribute("email", user.getEmail());
         model.addAttribute("boardCount", boardCount);
         model.addAttribute("commentCountByPost", commentCountList.get(0));
         model.addAttribute("commentCount", commentCountList.get(1));
@@ -190,7 +192,7 @@ public class UserController {
     public String changePasswordForm(HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession(false);
-        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        SessionUser sessionUser = (SessionUser) session.getAttribute(SessionConst.LOGIN_USER);
 
         model.addAttribute("changeForm", new ChangePasswordForm(sessionUser.getId()));
         return "users/changeForm";
@@ -247,7 +249,7 @@ public class UserController {
     public String deleteForm(HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession(false);
-        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+        SessionUser sessionUser = (SessionUser) session.getAttribute(SessionConst.LOGIN_USER);
 
         model.addAttribute("deleteForm", new DeleteForm(sessionUser.getId()));
         return "users/deleteForm";

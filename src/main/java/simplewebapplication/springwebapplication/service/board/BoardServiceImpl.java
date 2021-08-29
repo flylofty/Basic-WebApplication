@@ -5,10 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import simplewebapplication.springwebapplication.domain.board.Board;
+import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.repository.board.BoardRepository;
+import simplewebapplication.springwebapplication.service.user.UserService;
 import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,7 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserService userService;
 
     @Override
     @Transactional
@@ -79,7 +83,9 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional
-    public Long createBoard(Board board) {
+    public Long createBoard(String userId, String title, String content) {
+        User findUser = userService.findUser(userId);
+        Board board = new Board(title, content, findUser, LocalDateTime.now());
         boardRepository.save(board);
         return board.getId();
     }

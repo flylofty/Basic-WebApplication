@@ -3,7 +3,6 @@ package simplewebapplication.springwebapplication.service.like;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.repository.like.LikeRepository;
 import simplewebapplication.springwebapplication.web.form.LikeForm;
 
@@ -15,8 +14,8 @@ public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
 
     @Override
-    public LikeForm findLikeId(User user, Long boardId) {
-        Long likeId = likeRepository.findOneByUserAndBoard(user, boardId);
+    public LikeForm findLikeId(String userId, Long boardId) {
+        Long likeId = likeRepository.findOneByUserAndBoard(userId, boardId);
 
         LikeForm likeForm = new LikeForm(likeId, boardId);;
 
@@ -25,8 +24,8 @@ public class LikeServiceImpl implements LikeService {
 
     @Override
     @Transactional
-    public void createLike(User user, Long boardId) {
-        likeRepository.save(user, boardId);
+    public void createLike(String userId, Long boardId) {
+        likeRepository.save(userId, boardId);
     }
 
     @Override

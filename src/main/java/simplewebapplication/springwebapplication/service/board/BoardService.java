@@ -1,6 +1,5 @@
 package simplewebapplication.springwebapplication.service.board;
 
-import simplewebapplication.springwebapplication.domain.board.Board;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
 
@@ -24,7 +23,7 @@ public interface BoardService {
     BoardPagination createBoardPagination(Long currentPage, int currentBoardNumber, String searchWord);
 
     // 게시글 생성
-    Long createBoard(Board board);
+    Long createBoard(String userId, String title, String content);
 
     // 게시글 삭제
     Long deleteBoard(Long boardId);

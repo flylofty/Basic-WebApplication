@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import simplewebapplication.springwebapplication.domain.user.User;
 import simplewebapplication.springwebapplication.dto.board.ResponseBoard;
 import simplewebapplication.springwebapplication.web.form.CommentLevelOneForm;
 import simplewebapplication.springwebapplication.service.comment.CommentService;
@@ -20,6 +19,7 @@ import simplewebapplication.springwebapplication.web.form.LikeForm;
 import simplewebapplication.springwebapplication.web.form.WriteForm;
 import simplewebapplication.springwebapplication.service.board.BoardService;
 import simplewebapplication.springwebapplication.web.pagination.BoardPagination;
+import simplewebapplication.springwebapplication.web.user.SessionUser;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -114,10 +114,10 @@ public class BoardController {
             // 2. 작성자를 UserService 에서 찾아와야함
             // 세션에 담을 정보를 간소화 해야할 필요가 있음.
             HttpSession session = request.getSession(false);
-            User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
+            SessionUser sessionUser = (SessionUser) session.getAttribute(SessionConst.LOGIN_USER);
 
             // 3. Board 를 만들고 BoardService 를 통해 새로운 게시글을 만듦
-            boardId = boardService.createBoard(form.makeBoard(sessionUser));
+            boardId = boardService.createBoard(sessionUser.getId(), form.getTitle(), form.getContent());
         }
         else {
             boardService.updateBoard(form.getBoardId(), form.getContent());
@@ -143,8 +143,8 @@ public class BoardController {
 
         // 좋아요
         HttpSession session = request.getSession(false);
-        User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
-        LikeForm likeForm = likeService.findLikeId(sessionUser, boardId);
+        SessionUser sessionUser = (SessionUser) session.getAttribute(SessionConst.LOGIN_USER);
+        LikeForm likeForm = likeService.findLikeId(sessionUser.getId(), boardId);
         model.addAttribute("likeForm", likeForm);
 
         // 댓글 Level 1 객체 (Depth 1, 댓글)
@@ -185,8 +185,8 @@ public class BoardController {
         // 좋아요를 수행한 경우
         if (form.isPressedLikeButton()) {
             HttpSession session = request.getSession(false);
-            User sessionUser = (User) session.getAttribute(SessionConst.LOGIN_USER);
-            likeService.createLike(sessionUser, boardId);
+            SessionUser sessionUser = (SessionUser) session.getAttribute(SessionConst.LOGIN_USER);
+            likeService.createLike(sessionUser.getId(), boardId);
         }
         else { // 좋아요를 취소한 경우
             likeService.deleteById(form.getLikeId());

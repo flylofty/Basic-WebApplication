@@ -16,9 +16,9 @@ public class H2LikeRepository implements LikeRepository {
     private final EntityManager em;
 
     @Override
-    public Long findOneByUserAndBoard(User user, Long boardId) {
+    public Long findOneByUserAndBoard(String userId, Long boardId) {
 
-        User findUser = em.find(User.class, user.getId());
+        User findUser = em.find(User.class, userId);
         Board board = em.find(Board.class, boardId);
         List<Likes> likes = em.createQuery("select l from Likes l " +
                         " where l.user = :user " +
@@ -35,10 +35,11 @@ public class H2LikeRepository implements LikeRepository {
     }
 
     @Override
-    public void save(User user, Long boardId) {
+    public void save(String userId, Long boardId) {
+        User findUser = em.find(User.class, userId);
         Board findBoard = em.find(Board.class, boardId);
         findBoard.updateFavorite(1L);
-        em.persist(new Likes(user, findBoard));
+        em.persist(new Likes(findUser, findBoard));
     }
 
     @Override

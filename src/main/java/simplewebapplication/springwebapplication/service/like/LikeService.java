@@ -6,10 +6,10 @@ import simplewebapplication.springwebapplication.web.form.LikeForm;
 public interface LikeService {
 
     // 좋아요 단건 조회
-    LikeForm findLikeId(User user, Long boardId);
+    LikeForm findLikeId(String userId, Long boardId);
 
     // 좋아요 저장
-    void createLike(User user, Long boardId);
+    void createLike(String userId, Long boardId);
 
     // 좋아요 삭제
     void deleteById(Long likeId);

@@ -29,9 +29,4 @@ public class WriteForm {
         this.title = board.getTitle();
         this.content = board.getContent();
     }
-
-    public Board makeBoard(User user) {
-
-        return new Board(this.title, this.content, user, LocalDateTime.now());
-    }
 }
