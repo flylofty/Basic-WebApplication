@@ -16,7 +16,7 @@
     <!-- integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"-->
     <!-- crossorigin="anonymous">-->
     <link th:href="@{/css/board.css}"
-          href="../../static/css/board.css" rel="stylesheet">
+          href="../../static/css/boardHeartTest.css" rel="stylesheet">
 
 </head>
 
@@ -144,6 +144,19 @@
                             </button>
                         </div>
 
+                        <div class="btnDelete"
+                             th:if="${session.loginUser.id == board.user}">
+
+                            <form th:action="@{'/boards/{boardId}'(boardId=${board.id})}"
+                                  th:if="${session.loginUser.id == board.user}"
+                                  th:method="delete">
+                                <button type="submit" class="btn btn-outline-danger">
+                                    삭 제
+                                </button>
+                            </form>
+
+                        </div>
+
                         <div class="btnModify"
                              th:if="${session.loginUser.id == board.user}">
 
@@ -152,14 +165,6 @@
                                   th:method="post">
                                 <button type="submit" class="btn btn-outline-primary mx-2">
                                     수 정
-                                </button>
-                            </form>
-
-                            <form th:action="@{'/boards/{boardId}'(boardId=${board.id})}"
-                                  th:if="${session.loginUser.id == board.user}"
-                                  th:method="delete">
-                                <button type="submit" class="btn btn-outline-danger">
-                                    삭 제
                                 </button>
                             </form>
 

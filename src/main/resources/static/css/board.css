@@ -1,270 +1,261 @@
 html {
-    height : 100%;
+height : 100%;
 }
 
 body {
-    margin : 0;
-    height : 100%;
+margin : 0;
+height : 100%;
 }
 
 .wrap {
-    min-height : 100%;
-    position : relative;
-    padding-bottom : 19px;
+min-height : 100%;
+position : relative;
+padding-bottom : 19px;
 }
 
 header {
-    /*<!-- border:1px solid #cccccc;-->*/
+/*<!-- border:1px solid #cccccc;-->*/
 }
 
 a:hover {
-    text-decoration: underline;
+text-decoration: underline;
 }
 
 .myContainer {
-    width : 760px; height : 750px;
-    margin: 50px auto;
+width : 760px; height : 750px;
+margin: 50px auto;
 /*<!-- border:1px solid #cccccc;-->*/
 }
 
 .myContainer::-webkit-scrollbar {
-    display: none;
+display: none;
 }
 
 .post {
-    width : 740px; height : 460px;
-    margin: 0px auto;
+width : 740px; height : 460px;
+margin: 0px auto;
 /*<!-- border:1px solid #cccccc;-->*/
 }
 
 .postHeader {
-    /*<!-- border:1px solid #cccccc;-->*/
+/*<!-- border:1px solid #cccccc;-->*/
 }
 
 .postInfo {
-    width : 740px; height : 90px;
-    margin: 0px auto;
-    border-bottom: 3px;
-    border-bottom-style: solid;
+width : 740px; height : 90px;
+margin: 0px auto;
+border-bottom: 3px;
+border-bottom-style: solid;
 }
 
 .btnList {
-    width : 250px; height : 40px;
-    margin: 0px auto;
-    float: right;
-    overflow: hidden;
-    border:1px none #bbbbbb;
+width : 220px; height : 40px;
+float: right;
+/*border:1px solid #bbbbbb;*/
+}
+
+.btnDelete {
+margin-right: 7px;
 }
 
 .btnList div {
-    float: right;
-}
-
-.btnModify {
-    width: 145px; height: 40px;
-    position: relative;
-    left: 2px;
-    border:1px none #bbbbbb;
-}
-
-.btnList button {
-    float: left;
+float: right;
 }
 
 .postUser {
-    width : 740px; height : 44px;
-    margin: 0px auto;
-    padding: 10px 0px;
-    /*<!-- border:1px solid #bbbbbb;-->*/
+width : 740px; height : 44px;
+margin: 0px auto;
+padding: 10px 0px;
+/*<!-- border:1px solid #bbbbbb;-->*/
 }
 
 .postUser h5 {
-    float: left;
+float: left;
 }
 
 .postEtc {
-    width : 740px; height : 44px;
-    overflow: hidden;
-    margin: 0px auto;
-    border:1px none #bbbbbb;
+width : 740px; height : 44px;
+overflow: hidden;
+margin: 0px auto;
+border:1px none #bbbbbb;
 }
 
 .postEtc h5 {
-    float: left;
+float: left;
 }
 
 .postEtcViews {
-    margin-top: 1px;
+margin-top: 1px;
 }
 
 .postContent {
-    width : 740px; height : 270px;
-    padding: 20px 0px;
+width : 740px; height : 270px;
+padding: 20px 0px;
 /*<!-- border:1px solid #bbbbbb;-->*/
 /*<!-- border-bottom: 3px;-->*/
 /*<!-- border-bottom-style: solid;-->*/
 }
 
 .postEnd {
-    width : 740px; height : 42px;
-    border-bottom: 3px;
-    border-bottom-style: solid;
-    overflow: hidden;
+width : 740px; height : 42px;
+border-bottom: 3px;
+border-bottom-style: solid;
+overflow: hidden;
 /*<!-- border:1px solid #bbbbbb;-->*/
 }
 
 .postEnd div {
-    float: left;
+float: left;
 }
 
 .postEnd span {
-    color: black;
+color: black;
 }
 
 #heartBtn {
-    width: 18px; height: 23px;
-    margin-bottom: 2px;
-    border-style: none;
+width: 18px; height: 23px;
+margin-bottom: 2px;
+border-style: none;
 }
 
 #heart1 {
-    position: relative;
-    right: 8px;
-    bottom: 6px;
+position: relative;
+right: 8px;
+bottom: 6px;
 }
 
 .likeCount {
-    margin-top: 10px;
-    border:1px none #cccccc;
+margin-top: 10px;
+border:1px none #cccccc;
 }
 
 .commentCount {
-    margin-top: 10px;
-    margin-left: 8px;
+margin-top: 10px;
+margin-left: 8px;
 }
 
 .commentCountText {
-    margin-left: 5px;
+margin-left: 5px;
 }
 
 .commentArea {
-    width : 740px; height : 600px;
-    margin: 0px auto;
-    border:1px none #cccccc;
+width : 740px; height : 600px;
+margin: 0px auto;
+border:1px none #cccccc;
 }
 
 .commentArea::-webkit-scrollbar {
-    display: none;
+display: none;
 }
 
 .commentFormArea {
-    width : 740px; height : 85px;
-    overflow: hidden;
-    margin-top: 8px;
+width : 740px; height : 85px;
+overflow: hidden;
+margin-top: 8px;
 /*<!-- border-bottom: 1px;-->*/
 /*<!-- border-bottom-style: solid;-->*/
 /*<!-- border:1px solid #cccccc;-->*/
 }
 
 .commentForm {
-    border:1px solid #cccccc;
+border:1px solid #cccccc;
 }
 
 .formWrite {
-    margin-left: 17px;
-    overflow: hidden;
+margin-left: 17px;
+overflow: hidden;
 }
 
 .formWrite div {
-    float: left;
+float: left;
 }
 
 .formWrite textarea {
-    width: 600px; height: 90px;
+width: 600px; height: 90px;
 }
 
 .formWrite button {
-    margin-top: 0px;
-    margin-left: 5px;
-    width: 100px; height: 57px;
+margin-top: 0px;
+margin-left: 5px;
+width: 100px; height: 57px;
 }
 
 .formWrite label {
-    font-size: 15px;
-    opacity: 0.4;
+font-size: 15px;
+opacity: 0.4;
 }
 
 .commentErr {
-    width: 598px; height: 25px;
-    margin-top: 5px;
-    margin-left: 20px;
-    border:1px none #cccccc;
+width: 598px; height: 25px;
+margin-top: 5px;
+margin-left: 20px;
+border:1px none #cccccc;
 }
 
 .field-error {
-    border-color: #dc3545;
-    color: #dc3545;
-    border:1px none #dc3545;
+border-color: #dc3545;
+color: #dc3545;
+border:1px none #dc3545;
 }
 
 .commentLevelOne {
-    height: 95px;
-    margin-left: 10px;
-    margin-top: 10px;
-    border-width: thin;
-    border-top-style: ridge;
+height: 95px;
+margin-left: 10px;
+margin-top: 10px;
+border-width: thin;
+border-top-style: ridge;
 /*<!--border:1px none #cccccc;-->*/
 }
 
 .commentOwner {
-    height: 20px;
-    margin-top: 10px;
+height: 20px;
+margin-top: 10px;
 /*<!-- border:1px solid #cccccc;-->*/
 }
 
 .commentOwner h6 {
-    margin-left: 18px;
-    margin-top: 1px;
-    opacity: 0.9;
+margin-left: 18px;
+margin-top: 1px;
+opacity: 0.9;
 }
 
 .commentContentOuter {
-    height: 40px;
+height: 40px;
 /*<!-- border:1px none #cccccc;-->*/
 }
 
 .commentContent {
-    width: 650px; height: 40px;
-    margin-top: 4px;
-    margin-left: 16px;
-    border:1px none #cccccc;
-    border-width: thin;
+width: 650px; height: 40px;
+margin-top: 4px;
+margin-left: 16px;
+border:1px none #cccccc;
+border-width: thin;
 }
 
 .commentEtc {
-    margin-bottom: : : 5px;
-    display: flex;
-    align-items: center;
-    flex-direction: start;
+margin-bottom: : : 5px;
+display: flex;
+align-items: center;
+flex-direction: start;
 /*border:1px solid #cccccc;*/
 /* height: 23px;
 overflow: hidden;*/
 }
 
 .modal {
-    text-align: center;
+text-align: center;
 }
 
 .modal-content {
-    width: 610px; height: 220px;
+width: 610px; height: 220px;
 }
 
 .modal-body {
-    height: 90px;
+height: 90px;
 }
 
 .modal-footer {
-    height: 60px;
+height: 60px;
 }
 
 /* .commentEtc div {
@@ -272,44 +263,44 @@ float: left;
 }*/
 
 .commentEtcDelete {
-    margin-left: 4px;
+margin-left: 4px;
 }
 
 .etcMainBtn button {
-    width: 45px; height: 20px;
-    font-size: 8px;
-    margin: 0px;
-    padding: 0px;
+width: 45px; height: 20px;
+font-size: 8px;
+margin: 0px;
+padding: 0px;
 }
 
 .commentEtcBtnTitle {
 /*margin-top: -2px;*/
-    font-size: 0.1rem;
+font-size: 0.1rem;
 }
 
 .commentReply {
-    font-size: 14px;
+font-size: 14px;
 }
 
 .commentLevelTwo {
-    margin-top: 3px;
-    margin-left: 30px;
-    height: 90px;
+margin-top: 3px;
+margin-left: 30px;
+height: 90px;
 /*<!-- border-bottom: 1px;-->*/
 /*<!-- border-bottom-style: solid;-->*/
 /*<!-- border:1px solid #cccccc;-->*/
 }
 
 .commentContentTwo {
-    width: 620px; height: 40px;
-    margin-top: 2px;
-    margin-left: 16px;
-    border:1px solid #cccccc;
+width: 620px; height: 40px;
+margin-top: 2px;
+margin-left: 16px;
+border:1px solid #cccccc;
 }
 
 footer {
-    width:100%;
-    height:60px;
-    position:absolute;
-    bottom:0;
+width:100%;
+height:60px;
+position:absolute;
+bottom:0;
 }
