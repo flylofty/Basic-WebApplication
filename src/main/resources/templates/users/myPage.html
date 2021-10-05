@@ -126,8 +126,8 @@
               </h5>
               <h4 class="cr"> / </h4>
               <h4 class="cr" th:text="${commentCountByPost}">10</h4>
-              <h4 class="cr">post</h4>
-              <h4 class="cr" th:if="${commentCountByPost > 1}">s</h4>
+              <h4 class="cr" th:if="${commentCountByPost <= 1}">post</h4>
+              <h4 class="cr" th:if="${commentCountByPost > 1}">posts</h4>
             </div>
           </div>
 
